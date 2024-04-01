@@ -1,0 +1,17 @@
+[user]
+	name = Ondrej Zahradnik
+	email = ondraz@pm.me
+[credential]
+	helper = cache --timeout=3600
+[init]
+   defaultBranch = main
+[alias]
+	a = add
+	cm = commit -m
+	d = diff
+	ds = diff --stat
+	s = status
+	ss = status -s
+	co = checkout
+	p = push
+    log1 = log --graph --pretty=format:'%Cred(%h)%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative

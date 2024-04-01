@@ -1,0 +1,10 @@
+source /etc/bash_completion.d/git-prompt
+
+bold="\[\e[1m\]"
+reset="\[\e[0m\]"
+yellow="\[\e[33m\]"
+gray="\[\e[90m\]"
+green="\[\e[32m\]"
+red="\[\e[31m\]"
+
+export PS1="${bold}${yellow}\u${reset}@${gray}\H${reset}:${bold}${green}\w${reset} $red\$(__git_ps1 '(%s)')$reset\\$ "
