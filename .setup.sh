@@ -21,6 +21,8 @@ install_software() {
 	flatpak install --noninteractive flathub org.godotengine.Godot
 	# neovim
 	sudo snap install nvim --classic
+	# lunarvim
+	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 }
 
 install_themes() {
@@ -34,15 +36,21 @@ install_themes() {
 	cat 'godot/theme.tres' >> ~/.var/app/org.godotengine.Godot/editor_settings-3.tres
 }
 
-setup_ssh() {
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_ed25519
+install_font() {
+	FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.tar.xz"
+	FONT_DIR="/usr/share/fonts/JetBrainsMonoNerdFont"
+	TEMP_DIR=$(mktemp -d)
+	wget -O "$TEMP_DIR/JetBrainsMono.tar.xz" "$FONT_URL"
+	sudo mkdir -p "$FONT_DIR"
+	sudo tar -xvf "$TEMP_DIR/JetBrainsMono.tar.xz" -C "$FONT_DIR"
+	fc-cache -fv
+    rm -rf "$TEMP_DIR"
 }
 
 update_apt
 install_dependencies
 install_software
 install_themes
-setup_ssh
+install_font
 
 sudo apt autoremove -y
