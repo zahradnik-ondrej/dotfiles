@@ -77,6 +77,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export EDITOR=nano
 export JAVA_HOME=/opt/java/jdk-21.0.1+12
+export PATH=~/.local/bin:$PATH
 
 if [ -f ~/.bash_ps1 ]; then
 	. ~/.bash_ps1
