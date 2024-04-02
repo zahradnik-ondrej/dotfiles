@@ -1,4 +1,6 @@
-source /etc/bash_completion.d/git-prompt
+if [ -f /etc/bash_completion.d/git-prompt ]; then
+  source /etc/bash_completion.d/git-prompt
+fi
 
 bold="\[\e[1m\]"
 reset="\[\e[0m\]"
@@ -7,4 +9,8 @@ gray="\[\e[90m\]"
 green="\[\e[32m\]"
 red="\[\e[31m\]"
 
-export PS1="${bold}${yellow}\u${reset}@${gray}\H${reset}:${bold}${green}\w${reset} $red\$(__git_ps1 '(%s)')$reset\\$ "
+if type __git_ps1 &>/dev/null; then
+  export PS1="${bold}${yellow}\u${reset}@${gray}\H${reset}:${bold}${green}\w${reset} $red\$(__git_ps1 '(%s)')$reset\\$ "
+else
+  export PS1="${bold}${yellow}\u${reset}@${gray}\H${reset}:${bold}${green}\w${reset}\\$ "
+fi
