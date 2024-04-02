@@ -22,7 +22,7 @@ install_software() {
 	# neovim
 	sudo snap install nvim --classic
 	# lunarvim
-	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+	yes no | bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 }
 
 install_themes() {

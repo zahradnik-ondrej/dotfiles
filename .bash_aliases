@@ -1,7 +1,7 @@
 alias emacs='emacs -nw'
 alias godot='flatpak run org.godotengine.Godot'
 alias browsh='sudo docker run -it browsh/browsh'
-alias setup='chmod +x ~/setup.sh && ~/setup.sh'
+alias setup='chmod +x ~/.setup.sh && ~/.setup.sh'
 
 # bash
 alias ls='ls --color -la'
