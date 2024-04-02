@@ -37,6 +37,7 @@ install_themes() {
 }
 
 install_font() {
+	# jetbrainsmono nerd font
 	FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.tar.xz"
 	FONT_DIR="/usr/share/fonts/JetBrainsMonoNerdFont"
 	TEMP_DIR=$(mktemp -d)
