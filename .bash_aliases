@@ -17,6 +17,7 @@ alias vdir='vdir --color'
 # git
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
+alias git-fpd='git fetch --prune && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs git branch -D'
 
 # fit
 alias g++='g++ -std=c++20 -Wall -pedantic -Wno-long-long'
