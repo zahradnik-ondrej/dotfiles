@@ -23,6 +23,11 @@ install_software() {
 	sudo snap install nvim --classic
 	# lunarvim
 	yes no | bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+	# cura
+	sudo mkdir -p /opt/cura/
+	cd /opt/cura
+	sudo curl -L -o Cura.AppImage "https://github.com/Ultimaker/Cura/releases/download/5.7.0/UltiMaker-Cura-5.7.0-linux-X64.AppImage"
+	sudo chmod +x Cura.AppImage
 }
 
 install_themes() {

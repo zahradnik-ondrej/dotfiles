@@ -1,6 +1,7 @@
 alias emacs='emacs -nw'
 alias godot='flatpak run org.godotengine.Godot'
 alias browsh='sudo docker run -it browsh/browsh'
+alias cura='/opt/cura/Cura.AppImage'
 alias setup='chmod +x ~/.setup.sh && ~/.setup.sh'
 
 # bash
