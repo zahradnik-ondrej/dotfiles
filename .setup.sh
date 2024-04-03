@@ -13,9 +13,9 @@ install_dependencies() {
 }
 
 install_software() {
-	# mc / tmux / tree / emacs / bmap tools
-	sudo apt install -y mc tmux tree emacs bmap-tools
-	# telegram / prusaslicer / spotify
+	# mc / tmux / tree / emacs / bmap tools / wireshark / tshark
+	sudo apt install -y mc tmux tree emacs bmap-tools wireshark-qt tshark
+	# telegram / prusaslicer / spotify-tui
 	sudo snap install telegram-desktop prusa-slicer spt
 	# godot
 	flatpak install --noninteractive flathub org.godotengine.Godot
