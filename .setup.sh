@@ -1,7 +1,13 @@
 #!/bin/bash
 
+add_ppa() {
+	# love2d
+	sudo add-apt-repository -y ppa:bartbes/love-stable
+	# git-lfs
+	curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+}
+
 update_apt() {
-	# apt
 	sudo apt update
 	sudo apt upgrade -y
 }
@@ -13,8 +19,10 @@ install_dependencies() {
 }
 
 install_software() {
-	# mc / tmux / tree / emacs / bmap tools / wireshark / tshark / lua / love2d
-	sudo apt install -y mc tmux tree emacs bmap-tools wireshark-qt tshark lua5.4 love
+	# mc / tmux / tree / emacs / bmap tools / wireshark / tshark / lua / love2d / git-lfs
+	sudo apt install -y mc tmux tree emacs bmap-tools wireshark-qt tshark lua5.4 love git-lfs
+	# git-lfs
+	git lfs install
 	# telegram / prusaslicer / spotify-tui
 	sudo snap install telegram-desktop prusa-slicer spt
 	# godot
@@ -53,9 +61,7 @@ install_font() {
     rm -rf "$TEMP_DIR"
 }
 
-# love2d ppa
-sudo add-apt-repository -y ppa:bartbes/love-stable
-
+add_ppa
 update_apt
 install_dependencies
 install_software
