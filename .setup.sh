@@ -13,8 +13,8 @@ install_dependencies() {
 }
 
 install_software() {
-	# mc / tmux / tree / emacs / bmap tools / wireshark / tshark
-	sudo apt install -y mc tmux tree emacs bmap-tools wireshark-qt tshark
+	# mc / tmux / tree / emacs / bmap tools / wireshark / tshark / lua / love2d
+	sudo apt install -y mc tmux tree emacs bmap-tools wireshark-qt tshark lua5.4 love
 	# telegram / prusaslicer / spotify-tui
 	sudo snap install telegram-desktop prusa-slicer spt
 	# godot
@@ -52,6 +52,9 @@ install_font() {
 	fc-cache -fv
     rm -rf "$TEMP_DIR"
 }
+
+# love2d ppa
+sudo add-apt-repository -y ppa:bartbes/love-stable
 
 update_apt
 install_dependencies
