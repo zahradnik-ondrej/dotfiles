@@ -12,7 +12,7 @@ alias cls='clear'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias dir='dir --color'
+alias dir='vdir'
 alias vdir='vdir --color'
 
 # git
