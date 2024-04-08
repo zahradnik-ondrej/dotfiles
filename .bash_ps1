@@ -10,7 +10,7 @@ green="\[\e[32m\]"
 red="\[\e[31m\]"
 
 if type __git_ps1 &>/dev/null; then
-  export PS1="${bold}${yellow}\u${reset}@${gray}\H${reset}:${bold}${green}\w${reset} $red\$(__git_ps1 '(%s)')$reset\\$ "
+    export PS1="\n${gray}┌──${yellow}${bold}\u${reset}@${gray}\H${reset}:${green}${bold}\w${reset} ${red}\$(__git_ps1 '(%s)')${reset}\n${gray}└─${bold}\$${reset} "
 else
-  export PS1="${bold}${yellow}\u${reset}@${gray}\H${reset}:${bold}${green}\w${reset}\\$ "
+    export PS1="\n${gray}┌──${yellow}${bold}\u${reset}@${gray}\H${reset}:${green}${bold}\w${reset}\n${gray}└─${bold}\$${reset} "
 fi
