@@ -1,8 +1,18 @@
 #!/bin/bash
 
+VERBOSE=0
+
+bold="\e[1m"
+reset="\e[0m"
+yellow="\e[33m"
+
+if [ "$1" == "--verbose" ]; then
+	VERBOSE=1
+fi
+
 add_ppa() {
 	# love2d
-	sudo add-apt-repository -y ppa:bartbes/love-stable
+	#sudo add-apt-repository -y ppa:bartbes/love-stable
 	# git-lfs
 	curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 }
@@ -10,6 +20,11 @@ add_ppa() {
 update_apt() {
 	sudo apt update
 	sudo apt upgrade -y
+}
+
+update_snap() {
+	sudo snap install core
+	sudo snap refresh
 }
 
 install_dependencies() {
@@ -24,7 +39,7 @@ install_software() {
 	# git-lfs
 	git lfs install
 	# telegram / prusaslicer / spotify-tui
-	sudo snap install telegram-desktop prusa-slicer spt
+	#sudo snap install telegram-desktop prusa-slicer spt
 	# godot
 	flatpak install --noninteractive flathub org.godotengine.Godot
 	# neovim
@@ -61,11 +76,50 @@ install_font() {
     rm -rf "$TEMP_DIR"
 }
 
-add_ppa
-update_apt
-install_dependencies
-install_software
-install_themes
-install_font
-
-sudo apt autoremove -y
+if [ "$VERBOSE" -eq 0 ]; then
+	echo "Add PPAs..."
+	add_ppa > /dev/null 2>&1
+	echo "Update APT..."
+	update_apt > /dev/null 2>&1
+	echo "Update SNAP..."
+	update_snap > /dev/null 2>&1
+	echo "Install dependencies..."
+	install_dependencies > /dev/null 2>&1
+	echo "Install software..."
+	install_software > /dev/null 2>&1
+	#echo "Install themes..."
+	#install_themes > /dev/null 2>&1
+	echo "Install font..."
+	install_font > /dev/null 2>&1
+	sudo apt autoremove > /dev/null 2>&1
+else
+	printf "${yellow}${bold}"
+	echo "Add PPAs..."
+	printf "${reset}"
+	add_ppa
+	printf "${yellow}${bold}"
+	echo "Update APT..."
+    printf "${reset}"
+    update_apt
+	printf "${yellow}${bold}"
+	echo "Update SNAP..."
+    printf "${reset}"
+    update_snap
+	printf "${yellow}${bold}"
+	echo "Install dependencies..."
+    printf "${reset}"
+    install_dependencies
+	printf "${yellow}${bold}"
+	echo "Install software..."
+    printf "${reset}"
+    install_software
+	#printf "${yellow}${bold}"
+	#echo "Install themes..."
+    #printf "${reset}"
+    #install_themes
+	printf "${yellow}${bold}"
+	echo "Install font..."
+    printf "${reset}"
+    install_font
+	sudo apt autoremove -y
+fi
