@@ -19,6 +19,7 @@ alias vdir='vdir --color'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
 alias git-fpd='git fetch --prune && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs git branch -D'
+alias git-add100='find . -type f -size -100M -print0 | xargs -0 git add'
 
 git_lgbs() {
     local current_branch=$(git rev-parse --abbrev-ref HEAD)
@@ -37,4 +38,4 @@ alias g++='g++ -std=c++20 -Wall -pedantic -Wno-long-long'
 alias fray='ssh zahraon1@fray1.fit.cvut.cz'
 
 # prusa
-alias buildserver='ssh ondra@10.24.42.10'
+alias bs='ssh ondra@10.24.42.10'
