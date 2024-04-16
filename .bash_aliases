@@ -4,6 +4,20 @@ alias browsh='sudo docker run -it browsh/browsh'
 alias cura='/opt/cura/Cura.AppImage'
 alias setup='chmod +x ~/.setup.sh && ~/.setup.sh'
 
+# test.sh
+test_sh() {
+
+	if [ -d ~/test.sh ] && [ -f ~/test.sh/test.sh ]; then
+		bash ~/test.sh/test.sh "$@";
+	else
+		git clone https://github.com/zahradnik-ondrej/test.sh.git ~/test.sh;
+		bash ~/test.sh/test.sh "$@";
+	fi
+
+}
+
+alias testsh='test_sh'
+
 # bash
 alias ls='ls --color -la'
 alias rm='rm -rf'
