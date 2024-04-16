@@ -28,6 +28,7 @@ install_software() {
 install_themes() {
 	# gedit
 	wget https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
+	mkdir -p ~/.local/share/gedit/styles/
 	mv dracula.xml $HOME/.local/share/gedit/styles/
 }
 
