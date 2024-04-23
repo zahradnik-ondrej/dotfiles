@@ -30,10 +30,15 @@ alias dir='vdir'
 alias vdir='vdir --color'
 
 # git
+git_bl() {
+	git blame "$@"
+}
+
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
 alias git-fpd='git fetch --prune && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs git branch -D'
 alias git-add100='find . -type f -size -100M -print0 | xargs -0 git add'
+alias git-bl=git_bl
 
 git_lgbs() {
     local current_branch=$(git rev-parse --abbrev-ref HEAD)

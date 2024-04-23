@@ -82,3 +82,7 @@ export PATH=~/.local/bin:/snap/bin:$PATH
 if [ -f ~/.bash_ps1 ]; then
 	. ~/.bash_ps1
 fi
+
+export LS_COLORS="$LS_COLORS:di=34:*.conf=31:*.md=31:*.txt=31:*.json=31:*.h=32:*.sh=32:*.py=32:*.c=32:*.cpp=32:*.js=32:*.lua=32:*.tar.gz=33:*.zip=33:*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.png=90:*.jpg=90:*.svg=90"
+
+
