@@ -14,3 +14,5 @@ set whichwrap+=<,>,[,],h,l
 set number
 
 set mouse=a
+
+command YA %y+
