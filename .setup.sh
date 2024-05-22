@@ -43,13 +43,13 @@ install_dependencies() {
 
 	# wget
 	sudo apt install -y wget
-
 	# docker
 	sudo apt install -y docker
-
 	# xsel
 	sudo apt install -y xsel
-
+	# nodejs
+	wget -qO- https://deb.nodesource.com/setup_20.x | sudo -E bash -
+	sudo apt install -y nodejs
 	# tpm
 	TPM_PATH="$HOME/.tmux/plugins/tpm"
 	[ ! -d "$TPM_PATH" ] && git clone https://github.com/tmux-plugins/tpm "$TPM_PATH"
@@ -61,6 +61,12 @@ install_software() {
 
 	# vim
 	sudo apt install -y vim-gtk
+	# youcompleteme
+	cd "$HOME"
+	git clone https://github.com/ycm-core/YouCompleteMe.git
+	cd YouCompleteMe
+	git submodule update --init --recursive
+	python3 install.py --all
 	# tmux
 	sudo apt install -y tmux
 	# tree
@@ -83,7 +89,6 @@ install_software() {
 
 			# bmap tools
 			sudo apt install -y bmap-tools
-
 			# kicad
 			sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
 			sudo apt update
@@ -94,30 +99,6 @@ install_software() {
 	fi
 
 	sudo apt autoremove > /dev/null 2>&1
-
-}
-
-install_themes() {
-
-	# vim
-	mkdir -p $HOME/.vim/colors
-	wget -O $HOME/.vim/colors/gruvbox.vim https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim
-
-	# gedit
-	wget https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
-	mkdir -p $HOME/.local/share/gedit/styles/
-	mv dracula.xml $HOME/.local/share/gedit/styles/
-
-	if [ "$FULL" -eq 1 ]; then
-
-		# vim (openscad)
-		mkdir -p $HOME/.vim/pack/vendor/start
-		VIM_OPENSCAD_PATH="$HOME/.vim/pack/vendor/start/vim-openscad"
-		[ ! -d "$VIM_OPENSCAD_PATH" ] && git clone https://github.com/sirtaj/vim-openscad.git "$VIM_OPENSCAD_PATH"
-		VIM_PATH="$HOME/.vim/vimrc"
-		grep -q "filetype plugin indent on" "$VIM_PATH" || echo "filetype plugin indent on" >> "$VIM_PATH"
-
-	fi
 
 }
 
@@ -143,11 +124,6 @@ if [ "$VERBOSE" -eq 1 ]; then
     printf "${reset}"
     install_software
 
-	printf "${yellow}${bold}"
-	echo "Install themes..."
-    printf "${reset}"
-    install_themes
-
 else
 
 	echo "Update APT..."
@@ -161,8 +137,5 @@ else
 
 	echo "Install software..."
 	install_software > /dev/null 2>&1
-
-	echo "Install themes..."
-	install_themes > /dev/null 2>&1
 
 fi
