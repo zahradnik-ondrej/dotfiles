@@ -58,3 +58,4 @@ alias fray='ssh zahraon1@fray1.fit.cvut.cz'
 
 # prusa
 alias bs='ssh ondra@10.24.42.10'
+alias usbsdmux='/usr/bin/usbsdmux'
