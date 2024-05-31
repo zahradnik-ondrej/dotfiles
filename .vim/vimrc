@@ -6,9 +6,8 @@ set list
 set listchars=
 set listchars+=precedes:«,extends:»
 syntax enable
-
-set background=dark
 colorscheme gruvbox
+set background=dark
 
 set tabstop=4
 set shiftwidth=4
@@ -25,11 +24,6 @@ filetype plugin indent on
 
 " horizontal split: Ctrl + w, h
 nnoremap <C-w>h :split<CR>
-
-" NERDTree
-autocmd vimenter * NERDTree
-autocmd BufEnter * if (winnr('$') == 1 && &filetype == 'nerdtree') | q | endif
-nnoremap <C-n> :NERDTreeToggle<CR>
 
 " YouCompleteMe
 set runtimepath+=$HOME/YouCompleteMe

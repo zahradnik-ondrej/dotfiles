@@ -1,29 +1,8 @@
 #!/bin/bash
 
-VERBOSE=0
-FULL=0
-PRUSA=0
-
 bold="\e[1m"
 reset="\e[0m"
 yellow="\e[33m"
-
-while [[ $# -gt 0 ]]; do
-	case "$1" in
-		--verbose)
-			VERBOSE=1
-			shift
-			;;
-		--full)
-			FULL=1
-			shift
-			;;
-		--prusa)
-			PRUSA=1
-			shift
-			;;
-	esac
-done
 
 update_apt() {
 	if [[ $sudo -eq 1 ]]; then
@@ -47,9 +26,17 @@ install_dependencies() {
 	sudo apt install -y docker
 	# xsel
 	sudo apt install -y xsel
+	# cmake
+	sudo apt install -y cmake
 	# nodejs
 	wget -qO- https://deb.nodesource.com/setup_20.x | sudo -E bash -
 	sudo apt install -y nodejs
+	# npm
+	sudo apt install -y npm
+	# puppeteer / chai
+	npm install puppeteer chai
+	# typescript
+	npm install typescript @types/node @types/chai --save-dev
 	# tpm
 	TPM_PATH="$HOME/.tmux/plugins/tpm"
 	[ ! -d "$TPM_PATH" ] && git clone https://github.com/tmux-plugins/tpm "$TPM_PATH"
@@ -61,81 +48,60 @@ install_software() {
 
 	# vim
 	sudo apt install -y vim-gtk
+
 	# youcompleteme
 	cd "$HOME"
-	git clone https://github.com/ycm-core/YouCompleteMe.git
+	[ ! -d "YouCompleteMe" ] && git clone https://github.com/ycm-core/YouCompleteMe.git
 	cd YouCompleteMe
 	git submodule update --init --recursive
 	python3 install.py --all
+
 	# tmux
 	sudo apt install -y tmux
+
 	# tree
 	sudo apt install -y tree
+
 	# g++
 	sudo apt install -y g++
 
-	if [ "$FULL" -eq 1 ]; then
+	# openscad
+	sudo apt install -y openscad
 
-		# openscad
-		sudo apt install -y openscad
-		# pycharm
-		sudo snap install pycharm-community --classic
-		# telegram
-		sudo snap install telegram-desktop
-		# slack
-		sudo snap install slack
+	# pycharm
+	sudo snap install pycharm-community --classic
 
-		if [ "$PRUSA" -eq 1 ]; then
+	# telegram
+	sudo snap install telegram-desktop
 
-			# bmap tools
-			sudo apt install -y bmap-tools
-			# kicad
-			sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
-			sudo apt update
-			sudo apt install kicad
+	# slack
+	sudo snap install slack
 
-		fi
-
-	fi
+	# kicad
+	sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
+	sudo apt update
+	sudo apt install kicad
 
 	sudo apt autoremove > /dev/null 2>&1
 
 }
 
-if [ "$VERBOSE" -eq 1 ]; then
+printf "${yellow}${bold}"
+echo "Update APT..."
+printf "${reset}"
+update_apt
 
-	printf "${yellow}${bold}"
-	echo "Update APT..."
-    printf "${reset}"
-    update_apt
+printf "${yellow}${bold}"
+echo "Update snap..."
+printf "${reset}"
+update_snap
 
-    printf "${yellow}${bold}"
-	echo "Update snap..."
-    printf "${reset}"
-    update_snap
+printf "${yellow}${bold}"
+echo "Install dependencies..."
+printf "${reset}"
+install_dependencies
 
-	printf "${yellow}${bold}"
-	echo "Install dependencies..."
-    printf "${reset}"
-    install_dependencies
-
-	printf "${yellow}${bold}"
-	echo "Install software..."
-    printf "${reset}"
-    install_software
-
-else
-
-	echo "Update APT..."
-	update_apt > /dev/null 2>&1
-
-	echo "Update snap..."
-	update_snap > /dev/null 2>&1
-
-	echo "Install dependencies..."
-	install_dependencies > /dev/null 2>&1
-
-	echo "Install software..."
-	install_software > /dev/null 2>&1
-
-fi
+printf "${yellow}${bold}"
+echo "Install software..."
+printf "${reset}"
+install_software
