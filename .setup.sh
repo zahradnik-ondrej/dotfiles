@@ -69,7 +69,7 @@ install_software() {
 	sudo apt install -y openscad
 
 	# pycharm
-	sudo snap install pycharm-community --classic
+	sudo snap install pycharm-professional --classic
 
 	# telegram
 	sudo snap install telegram-desktop
