@@ -83,6 +83,12 @@ install_software() {
 	# godot
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo flatpak install -y flathub org.godotengine.Godot
+	# balena etcher
+	ETCHER_DOWNLOAD_URL="https://github.com/balena-io/etcher/releases/download/v1.19.21/balenaEtcher-1.19.21-x64.AppImage"
+	ETCHER_APPIMAGE_PATH="/opt/balenaEtcher"
+	sudo mkdir -p "$ETCHER_APPIMAGE_PATH"
+	sudo wget -O "$ETCHER_APPIMAGE_PATH/balenaEtcher.AppImage" "$ETCHER_DOWNLOAD_URL"
+	sudo chmod +x "$ETCHER_APPIMAGE_PATH/balenaEtcher.AppImage"
 }
 
 printf "${yellow}${bold}"
