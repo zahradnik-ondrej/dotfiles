@@ -5,11 +5,35 @@ reset="\e[0m"
 yellow="\e[33m"
 blue="\e[36m"
 
-set -x
+# set -x
+
+add_ppas() {
+
+	# kicad
+	printf "${blue}kicad (PPA)${reset}\n"
+	sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
+
+	# love2d
+	printf "${blue}love2d (PPA)${reset}\n"
+	sudo add-apt-repository -y ppa:bartbes/love-stable
+	
+	# obs
+	printf "${blue}obs (PPA)${reset}\n"
+	sudo add-apt-repository -y ppa:obsproject/obs-studio
+	
+	# freecad
+	printf "${blue}freecad (PPA)${reset}\n"
+	sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
+	
+	# steam
+	printf "${blue}multiverse (PPA for steam)${reset}\n"
+	sudo add-apt-repository -y multiverse
+
+}
 
 update_apt() {
-	sudo apt install -f --fix-missing
 	sudo apt update
+	sudo apt install -f --fix-missing
 	sudo apt upgrade -y
 }
 
@@ -20,13 +44,14 @@ update_snap() {
 
 install_dependencies() {
 
-	# flatpak (for godot)
+	# flatpak
 	printf "${blue}flatpak${reset}\n"
+	sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo apt install -y flatpak
 
 	# docker (for browsh)
 	printf "${blue}docker${reset}\n"
-	sudo snap install docker
+	sudo snap install docker --yes
 
 	# youcompleteme (for vim)
 	printf "${blue}youcompleteme${reset}\n"
@@ -75,9 +100,32 @@ install_dependencies() {
 	printf "${blue}expect${reset}\n"
 	sudo apt install -y expect
 
-	# .private_env_vars
-	[ -e "$HOME/.private_env_vars" ] && source "$HOME/.private_env_vars"
+}
 
+configure_netrc() {
+    NETRC_FILE="$HOME/.netrc"
+    
+    [ -e "$HOME/.private_env_vars" ] && source "$HOME/.private_env_vars"
+
+    GITHUB_MACHINE="github.com"
+    GITHUB_LOGIN="zahradnik-ondrej"
+    GITHUB_PASSWORD="$GITHUB_PAT"
+
+    GITLAB_MACHINE="gitlab.com"
+    GITLAB_LOGIN="ondra-zahradnik"
+    GITLAB_PASSWORD="$GITLAB_PAT"
+
+    cat <<EOF > $NETRC_FILE
+machine $GITHUB_MACHINE
+login $GITHUB_LOGIN
+password $GITHUB_PASSWORD
+
+machine $GITLAB_MACHINE
+login $GITLAB_LOGIN
+password $GITLAB_PASSWORD
+EOF
+
+    chmod 600 $NETRC_FILE
 }
 
 install_software() {
@@ -104,20 +152,18 @@ install_software() {
 
 	# pycharm
 	printf "${blue}pycharm${reset}\n"
-	sudo snap install pycharm-professional --classic
+	sudo snap install pycharm-professional --classic --yes
 
 	# telegram
 	printf "${blue}telegram${reset}\n"
-	sudo snap install telegram-desktop
+	sudo snap install telegram-desktop --yes
 
 	# slack
 	printf "${blue}slack${reset}\n"
-	sudo snap install slack
+	sudo snap install slack --yes
 
 	# kicad
 	printf "${blue}kicad${reset}\n"
-	sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
-	sudo apt update
 	sudo apt install -y kicad
 
 	# cura
@@ -145,7 +191,6 @@ install_software() {
 
 	# godot
 	printf "${blue}godot${reset}\n"
-	sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo flatpak install -y flathub org.godotengine.Godot
 
 	# balenaEtcher
@@ -178,16 +223,48 @@ install_software() {
 
 	# surfshark
 	printf "${blue}surfshark${reset}\n"
-	sudo snap install surfshark --beta
+	sudo snap install surfshark --beta --yes
 
 	# gitlab-runner
 	printf "${blue}gitlab-runner${reset}\n"
 	wget -O - "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
 	sudo apt install -y gitlab-runner
-	
+
 	# neofetch
 	printf "${blue}neofetch${reset}\n"
 	sudo apt install -y neofetch
+
+	# lua
+	printf "${blue}lua${reset}\n"
+	sudo apt install -y lua5.3
+
+	# love2d
+	printf "${blue}love2d${reset}\n"
+	sudo apt install -y love
+	
+	# obs
+	printf "${blue}obs${reset}\n"
+	sudo apt install -y obs-studio
+	
+	# freecad
+	printf "${blue}freecad${reset}\n"
+	sudo apt install -y freecad
+	
+	# blender
+	printf "${blue}blender${reset}\n"
+	snap install blender --classic --yes
+	
+	# steam
+	printf "${blue}steam${reset}\n"
+	sudo apt install -y steam
+	
+	# spotify
+	printf "${blue}spotify${reset}\n"
+	sudo snap install spotify
+	
+	# prusaslicer
+	printf "${blue}prusaslicer${reset}\n"
+	sudo flatpak install -y flathub com.prusa3d.PrusaSlicer
 
 }
 
@@ -219,8 +296,12 @@ install_themes() {
 
 EOF
 
-
 }
+
+printf "${yellow}${bold}"
+echo "Add PPAs..."
+printf "${reset}"
+add_ppas
 
 printf "${yellow}${bold}"
 echo "Update APT..."
@@ -238,6 +319,11 @@ printf "${reset}"
 install_dependencies
 
 printf "${yellow}${bold}"
+echo "Configure .netrc..."
+printf "${reset}"
+configure_netrc
+
+printf "${yellow}${bold}"
 echo "Install software..."
 printf "${reset}"
 install_software
@@ -247,4 +333,5 @@ echo "Install themes..."
 printf "${reset}"
 install_themes
 
-sudo apt autoremove > /dev/null 2>&1
+sudo apt autoclean
+sudo apt autoremove -y
