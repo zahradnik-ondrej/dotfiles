@@ -59,3 +59,5 @@ alias fray='ssh zahraon1@fray1.fit.cvut.cz'
 # prusa
 alias bs='ssh ondra@10.24.42.10'
 alias usbsdmux='/usr/bin/usbsdmux'
+alias ctrl='(cwd=$(pwd) && cd /home/ondra/prusa/meta-sl1-hw-tests/ && python3 tools/control.py && cd "$cwd")'
+
