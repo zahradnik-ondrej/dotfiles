@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="application/x-3mf">
+    <comment>3MF file</comment>
+    <glob pattern="*.3mf"/>
+  </mime-type>
+</mime-info>

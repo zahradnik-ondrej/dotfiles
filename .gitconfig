@@ -1,0 +1,24 @@
+[user]
+	name = Ondrej Zahradnik
+	email = ondraz@pm.me
+[credential]
+	helper = cache --timeout=3600
+[init]
+   defaultBranch = main
+[alias]
+	a  = add
+	cm = commit -m
+	d  = diff
+	ds = diff --stat
+	s  = status
+	ss = status -s
+	co = checkout
+	p  = push
+	lg = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred(%h)%Creset %Cgreen(%cr) %C(blue)<%an>%Creset %s %C(yellow)%d%Creset' --all
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[core]
+	autocrlf = input

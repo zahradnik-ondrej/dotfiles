@@ -1,0 +1,16 @@
+if [ -f /etc/bash_completion.d/git-prompt ]; then
+  source /etc/bash_completion.d/git-prompt
+fi
+
+bold="\[\e[1m\]"
+reset="\[\e[0m\]"
+yellow="\[\e[33m\]"
+gray="\[\e[90m\]"
+green="\[\e[32m\]"
+red="\[\e[31m\]"
+
+if type __git_ps1 &>/dev/null; then
+    export PS1="\n${gray}┌──${yellow}${bold}\u${reset}@${gray}\H${reset}:${green}${bold}\w${reset} ${red}\$(__git_ps1 '(%s)')${reset}\n${gray}└─${bold}\$${reset} "
+else
+    export PS1="\n${gray}┌──${yellow}${bold}\u${reset}@${gray}\H${reset}:${green}${bold}\w${reset}\n${gray}└─${bold}\$${reset} "
+fi
