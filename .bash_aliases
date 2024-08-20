@@ -28,7 +28,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias dir='vdir'
 alias vdir='vdir --color'
-alias grep='grep -rIn --color=always --exclude-dir=venv'
+alias grep='grep -I --color=always'
 
 # git
 git_bl() {
