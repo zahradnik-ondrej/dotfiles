@@ -87,3 +87,12 @@ export LS_COLORS="di=34:*.yaml=31:*.yml=31:*.ini=31:*.toml=31:*.conf=31:*.md=31:
 
 #source ~/git-prompt.sh
 #PROMPT_COMMAND='__posh_git_ps1 "\u@\h:\w " "\\\$ ";'$PROMPT_COMMAND
+
+if [ -z "$TMUX" ]; then
+	if tmux has-session 2>/dev/null; then
+		tmux attach-session -d
+	else
+		tmux new-session -s 0
+	fi
+fi
+
