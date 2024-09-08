@@ -7,8 +7,6 @@ blue="\e[36m"
 
 # set -x
 
-add_ppas() {}
-
 update_apt() {
 	sudo apt update
 	sudo apt install -f --fix-missing
@@ -134,13 +132,6 @@ install_software() {
 
 }
 
-install_themes() {}
-
-printf "${yellow}${bold}"
-echo "Add PPAs..."
-printf "${reset}"
-add_ppas
-
 printf "${yellow}${bold}"
 echo "Update APT..."
 printf "${reset}"
@@ -165,11 +156,6 @@ printf "${yellow}${bold}"
 echo "Install software..."
 printf "${reset}"
 install_software
-
-printf "${yellow}${bold}"
-echo "Install themes..."
-printf "${reset}"
-install_themes
 
 sudo apt autoclean
 sudo apt autoremove -y
