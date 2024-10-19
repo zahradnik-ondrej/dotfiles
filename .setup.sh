@@ -100,6 +100,9 @@ install_dependencies() {
 	printf "${blue}expect${reset}\n"
 	sudo apt install -y expect
 
+	# appindicator (for proton-vpn)
+	sudo apt install -y libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1 gnome-shell-extension-appindicator
+
 }
 
 configure_netrc() {
@@ -268,6 +271,11 @@ install_software() {
 	# inkscape
 	printf "${blue}inkscape${reset}\n"
 	sudo apt install -y inkscape
+
+	# proton-vpn
+	wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.4_all.deb
+	sudo dpkg -i ./protonvpn-stable-release_1.0.4_all.deb && sudo apt update
+	sudo apt install -y proton-vpn-gnome-desktop
 
 }
 
