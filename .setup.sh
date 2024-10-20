@@ -29,6 +29,10 @@ add_ppas() {
 	printf "${blue}multiverse (PPA for steam)${reset}\n"
 	sudo add-apt-repository -y multiverse
 
+	# peek
+	printf "${blue}peek (PPA)${reset}\n"
+	sudo add-apt-repository -y ppa:peek-developers/stable
+
 }
 
 update_apt() {
@@ -272,10 +276,9 @@ install_software() {
 	printf "${blue}inkscape${reset}\n"
 	sudo apt install -y inkscape
 
-	# proton-vpn
-	wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.4_all.deb
-	sudo dpkg -i ./protonvpn-stable-release_1.0.4_all.deb && sudo apt update
-	sudo apt install -y proton-vpn-gnome-desktop
+	# peek
+	printf "${blue}peek${reset}\n"
+	sudo apt install -y peek
 
 }
 
