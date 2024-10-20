@@ -6,7 +6,7 @@
 
 You will never have to put all your dotfiles into one folder or use symlinks ever again.
 
-*(The instructions below have been made to work on **Linux** operating systems, specifically on **Ubuntu** (20.04 and 22.04) along with the prerequisite of having **Git** installed on your system.)*
+*(The instructions below have been made to work on **Linux** operating systems, specifically on **Ubuntu 22.04** along with the prerequisite of having **Git** installed on your system.)*
 
 </div>
 
