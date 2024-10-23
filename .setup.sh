@@ -272,6 +272,14 @@ install_software() {
 	printf "${blue}libreoffice${reset}\n"
 	sudo apt install -y libreoffice
 
+	# gparted
+	printf "${blue}gparted${reset}\n"
+	sudo apt install -y gparted
+
+	# htop
+	printf "${blue}htop${reset}\n"
+	sudo apt install -y htop
+
 	# inkscape
 	printf "${blue}inkscape${reset}\n"
 	sudo apt install -y inkscape
