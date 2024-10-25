@@ -58,7 +58,9 @@ alias g++='g++ -std=c++20 -Wall -pedantic -Wno-long-long'
 alias fray='ssh zahraon1@fray1.fit.cvut.cz'
 
 # prusa
-alias bs='ssh ondra@10.24.42.10'
 alias usbsdmux='/usr/bin/usbsdmux'
 alias ctrl='(cwd=$(pwd) && cd /home/ondra/prusa/meta-sl1-hw-tests/ && python3 tools/control.py && cd "$cwd")'
-
+vnc() {
+    ssh root@$1 "touch-ui -platform vnc &"
+    vncviewer $1:5900 -geometry 800x500
+}

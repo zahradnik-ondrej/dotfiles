@@ -280,6 +280,10 @@ install_software() {
 	printf "${blue}peek${reset}\n"
 	sudo apt install -y peek
 
+	# flameshot
+	printf "${blue}flameshot${reset}\n"
+	sudo apt install -y flameshot
+
 }
 
 install_themes() {
