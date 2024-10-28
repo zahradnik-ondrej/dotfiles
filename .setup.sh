@@ -33,6 +33,10 @@ add_ppas() {
 	printf "${blue}peek (PPA)${reset}\n"
 	sudo add-apt-repository -y ppa:peek-developers/stable
 
+	# signal
+	printf "${blue}signal (PPA)${reset}\n"
+	echo 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal-xenial.list
+
 }
 
 update_apt() {
@@ -291,6 +295,10 @@ install_software() {
 	# flameshot
 	printf "${blue}flameshot${reset}\n"
 	sudo apt install -y flameshot
+
+	# signal
+	printf "${blue}signal${reset}\n"
+	sudo apt install -y signal-desktop
 
 }
 
