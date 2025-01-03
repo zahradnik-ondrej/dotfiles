@@ -24,8 +24,3 @@ filetype plugin indent on
 
 " horizontal split: Ctrl + w, h
 nnoremap <C-w>h :split<CR>
-
-" YouCompleteMe
-set runtimepath+=$HOME/YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '$HOME/.vim/.ycm_extra_conf.py'
-set completeopt-=preview

@@ -1,56 +1,121 @@
 #!/bin/bash
 
-bold="\e[1m"
 reset="\e[0m"
+bold="\e[1m"
+reset_bold="\e[22m"
+green="\e[32m"
 yellow="\e[33m"
 red="\e[35m"
-green="\e[32m"
-blue="\e[36m"
+cyan="\e[36m"
 
-# set -x
+ask_install() {
+	local name=$1
+	local default=${2:-yes}
+
+	local name_upper=$(echo "$name" | tr '[:lower:]' '[:upper:]')
+
+	local options
+	if [[ "$default" =~ ^[Yy] ]]; then
+		options="[${green}Y${cyan}/n${cyan}]"
+	else
+		options="[${cyan}y/${red}N${cyan}]"
+	fi
+
+  while true; do
+		read -p "$(echo -e "${cyan}Do you want to install packages in the ${bold}$name_upper${reset_bold} category? $options${cyan}: ${reset}")" answer
+
+		if [[ -z "$answer" ]]; then
+			answer=$default
+		fi
+
+		case $answer in
+			[Yy]* ) return 1 ;;
+			[Nn]* ) return 0 ;;
+			* ) echo "Please answer yes or no." ;;
+		esac
+	done
+}
 
 run() {
-    "$@" >/dev/null 2>&1
-    local exit_code=$?
+	"$@" >/dev/null 2>&1
+	local exit_code=$?
 
-    if [ $exit_code -eq 0 ]; then
-        printf "${green} ✔${reset}\n"
-    else
-        printf "${red} ✖${reset}\n"
-    fi
+	if [ $exit_code -eq 0 ]; then
+		printf "${green} ✔${reset}\n"
+	else
+		printf "${red} ✖${reset}\n"
+	fi
 
-    return $exit_code
+	return $exit_code
+}
+
+clone_repo() {
+	local repo_url="$1"
+	local target_path="$2"
+
+	[ -d "$target_path" ] && rm -rf "$target_path"
+	run git clone "$repo_url" "$target_path"
+}
+
+install_appimage() {
+	local expected_version="$1"
+	local download_url="$2"
+	local appimage_path="$3"
+	local appimage_file="$appimage_path/$(basename "$download_url")"
+
+	local current_version="none"
+	[ -f "$appimage_file" ] && current_version=$("$appimage_file" --appimage-version 2>&1)
+
+	if [ "$current_version" != "$expected_version" ]; then
+		sudo mkdir -p "$appimage_path"
+		sudo wget -O "$appimage_file" "$download_url" >/dev/null 2>&1
+		sudo chmod +x "$appimage_file"
+	fi
+
+	run test -f "$appimage_file"
 }
 
 add_ppas() {
 
-	# kicad
-	printf "${blue}kicad (PPA)${reset}"
-	sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
+	if [ "$dev_env" -eq 1 ]; then
 
-	# love2d
-	printf "${blue}love2d (PPA)${reset}"
-	run sudo add-apt-repository -y ppa:bartbes/love-stable
+		# love2d
+		printf "love2d (PPA)"
+		run sudo add-apt-repository -y ppa:bartbes/love-stable
 
-	# obs
-	printf "${blue}obs (PPA)${reset}"
-	run sudo add-apt-repository -y ppa:obsproject/obs-studio
+	fi
 
-	# freecad
-	printf "${blue}freecad (PPA)${reset}"
-	run sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
+	if [ "$three_d" -eq 1 ]; then
 
-	# steam
-	printf "${blue}multiverse (PPA for steam)${reset}"
-	run sudo add-apt-repository -y multiverse
+		# freecad
+		printf "freecad (PPA)"
+		run sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
 
-	# peek
-	printf "${blue}peek (PPA)${reset}"
-	run sudo add-apt-repository -y ppa:peek-developers/stable
+	fi
 
-	# python
-	printf "${blue}python (PPA)${reset}"
-	run sudo add-apt-repository -y ppa:deadsnakes/ppa
+	if [ "$utilities" -eq 1 ]; then
+
+		# obs
+		printf "obs (PPA)"
+		run sudo add-apt-repository -y ppa:obsproject/obs-studio
+
+		# peek
+		printf "peek (PPA)"
+		run sudo add-apt-repository -y ppa:peek-developers/stable
+
+	fi
+
+	if [ "$misc" -eq 1 ]; then
+
+		# kicad
+		printf "kicad (PPA)"
+		run sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
+
+		# steam
+		printf "multiverse (PPA for steam)"
+		run sudo add-apt-repository -y multiverse
+
+	fi
 
 }
 
@@ -61,355 +126,353 @@ update_apt() {
 }
 
 update_snap() {
-	sudo snap install core
+	if ! snap list | grep -q core; then
+    	sudo snap install core
+	fi
 	sudo snap refresh
 }
 
 install_dependencies() {
 
 	# flatpak
-	printf "${blue}flatpak${reset}"
+	printf "flatpak"
 	run sudo apt install -y flatpak
 	sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-	# docker (for browsh)
-	printf "${blue}docker${reset}"
-	run sudo snap install docker
-
-	# cmake (for youcompleteme for vim)
-	printf "${blue}cmake${reset}"
-	run sudo apt install -y cmake
-
-	# golang (for youcompleteme for vim)
-	printf "${blue}golang${reset}"
-	run sudo apt install -y golang-go
-
-	# youcompleteme (for vim)
-	printf "${blue}youcompleteme${reset}\n"
-	[ -d "YouCompleteMe" ] && rm -rf "YouCompleteMe"
-	git clone https://github.com/ycm-core/YouCompleteMe.git
-	cd YouCompleteMe
-	git submodule update --init --recursive
-	python3 install.py --all --verbose
-
-	# tpm (for tmux)
-	printf "${blue}tpm${reset}"
-	TPM_PATH="$HOME/.tmux/plugins/tpm"
-	[ -d "$TPM_PATH" ] && rm -rf "$TPM_PATH"
-	run git clone https://github.com/tmux-plugins/tpm "$TPM_PATH"
-
-	# xsel (for tmux)
-	printf "${blue}xsel${reset}"
-	run sudo apt install -y xsel
-
-	# chromium (for puppeteer)
-	printf "${blue}chromium${reset}"
-	run sudo apt install -y chromium-browser
-
-	# nodejs
-	printf "${blue}nodejs${reset}\n"
-	wget -qO- https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt install -y nodejs
-
-	# typescript
-	printf "${blue}typescript${reset}"
-	run npm install typescript @types/node --save-dev
-
-	# puppeteer / mocha / chai
-	printf "${blue}puppeteer / mocha / chai${reset}"
-	run npm install puppeteer mocha chai @types/mocha @types/chai --save-dev
-
-	# pip (for yt-dlp)
-	printf "${blue}pip${reset}"
+	# pip
+	printf "pip"
 	run sudo apt install -y python3-pip
 
-	# dconf (for dracula for gnome terminal)
-	printf "${blue}dconf${reset}"
-	run sudo apt install -y dconf-cli
+	if [ "$dev_env" -eq 1 ]; then
 
-	# expect (for dracula for gnome terminal)
-	printf "${blue}expect${reset}"
-	run sudo apt install -y expect
+		# tpm (for tmux)
+		printf "tpm (for tmux)"
+		clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
 
-	# appindicator (for proton-vpn)
-	printf "${blue}appindicator)${reset}"
-	run sudo apt install -y libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1 gnome-shell-extension-appindicator
+		# xsel (for tmux-yank)
+		printf "xsel (for tmux)"
+		run sudo apt install -y xsel
 
-}
+	fi
 
-configure_netrc() {
-    NETRC_FILE="$HOME/.netrc"
+	if [ "$typescript" -eq 1 ]; then
 
-    [ -e "$HOME/.private_env_vars" ] && source "$HOME/.private_env_vars"
+		# chromium (for puppeteer)
+		printf "chromium (for puppeteer)"
+		run sudo apt install -y chromium-browser
 
-    GITHUB_MACHINE="github.com"
-    GITHUB_LOGIN="zahradnik-ondrej"
-    GITHUB_PASSWORD="$GITHUB_PAT"
+	fi
 
-    GITLAB_MACHINE="gitlab.com"
-    GITLAB_LOGIN="ondra-zahradnik"
-    GITLAB_PASSWORD="$GITLAB_PAT"
-
-    cat <<EOF > $NETRC_FILE
-machine $GITHUB_MACHINE
-login $GITHUB_LOGIN
-password $GITHUB_PASSWORD
-
-machine $GITLAB_MACHINE
-login $GITLAB_LOGIN
-password $GITLAB_PASSWORD
-EOF
-
-    chmod 600 $NETRC_FILE
 }
 
 install_software() {
 
-	# vim
-	printf "${blue}vim${reset}"
-	run sudo apt install -y vim
+	if [ "$dev_env" -eq 1 ]; then
 
-	# tmux
-	printf "${blue}tmux${reset}"
-	run sudo apt install -y tmux
+		# btop
+		printf "btop"
+		run sudo snap install btop
 
-	# tree
-	printf "${blue}tree${reset}"
-	run sudo apt install -y tree
+		# curl
+		printf "curl"
+		run sudo apt install -y curl
 
-	# g++
-	printf "${blue}g++${reset}"
-	run sudo apt install -y g++
+		# dotnet-sdk
+		printf "dotnet-sdk"
+		run sudo apt install -y dotnet-sdk-8.0
 
-	# openscad
-	printf "${blue}openscad${reset}"
-	run sudo apt install -y openscad
+		# g++
+		printf "g++"
+		run sudo apt install -y g++
 
-	# pycharm
-	printf "${blue}pycharm${reset}"
-	run sudo snap install pycharm-professional --classic
+		# godot
+		printf "godot"
+		run sudo flatpak install -y flathub org.godotengine.Godot
 
-	# telegram
-	printf "${blue}telegram${reset}"
-	run sudo snap install telegram-desktop
+		# gparted
+		printf "gparted"
+		run sudo apt install -y gparted
 
-	# slack
-	printf "${blue}slack${reset}"
-	run sudo snap install slack
+		# love2d
+		printf "love2d"
+		run sudo apt install -y love
 
-	# kicad
-	printf "${blue}kicad${reset}"
-	run sudo apt install -y kicad
+		# lua
+		printf "lua"
+		run sudo apt install -y lua5.3
+
+		# midnight-commander
+		printf "midnight-commander"
+		run sudo apt install -y mc
+
+		# neofetch
+		printf "neofetch"
+		run sudo apt install -y neofetch
+
+		# tmux
+		printf "tmux"
+		run sudo apt install -y tmux
+
+		# tree
+		printf "tree"
+		run sudo apt install -y tree
+
+		# vim
+		printf "vim"
+		run sudo apt install -y vim
+
+	fi
+
+	if [ "$typescript" -eq 1 ]; then
+
+		# nodejs
+		printf "nodejs\n"
+		if ! command -v node >/dev/null 2>&1; then
+			wget -qO- https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt install -y nodejs
+		fi
+
+		# chai
+		printf "chai"
+		run npm install chai @types/chai --save-dev
+
+		# mocha
+		printf "mocha"
+		run npm install mocha @types/mocha --save-dev
+
+		# puppeteer
+		printf "puppeteer"
+		run npm install puppeteer --save-dev
+
+		# typescript
+		printf "typescript"
+		run npm install typescript @types/node --save-dev
+
+	fi
+
+	if [ "$three_d" -eq 1 ]; then
+
+		# blender
+		printf "blender"
+		run sudo snap install blender --classic
+
+		# freecad
+		printf "freecad"
+		run sudo apt install -y freecad
+
+		# openscad
+		printf "openscad"
+		run sudo apt install -y openscad
+
+		# prusaslicer
+		printf "prusaslicer"
+		run sudo flatpak install -y flathub com.prusa3d.PrusaSlicer
+
+	fi
+
+	if [ "$utilities" -eq 1 ]; then
+
+		# deluge
+		printf "deluge"
+		run sudo apt install -y deluge
+
+		# ffmpeg
+		printf "ffmpeg"
+		run sudo apt install -y ffmpeg
+
+		# flameshot
+		printf "flameshot"
+		run sudo apt install -y flameshot
+
+		# inkscape
+		printf "inkscape"
+		run sudo apt install -y inkscape
+
+		# libreoffice
+		printf "libreoffice"
+		run sudo apt install -y libreoffice
+
+		# obs
+		printf "obs"
+		run sudo apt install -y obs-studio
+
+		# peek
+		printf "peek"
+		run sudo apt install -y peek
+
+		# vlc
+		printf "vlc"
+		run sudo apt install -y vlc
+
+		# yt-dlp
+		printf "yt-dlp"
+		run pip3 install --upgrade yt-dlp
+
+	fi
+
+	if [ "$misc" -eq 1 ]; then
+
+		# kicad
+		printf "kicad"
+		run sudo apt install -y kicad
+
+		# slack
+		printf "slack"
+		run sudo snap install slack
+
+		# spotify
+		printf "spotify"
+		run sudo snap install spotify
+
+		# steam
+		printf "steam"
+		run sudo apt install -y steam
+
+		# telegram
+		printf "telegram"
+		run sudo snap install telegram-desktop
+
+		# vivaldi
+		printf "vivaldi"
+		run sudo snap install vivaldi
+
+	fi
 
 	# cura
-	printf "${blue}cura${reset}\n"
-	CURA_EXPECTED_VERSION="Version: 5735cc5"
-	CURA_DOWNLOAD_URL="https://github.com/Ultimaker/Cura/releases/download/5.7.2-RC2/UltiMaker-Cura-5.7.2-linux-X64.AppImage"
-	CURA_APPIMAGE_PATH="/opt/cura"
-	CURA_APPIMAGE="$CURA_APPIMAGE_PATH/Cura.AppImage"
-	CURA_VERSION="none"
-	[ -f "$CURA_APPIMAGE" ] && CURA_VERSION=$("$CURA_APPIMAGE" --appimage-version 2>&1)
-
-	if [ "$CURA_VERSION" != "$CURA_EXPECTED_VERSION" ]; then
-		sudo mkdir -p "$CURA_APPIMAGE_PATH"
-		sudo wget -O "$CURA_APPIMAGE" "$CURA_DOWNLOAD_URL"
-		sudo chmod +x "$CURA_APPIMAGE"
-	fi
-
-	# deluge
-	printf "${blue}deluge${reset}"
-	run sudo apt install -y deluge
-
-	# vlc
-	printf "${blue}vlc${reset}"
-	run sudo apt install -y vlc
-
-	# godot
-	printf "${blue}godot${reset}"
-	run sudo flatpak install -y flathub org.godotengine.Godot
+	printf "cura"
+	install_appimage \
+		"Version: 5735cc5" \
+		"https://github.com/Ultimaker/Cura/releases/download/5.7.2-RC2/UltiMaker-Cura-5.7.2-linux-X64.AppImage" \
+		"/opt/cura"
 
 	# balenaEtcher
-	printf "${blue}balenaEtcher${reset}\n"
-	ETCHER_EXPECTED_VERSION="Version: effcebc"
-	ETCHER_DOWNLOAD_URL="https://github.com/balena-io/etcher/releases/download/v1.18.0/balenaEtcher-1.18.0-x64.AppImage"
-	ETCHER_APPIMAGE_PATH="/opt/balenaEtcher"
-	ETCHER_APPIMAGE="$ECTHER_APPIMAGE_PATH/balenaEtcher.AppImage"
-	ETCHER_VERSION="none"
-	[ -f "$ETCHER_APPIMAGE" ] && ETCHER_VERSION=$("$ETCHER_APPIMAGE" --appimage-version 2>&1)
+	printf "balenaEtcher"
 
-	if [ "$ETCHER_VERSION" != "$ETCHER_EXPECTED_VERSION" ]; then
-		sudo mkdir -p "$ETCHER_APPIMAGE_PATH"
-		sudo wget -O "$ECTHER_APPIMAGE" "$ETCHER_DOWNLOAD_URL"
-		sudo chmod +x "$ETCHER_APPIMAGE"
-	fi
-
-
-	# yt-dlp
-	printf "${blue}yt-dlp${reset}"
-	run pip3 install --upgrade yt-dlp
-
-	# ffmpeg
-	printf "${blue}ffmpeg${reset}"
-	run sudo apt install -y ffmpeg
-
-	# nautilus
-	printf "${blue}nautilus${reset}"
-	run sudo apt install -y nautilus
-
-	# surfshark
-	printf "${blue}surfshark${reset}"
-	run sudo snap install surfshark
-
-	# neofetch
-	printf "${blue}neofetch${reset}"
-	run sudo apt install -y neofetch
-
-	# lua
-	printf "${blue}lua${reset}"
-	run sudo apt install -y lua5.3
-
-	# love2d
-	printf "${blue}love2d${reset}"
-	run sudo apt install -y love
-
-	# obs
-	printf "${blue}obs${reset}"
-	run sudo apt install -y obs-studio
-
-	# freecad
-	printf "${blue}freecad${reset}"
-	run sudo apt install -y freecad
-
-	# blender
-	printf "${blue}blender${reset}"
-	run sudo snap install blender --classic
-
-	# steam
-	printf "${blue}steam${reset}"
-	run sudo apt install -y steam
-
-	# spotify
-	printf "${blue}spotify${reset}"
-	run sudo snap install spotify
-
-	# prusaslicer
-	printf "${blue}prusaslicer${reset}"
-	run sudo flatpak install -y flathub com.prusa3d.PrusaSlicer
-
-	# libreoffice
-	printf "${blue}libreoffice${reset}"
-	run sudo apt install -y libreoffice
-
-	# gparted
-	printf "${blue}gparted${reset}"
-	run sudo apt install -y gparted
-
-	# htop
-	printf "${blue}htop${reset}"
-	run sudo apt install -y htop
-
-	# inkscape
-	printf "${blue}inkscape${reset}"
-	run sudo apt install -y inkscape
-
-	# peek
-	printf "${blue}peek${reset}"
-	run sudo apt install -y peek
-
-	# flameshot
-	printf "${blue}flameshot${reset}"
-	run sudo apt install -y flameshot
-
-	# signal
-	printf "${blue}signal${reset}"
-	run sudo snap install signal-desktop
-
-	# vivaldi
-	printf "${blue}vivaldi${reset}"
-	run sudo snap install vivaldi
-
-	# dotnet-sdk
-	printf "${blue}dotnet-sdk${reset}"
-	run sudo apt install -y dotnet-sdk-8.0
-
-	# python
-	printf "${blue}python${reset}"
-	run sudo apt install -y python3.12
+	install_appimage \
+		"Version: effcebc" \
+		"https://github.com/balena-io/etcher/releases/download/v1.18.0/balenaEtcher-1.18.0-x64.AppImage" \
+		"/opt/balenaEtcher"
 
 }
 
 install_themes() {
 
-	# dracula (for gnome terminal)
-	printf "${blue}dracula${reset}\n"
-	[ -d "gnome-terminal" ] && rm -rf "gnome-terminal"
-	git clone https://github.com/dracula/gnome-terminal
-	cd gnome-terminal
+	if [ "$dev_env" -eq 1 ]; then
 
-	expect <<EOF
-	set timeout -1
+		# gruvbox (for vim)
+		printf "gruvbox (for vim)"
+		clone_repo "https://github.com/morhetz/gruvbox.git" "$HOME/.vim/pack/plugins/start/gruvbox"
+		
+	fi
 
-	spawn ./install.sh
+}
 
-	expect "Please select a color scheme:"
-	send "1\r"
+cleanup() {
 
-	expect {
-		"You need to create a new default profile to continue. Continue?" {
-			send "yes\r"
-			expect "Please select a Gnome Terminal profile:"
-			send "1\r"
-		}
-		"Please select a Gnome Terminal profile:" {
-			send "1\r"
-		}
-	}
-
-EOF
-
-	# dracula (for konsole)
-	[ -d "konsole" ] && rm -rf "konsole"
-	git clone https://github.com/dracula/konsole.git
-	mv "konsole/Dracula.colorscheme" "$HOME/.local/share/konsole"
-	rm -rf "konsole"
+	sudo apt autoclean >/dev/null
+	sudo apt autoremove -y >/dev/null
 
 }
 
 sudo -v
 
+category="Dev Environment"
+printf "${cyan}${bold}"
+printf "❏ ${category}\n"
+printf "${reset}"
+echo "- btop"
+echo "- curl"
+echo "- dotnet-sdk"
+echo "- g++"
+echo "- godot"
+echo "- gparted"
+echo "- love2d"
+echo "- lua"
+echo "- midnight-commander"
+echo "- neofetch"
+echo "- tmux"
+echo "- tree"
+echo "- vim"
+dev_env=$(ask_install "${category}" "yes"; echo $?)
+
+category="TypeScript"
+printf "${cyan}${bold}"
+printf "❏ ${category}\n"
+printf "${reset}"
+echo "- chai"
+echo "- mocha"
+echo "- nodejs"
+echo "- puppeteer"
+echo "- typescript"
+typescript=$(ask_install "${category}" "no"; echo $?)
+
+category="3D"
+printf "${cyan}${bold}"
+printf "❏ ${category}\n"
+printf "${reset}"
+echo "- blender"
+echo "- freecad"
+echo "- openscad"
+echo "- prusaslicer"
+three_d=$(ask_install "${category}" "no"; echo $?)
+
+category="Utilities"
+printf "${cyan}${bold}"
+printf "❏ ${category}\n"
+printf "${reset}"
+echo "- deluge"
+echo "- ffmpeg"
+echo "- flameshot"
+echo "- inkscape"
+echo "- libreoffice"
+echo "- obs"
+echo "- peek"
+echo "- vlc"
+echo "- yt-dlp"
+utilities=$(ask_install "${category}" "no"; echo $?)
+
+category="Miscellaneous"
+printf "${cyan}${bold}"
+printf "❏ ${category}\n"
+printf "${reset}"
+echo "- kicad"
+echo "- slack"
+echo "- spotify"
+echo "- steam"
+echo "- telegram"
+echo "- vivaldi"
+misc=$(ask_install "${category}" "no"; echo $?)
+
 printf "${yellow}${bold}"
-echo "Add PPAs..."
+echo "========= Add PPAs ========="
 printf "${reset}"
 add_ppas
 
 printf "${yellow}${bold}"
-printf "Update APT..."
+echo "======== Update APT ========"
 printf "${reset}"
 run update_apt
 
 printf "${yellow}${bold}"
-printf "Update snap..."
+echo "======= Update snap ========"
 printf "${reset}"
 run update_snap
 
 printf "${yellow}${bold}"
-echo "Install dependencies..."
+echo "=== Install dependencies ==="
 printf "${reset}"
 install_dependencies
 
 printf "${yellow}${bold}"
-printf "Configure .netrc..."
-printf "${reset}"
-run configure_netrc
-
-printf "${yellow}${bold}"
-echo "Install software..."
+echo "===== Install software ====="
 printf "${reset}"
 install_software
 
 printf "${yellow}${bold}"
-printf "Install themes..."
+echo "====== Install themes ======"
 printf "${reset}"
-run install_themes
+install_themes
 
-sudo apt autoclean >/dev/null 2>&1
-sudo apt autoremove -y >/dev/null 2>&1
+printf "${yellow}${bold}"
+echo "===== Cleanup ====="
+printf "${reset}"
+run cleanup
