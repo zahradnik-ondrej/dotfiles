@@ -1,8 +1,10 @@
 alias godot='flatpak run org.godotengine.Godot'
 alias browsh='sudo docker run -it browsh/browsh'
 alias cura='/opt/cura/Cura.AppImage'
-alias setup='chmod +x ~/.setup.sh && ~/.setup.sh'
 alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
+alias nvim='/opt/nvim-linux64/bin/nvim'
+alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
+alias nv="neovide"
 
 # test.sh
 test_sh() {

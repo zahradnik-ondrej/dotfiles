@@ -24,3 +24,4 @@ filetype plugin indent on
 
 " horizontal split: Ctrl + w, h
 nnoremap <C-w>h :split<CR>
+

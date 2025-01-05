@@ -53,8 +53,12 @@ clone_repo() {
 	local repo_url="$1"
 	local target_path="$2"
 
-	[ -d "$target_path" ] && rm -rf "$target_path"
-	run git clone "$repo_url" "$target_path"
+	if [ -z "$target_path" ]; then
+		run git clone "$repo_url"
+	else
+		[ -d "$target_path" ] && rm -rf "$target_path"
+        run git clone "$repo_url" "$target_path"
+    fi
 }
 
 install_appimage() {
@@ -143,6 +147,10 @@ install_dependencies() {
 	printf "pip"
 	run sudo apt install -y python3-pip
 
+	# docker
+	printf "docker"
+	run sudo snap install docker --classic
+
 	if [ "$dev_env" -eq 1 ]; then
 
 		# tpm (for tmux)
@@ -171,7 +179,7 @@ install_software() {
 
 		# btop
 		printf "btop"
-		run sudo snap install btop
+		run sudo apt install -y btop
 
 		# curl
 		printf "curl"
@@ -208,6 +216,13 @@ install_software() {
 		# neofetch
 		printf "neofetch"
 		run sudo apt install -y neofetch
+    
+    # neovide
+    printf "neovide"
+    install_appimage \
+      "Version: 5735cc5" \
+      "https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage" \
+      "/opt/neovide"
 
 		# tmux
 		printf "tmux"
@@ -305,7 +320,7 @@ install_software() {
 
 		# yt-dlp
 		printf "yt-dlp"
-		run pip3 install --upgrade yt-dlp
+    run pip3 install --upgrade yt-dlp --quiet --no-input
 
 	fi
 
@@ -358,10 +373,18 @@ install_themes() {
 
 	if [ "$dev_env" -eq 1 ]; then
 
+		# dracula (for midnight-commander)
+		printf "dracula (for midnight-commander)"
+		MC_DRACULA_PATH="$HOME/mc-dracula-theme"
+		clone_repo "https://github.com/dracula/midnight-commander.git" "$MC_DRACULA_PATH"
+		mkdir -p "$HOME/.local/share/mc/skins"
+		cp "$MC_DRACULA_PATH/skins/dracula256.ini" "$HOME/.local/share/mc/skins"
+		rm -rf "$MC_DRACULA_PATH"
+
 		# gruvbox (for vim)
 		printf "gruvbox (for vim)"
-		clone_repo "https://github.com/morhetz/gruvbox.git" "$HOME/.vim/pack/plugins/start/gruvbox"
-		
+		clone_repo "https://github.com/morhetz/gruvbox.git" "$HOME/.vim/pack/themes/start/gruvbox"
+
 	fi
 
 }
@@ -389,6 +412,7 @@ echo "- love2d"
 echo "- lua"
 echo "- midnight-commander"
 echo "- neofetch"
+echo "- neovide"
 echo "- tmux"
 echo "- tree"
 echo "- vim"

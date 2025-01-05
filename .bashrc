@@ -48,6 +48,8 @@ if ! shopt -oq posix; then
 fi
 
 export EDITOR=lvim
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+export PATH=$PATH:/opt/nvim-linux64/bin
 
 if [ -f ~/.bash_ps1 ]; then
 	. ~/.bash_ps1
@@ -55,10 +57,11 @@ fi
 
 export LS_COLORS="di=34:*.yaml=31:*.yml=31:*.ini=31:*.toml=31:*.conf=31:*.md=31:*.txt=31:*.json=31:*.pdf=31:*.doc=31:*.docx=31:*.h=32:*.sh=32:*.py=32:*.c=32:*.cpp=32:*.js=32:*.ts=32:*.lua=32:*.tar.gz=33:*.zip=33:*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.png=90:*.jpg=90:*.svg=90:*Dockerfile=36"
 
-if [ -z "$TMUX" ]; then
-	if tmux has-session 2>/dev/null; then
-		tmux attach-session -d
-	else
-		tmux new-session -s 0
-	fi
-fi
+# if [ -z "$TMUX" ]; then
+# 	if tmux has-session 2>/dev/null; then
+# 		tmux attach-session -d
+# 	else
+# 		tmux new-session -s 0
+# 	fi
+# fi
+
