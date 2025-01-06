@@ -54,10 +54,10 @@ clone_repo() {
 	local target_path="$2"
 
 	if [ -z "$target_path" ]; then
-		run git clone "$repo_url"
+		git clone "$repo_url"
 	else
 		[ -d "$target_path" ] && rm -rf "$target_path"
-        run git clone "$repo_url" "$target_path"
+        git clone "$repo_url" "$target_path"
     fi
 }
 
@@ -80,6 +80,10 @@ install_appimage() {
 }
 
 add_ppas() {
+ 
+  # multiverse (PPA)
+  printf "multiverse (PPA)"
+  run sudo add-apt-repository -y multiverse
 
 	if [ "$dev_env" -eq 1 ]; then
 
@@ -115,10 +119,6 @@ add_ppas() {
 		printf "kicad (PPA)"
 		run sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
 
-		# steam
-		printf "multiverse (PPA for steam)"
-		run sudo add-apt-repository -y multiverse
-
 	fi
 
 }
@@ -152,7 +152,11 @@ install_dependencies() {
 	run sudo snap install docker --classic
 
 	if [ "$dev_env" -eq 1 ]; then
-	
+
+    # libfontconfig1-dev (for alacritty)
+    printf "libfontconfig1-dev (for alacritty)"
+    run sudo apt install -y libfontconfig1-dev
+
 		# rustup (for lunarvim)
 		echo "rustup (for lunarvim)"
 		wget -qO- https://sh.rustup.rs | sh -s -- -y
@@ -181,6 +185,15 @@ install_dependencies() {
 install_software() {
 
 	if [ "$dev_env" -eq 1 ]; then
+
+    # alacritty
+    printf "alacritty"
+    ALACRITTY_PATH="$HOME/alacritty"
+    clone_repo "https://github.com/alacritty/alacritty.git" "$ALACRITTY_PATH"
+    cwd=$(pwd)
+    cd "$ALACRITTY_PATH"
+    cargo build --release
+    cd "$cwd"
 
 		# btop
 		printf "btop"
@@ -265,19 +278,19 @@ install_software() {
 
 		# chai
 		printf "chai"
-		run npm install chai @types/chai --save-dev
+		run sudo npm install chai @types/chai --save-dev
 
 		# mocha
 		printf "mocha"
-		run npm install mocha @types/mocha --save-dev
+		run sudo npm install mocha @types/mocha --save-dev
 
 		# puppeteer
 		printf "puppeteer"
-		run npm install puppeteer --save-dev
+		run sudo npm install puppeteer --save-dev
 
 		# typescript
 		printf "typescript"
-		run npm install typescript @types/node --save-dev
+		run sudo npm install typescript @types/node --save-dev
 
 	fi
 
@@ -332,8 +345,8 @@ install_software() {
 		run sudo apt install -y peek
 
 		# virtualbox
-		printf "virtualbox"
-		run sudo apt install -y virtualbox virtualbox-ext-pack
+		# printf "virtualbox"
+		# sudo apt install -y virtualbox virtualbox-ext-pack
 
 		# vlc
 		printf "vlc"
@@ -466,6 +479,7 @@ category="Dev Environment"
 printf "${cyan}${bold}"
 printf "❏ ${category}\n"
 printf "${reset}"
+echo "- alacritty"
 echo "- btop"
 echo "- curl"
 echo "- dotnet-sdk"
@@ -516,7 +530,7 @@ echo "- inkscape"
 echo "- libreoffice"
 echo "- obs"
 echo "- peek"
-echo "- virtualbox"
+# echo "- virtualbox"
 echo "- vlc"
 echo "- yt-dlp"
 utilities=$(ask_install "${category}" "no"; echo $?)

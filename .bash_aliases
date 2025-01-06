@@ -4,7 +4,8 @@ alias cura='/opt/cura/Cura.AppImage'
 alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
 alias nvim='/opt/nvim-linux64/bin/nvim'
 alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
-alias nv="neovide"
+alias nv='neovide'
+alias ac='$HOME/alacritty/target/release/alacritty'
 
 # test.sh
 test_sh() {
