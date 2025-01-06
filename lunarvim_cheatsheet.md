@@ -139,3 +139,7 @@
 - **Open File History**: `<leader> g f`
 - **Close Diff View**:   `<leader> g q`
 
+## Calendar
+
+- **Open Calendar**: `<leader> cc`
+

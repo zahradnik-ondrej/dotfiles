@@ -6,7 +6,9 @@ reload("user.lsp")
 reload("user.lualine")
 reload("user.plugins")
 reload("user.tabs")
+reload("user.telekasten")
 reload("user.telescope")
+reload("user.todo-comments")
 
 --------------------------------------------------------------------------------
 

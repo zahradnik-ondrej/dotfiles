@@ -65,3 +65,4 @@ export LS_COLORS="di=34:*.yaml=31:*.yml=31:*.ini=31:*.toml=31:*.conf=31:*.md=31:
 # 	fi
 # fi
 
+. "$HOME/.cargo/env"

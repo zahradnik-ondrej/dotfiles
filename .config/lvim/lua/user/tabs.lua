@@ -1,4 +1,3 @@
-
 -- new tab
 lvim.keys.normal_mode["<leader>t"] = ":tabnew<CR>"
 

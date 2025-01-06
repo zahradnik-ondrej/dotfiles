@@ -46,8 +46,8 @@ end
 -- end
 
 lvim.builtin.lualine.sections.lualine_c = {
-  { date_component, color = { fg = "#282a36", bg = "#bd93f9" } },
-  { time_component, color = { fg = "#282a36", bg = "#8be9fd" } },
+  { time_component, color = { fg = "#282a36", bg = "#bd93f9" } },
+  { date_component, color = { fg = "#282a36", bg = "#8be9fd" } },
   { ram_usage,      color = { fg = "#282a36", bg = "#50fa7b" } },
   -- { internet_status, color = { fg = "#282a36", bg = "#ff5555" } },
 }

@@ -152,6 +152,11 @@ install_dependencies() {
 	run sudo snap install docker --classic
 
 	if [ "$dev_env" -eq 1 ]; then
+	
+		# rustup (for lunarvim)
+		echo "rustup (for lunarvim)"
+		wget -qO- https://sh.rustup.rs | sh -s -- -y
+		source "$HOME/.bashrc"
 
 		# tpm (for tmux)
 		printf "tpm (for tmux)"
@@ -208,6 +213,10 @@ install_software() {
 		# lua
 		printf "lua"
 		run sudo apt install -y lua5.3
+		
+		# lunarvim
+		printf "lunarvim"
+		LV_BRANCH='master' bash <(wget -qO- https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.sh) <<< $'n\ny'
 
 		# midnight-commander
 		printf "midnight-commander"
@@ -223,6 +232,14 @@ install_software() {
 			"Version: 5735cc5" \
 			"https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage" \
 			"/opt/neovide"
+
+		# neovim
+		printf "neovim"
+		NEOVIM_ARCHIVE_PATH="$HOME/nvim-linux64.tar.gz"
+		[ -f "$NEOVIM_ARCHIVE_PATH" ] && rm -f "$NEOVIM_ARCHIVE_PATH"
+		run wget -qO "$NEOVIM_ARCHIVE_PATH" https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+		sudo rm -rf /opt/nvim
+		sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
 		# tmux
 		printf "tmux"
@@ -416,6 +433,26 @@ install_themes() {
 
 }
 
+install_fonts() {
+
+	FONTS_PATH="$HOME/.local/share/fonts"
+	
+	if [ "$dev_env" -eq 1 ]; then
+
+		# hack nerd font (for lunarvim)
+		printf "hack nerd font (for lunarvim)\n"
+		HACK_NERD_FONT_ARCHIVE_PATH="$HOME/Hack.zip"
+		[ -f "$HACK_NERD_FONT_ARCHIVE_PATH" ] && rm -f "$HACK_NERD_FONT_ARCHIVE_PATH"
+		wget -qO "$HACK_NERD_FONT_ARCHIVE_PATH" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
+		mkdir -p "$FONTS_PATH"
+		unzip -oq "$HACK_NERD_FONT_ARCHIVE_PATH" -d "$FONTS_PATH"
+	
+	fi
+    
+    fc-cache -f
+    
+}
+
 cleanup() {
 
 	sudo apt autoclean >/dev/null
@@ -437,9 +474,11 @@ echo "- godot"
 echo "- gparted"
 echo "- love2d"
 echo "- lua"
+echo "- lunarvim"
 echo "- midnight-commander"
 echo "- neofetch"
 echo "- neovide"
+echo "- neovim"
 echo "- tmux"
 echo "- tree"
 echo "- vim"
@@ -524,6 +563,11 @@ printf "${yellow}${bold}"
 echo "====== Install themes ======"
 printf "${reset}"
 install_themes
+
+printf "${yellow}${bold}"
+echo "====== Install fonts ======"
+printf "${reset}"
+install_fonts
 
 printf "${yellow}${bold}"
 echo "===== Cleanup ====="
