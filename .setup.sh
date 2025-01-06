@@ -41,9 +41,9 @@ run() {
 	local exit_code=$?
 
 	if [ $exit_code -eq 0 ]; then
-		printf "${green} ✔${reset}\n"
+		printf "${green} ✓${reset}\n"
 	else
-		printf "${red} ✖${reset}\n"
+		printf "${red} ✗${reset}\n"
 	fi
 
 	return $exit_code
@@ -216,13 +216,13 @@ install_software() {
 		# neofetch
 		printf "neofetch"
 		run sudo apt install -y neofetch
-    
-    # neovide
-    printf "neovide"
-    install_appimage \
-      "Version: 5735cc5" \
-      "https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage" \
-      "/opt/neovide"
+
+		# neovide
+		printf "neovide"
+		install_appimage \
+			"Version: 5735cc5" \
+			"https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage" \
+			"/opt/neovide"
 
 		# tmux
 		printf "tmux"
@@ -314,13 +314,17 @@ install_software() {
 		printf "peek"
 		run sudo apt install -y peek
 
+		# virtualbox
+		printf "virtualbox"
+		run sudo apt install -y virtualbox virtualbox-ext-pack
+
 		# vlc
 		printf "vlc"
 		run sudo apt install -y vlc
 
 		# yt-dlp
 		printf "yt-dlp"
-    run pip3 install --upgrade yt-dlp --quiet --no-input
+    	run pip3 install --upgrade yt-dlp --quiet --no-input
 
 	fi
 
@@ -329,6 +333,10 @@ install_software() {
 		# kicad
 		printf "kicad"
 		run sudo apt install -y kicad
+
+		# proton-mail
+		printf "proton-mail"
+		run sudo snap install proton-mail
 
 		# slack
 		printf "slack"
@@ -375,15 +383,34 @@ install_themes() {
 
 		# dracula (for midnight-commander)
 		printf "dracula (for midnight-commander)"
-		MC_DRACULA_PATH="$HOME/mc-dracula-theme"
-		clone_repo "https://github.com/dracula/midnight-commander.git" "$MC_DRACULA_PATH"
+		DRACULA_MC_PATH="$HOME/dracula-mc-theme"
+		clone_repo "https://github.com/dracula/midnight-commander.git" "$DRACULA_MC_PATH"
 		mkdir -p "$HOME/.local/share/mc/skins"
-		cp "$MC_DRACULA_PATH/skins/dracula256.ini" "$HOME/.local/share/mc/skins"
-		rm -rf "$MC_DRACULA_PATH"
+		ln -sf "$DRACULA_MC_PATH/skins/dracula256.ini" "$HOME/.local/share/mc/skins"
 
 		# gruvbox (for vim)
 		printf "gruvbox (for vim)"
 		clone_repo "https://github.com/morhetz/gruvbox.git" "$HOME/.vim/pack/themes/start/gruvbox"
+
+	fi
+
+	if [ "$three_d" -eq 1 ]; then
+
+		# dracula (for openscad)
+		printf "dracula (for openscad)"
+		DRACULA_OPENSCAD_PATH="$HOME/dracula-openscad-theme"
+		clone_repo "https://github.com/dracula/openscad.git" "$DRACULA_OPENSCAD_PATH"
+		mkdir -p "$HOME/.config/OpenSCAD/color-schemes/editor" "$HOME/.config/OpenSCAD/color-schemes/render"
+		ln -sf "$DRACULA_OPENSCAD_PATH/openscad/dracula.json" "$HOME/.config/OpenSCAD/color-schemes/editor"
+		ln -sf "$DRACULA_OPENSCAD_PATH/openscad/transylvania.json" "$HOME/.config/OpenSCAD/color-schemes/render"
+
+	fi
+
+	if [ "$misc" -eq 1 ]; then
+
+		# dracula (for telegram)
+		printf "dracula (for telegram)"
+		clone_repo "https://github.com/dracula/telegram.git" "$HOME/dracula-telegram-theme"
 
 	fi
 
@@ -450,6 +477,7 @@ echo "- inkscape"
 echo "- libreoffice"
 echo "- obs"
 echo "- peek"
+echo "- virtualbox"
 echo "- vlc"
 echo "- yt-dlp"
 utilities=$(ask_install "${category}" "no"; echo $?)
@@ -459,6 +487,7 @@ printf "${cyan}${bold}"
 printf "❏ ${category}\n"
 printf "${reset}"
 echo "- kicad"
+echo "- proton-mail"
 echo "- slack"
 echo "- spotify"
 echo "- steam"
