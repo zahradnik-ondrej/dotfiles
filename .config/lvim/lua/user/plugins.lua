@@ -3,7 +3,7 @@ lvim.plugins = {
   { "catppuccin/nvim" },
   { "dracula/vim" },
   { "szw/vim-maximizer" },
-  { "sindrets/diffview.nvim" },
+  -- { "sindrets/diffview.nvim" },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",

@@ -62,9 +62,10 @@
 - **Add New Line Below**: `o`
 - **Add New Line Above**: `O`
 
-- **Replace Char**: `r`
-- **Replace Word**: `ciw`
-- **Replace Line**: `cc`
+- **Replace Char**:               `r`
+- **Replace Word**:               `ciw`
+- **Replace Line**:               `cc`
+- **Replace to the End of Line**: `C`
 - **Replace Every Occurrence in File**: `:%s/old/new/g`
 
 - **Delete Char**:                  `x`
@@ -79,6 +80,7 @@
 - **Copy**:                       `y`
 - **Copy Word**:                  `yiw`
 - **Copy Line**:                  `yy`
+- **Copy to the End of Line**:    `Y`
 - **Copy Entire File's Content**: `YA`
 
 - **Swap Lines**: `ddp`

@@ -1,6 +1,6 @@
-require('diffview').setup {
-  enhanced_diff_hl = true,
-}
+-- require('diffview').setup {
+--   enhanced_diff_hl = true,
+-- }
 
 -- -- open diff view
 -- lvim.keys.normal_mode["<leader>gd"] = ":DiffviewOpen<CR>"
