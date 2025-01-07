@@ -1,16 +1,19 @@
 reload("user.core")
 reload("user.diffview")
 reload("user.formatters")
-reload("user.keymaps")
 reload("user.lsp")
 reload("user.lualine")
 reload("user.plugins")
-reload("user.tabs")
 reload("user.telekasten")
 reload("user.telescope")
 reload("user.todo-comments")
+reload("user.vim-maximizer")
+reload("user.which-key")
 
 --------------------------------------------------------------------------------
+
+-- #TODO_MID  Bind keys using `lvim.builtin.which_key.mappings` instead of `lvim.keys`.
+-- #TODO_LOW  Customize LunarVim dashboard.
 
 -- missing session management (
 --  https://github.com/rmagatti/auto-session

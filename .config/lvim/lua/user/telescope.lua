@@ -1,25 +1,15 @@
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
-  -- find files
   f = { "<cmd>Telescope find_files<CR>", "Find Files" },
-  -- live grep
+  r = { "<cmd>Telescope oldfiles<CR>", "View Recent Files" },
   g = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
-  -- view  buffers
-  b = { "<cmd>Telescope buffers<CR>", "Buffers" },
-  -- search neovim docs
-  h = { "<cmd>Telescope help_tags<CR>", "Help Tags" },
-  -- view recent files
-  r = { "<cmd>Telescope oldfiles<CR>", "Recent Files" },
+  b = { "<cmd>Telescope buffers<CR>", "View Current Buffers" },
+  h = { "<cmd>Telescope help_tags<CR>", "Search Neovim Docs" },
+  l = { "<cmd>Telescope resume<CR>", "Resume Last Search" },
+  R = { "<cmd>Telescope lsp_references<CR>", "Find References" },
+  d = { "<cmd>Telescope lsp_definitions<CR>", "Find Definitions" },
+  D = { "<cmd>Telescope lsp_type_definitions<CR>", "Find Type Definitions" },
+  w = { "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>') })<cr>", "Grep Word Under Cursor" }
 }
 
--- find references
-lvim.keys.normal_mode["<leader>rr"] = "<cmd>Telescope lsp_references<CR>"
-
--- find definitions
-lvim.keys.normal_mode["<leader>rd"] = "<cmd>Telescope lsp_definitions<CR>"
-
--- find declarations
-lvim.keys.normal_mode["<leader>rD"] = "<cmd>Telescope lsp_type_definitions<CR>"
-
--- switch from quickfix to telescope
-vim.api.nvim_set_keymap("n", "<C-g>", lvim.builtin.which_key.mappings["l"]["e"][1], { noremap = true, silent = true })
+lvim.keys.normal_mode["<C-g>"] = lvim.builtin.which_key.mappings["l"]["e"][1] -- switch from quickfix to telescope

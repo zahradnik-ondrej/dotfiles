@@ -5,11 +5,9 @@ require('telekasten').setup {
   new_note_location = "home",
 }
 
--- show calendar
-lvim.keys.normal_mode['<leader>nc'] = ':Telekasten show_calendar<CR>'
-
--- new day-agnostic note
-lvim.keys.normal_mode['<leader>nn'] = ':Telekasten new_note<CR>'
-
--- find notes
-lvim.keys.normal_mode['<leader>nf'] = ':Telekasten find_notes<CR>'
+lvim.builtin.which_key.mappings["n"] = {
+  name = "Notes",
+  c = { ":Telekasten show_calendar<CR>", "Show Calendar" },
+  n = { ":Telekasten new_note<CR>", "New Note" },
+  f = { ":Telekasten find_notes<CR>", "Find Notes" },
+}
