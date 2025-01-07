@@ -139,7 +139,8 @@
 - **Open File History**: `<leader> g f`
 - **Close Diff View**:   `<leader> g q`
 
-## Calendar
+## Notes
 
-- **Open Calendar**: `<leader> cc`
-
+- **New Day-Agnostic Note**: `<leader> nn`
+- **Find Notes**:            `<leader> nf`
+- **Open Calendar**:         `<leader> nc`

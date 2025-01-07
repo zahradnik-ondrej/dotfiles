@@ -4,7 +4,7 @@ local function date_component()
   if type(day) ~= "string" or type(date) ~= "string" then
     return "📅 ?? ??/??/????"
   end
-  return "📅 " .. day:sub(1, 2) .. " " .. date
+  return "📅 " .. day .. " " .. date
 end
 
 local function time_component()

@@ -17,10 +17,30 @@ require("todo-comments").setup {
     yellow = { "#F1FA8C" },
   },
   keywords = {
-    DONE = { color = "green" },
-    NOTE = { color = "comment" },
-    TODO_HIGH = { color = "red" },
-    TODO_MID = { color = "orange" },
-    TODO_LOW = { color = "yellow" },
+    TODO = { icon = "", color = "background" },
+    HACK = { icon = "", color = "background" },
+    WARN = { icon = "", color = "background" },
+    PERF = { icon = "", color = "background" },
+    FIX = { icon = "", color = "red", alt = { "BUG" } },
+    NOTE = { icon = "", color = "comment" },
+    TEST = { icon = "", color = "cyan" },
+    DONE = { icon = "", color = "green" },
+    TODO_HIGH = { icon = "", color = "red" },
+    TODO_MID = { icon = "", color = "orange" },
+    TODO_LOW = { icon = "", color = "yellow" },
   },
 }
+
+-- # TODO
+-- # HACK
+-- # WARN
+-- # PERF
+-- # TEST
+-- # FIX
+-- # BUG
+
+-- # NOTE
+-- # DONE
+-- # TODO_HIGH
+-- # TODO_MID
+-- # TODO_LOW

@@ -54,10 +54,10 @@ clone_repo() {
 	local target_path="$2"
 
 	if [ -z "$target_path" ]; then
-		git clone "$repo_url"
+		git clone -q "$repo_url"
 	else
 		[ -d "$target_path" ] && rm -rf "$target_path"
-        git clone "$repo_url" "$target_path"
+        git clone -q "$repo_url" "$target_path"
     fi
 }
 
@@ -412,14 +412,14 @@ install_themes() {
 	if [ "$dev_env" -eq 1 ]; then
 
 		# dracula (for midnight-commander)
-		printf "dracula (for midnight-commander)"
+		printf "dracula (for midnight-commander)\n"
 		DRACULA_MC_PATH="$HOME/dracula-mc-theme"
 		clone_repo "https://github.com/dracula/midnight-commander.git" "$DRACULA_MC_PATH"
 		mkdir -p "$HOME/.local/share/mc/skins"
 		ln -sf "$DRACULA_MC_PATH/skins/dracula256.ini" "$HOME/.local/share/mc/skins"
 
 		# gruvbox (for vim)
-		printf "gruvbox (for vim)"
+		printf "gruvbox (for vim)\n"
 		clone_repo "https://github.com/morhetz/gruvbox.git" "$HOME/.vim/pack/themes/start/gruvbox"
 
 	fi
@@ -427,7 +427,7 @@ install_themes() {
 	if [ "$three_d" -eq 1 ]; then
 
 		# dracula (for openscad)
-		printf "dracula (for openscad)"
+		printf "dracula (for openscad)\n"
 		DRACULA_OPENSCAD_PATH="$HOME/dracula-openscad-theme"
 		clone_repo "https://github.com/dracula/openscad.git" "$DRACULA_OPENSCAD_PATH"
 		mkdir -p "$HOME/.config/OpenSCAD/color-schemes/editor" "$HOME/.config/OpenSCAD/color-schemes/render"
@@ -439,7 +439,7 @@ install_themes() {
 	if [ "$misc" -eq 1 ]; then
 
 		# dracula (for telegram)
-		printf "dracula (for telegram)"
+		printf "dracula (for telegram)\n"
 		clone_repo "https://github.com/dracula/telegram.git" "$HOME/dracula-telegram-theme"
 
 	fi
