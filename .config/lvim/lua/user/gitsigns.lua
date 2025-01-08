@@ -1,8 +1,8 @@
 lvim.builtin.which_key.mappings["g"] = {
   name = "Git",
-  b = lvim.builtin.which_key.mappings["g"]["b"],
+  b = lvim.builtin.which_key.mappings["g"]["b"], -- Checkout branch
   C = { lvim.builtin.which_key.mappings["g"]["C"][1], "Checkout commit (for current file)" },
-  c = lvim.builtin.which_key.mappings["g"]["c"],
+  c = lvim.builtin.which_key.mappings["g"]["c"], -- Checkout commit
   d = { lvim.builtin.which_key.mappings["g"]["d"][1], "Git diff" },
   l = { lvim.builtin.which_key.mappings["g"]["l"][1], "Blame line" },
   g = nil, -- unbind <leader> g g (Lazygit)

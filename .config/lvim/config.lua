@@ -1,29 +1,25 @@
+reload("user.auto-save")
 reload("user.core")
-reload("user.diffview")
+-- reload("user.diffview")
 reload("user.formatters")
 reload("user.gitsigns")
-reload("user.lsp")
+reload("user.hop")
 reload("user.lualine")
+reload("user.neo-tree")
 reload("user.plugins")
+reload("user.project")
 reload("user.telekasten")
 reload("user.telescope")
 reload("user.todo-comments")
 reload("user.vim-maximizer")
-reload("user.which-key")
 
 --------------------------------------------------------------------------------
 
--- #TODO_MID  Bind keys using `lvim.builtin.which_key.mappings` instead of `lvim.keys`.
+-- #TODO_MID  Consolidate built-in Which Keys.
 -- #TODO_LOW  Customize LunarVim dashboard.
+-- #TODO_LOW  Make auto-formatting and auto-saving state persistent.
+-- #TODO_LOW  Add toggle-able in-line Git blame using gitsigns.nvim.
+-- #TODO_LOW  Add session management via persistence.nvim.
+-- #TODO_LOW  Add trouble.nvim for a pretty diagnostics window.
 
--- missing session management (
---  https://github.com/rmagatti/auto-session
---  https://github.com/folke/persistence.nvim
--- )
--- missing project management (https://github.com/ahmedkhalf/project.nvim)
--- missing file explorer git integration (https://github.com/nvim-neo-tree/neo-tree.nvim)
--- missing diagnostics (https://github.com/folke/trouble.nvim)
--- missing better tmux pane switching integration (https://github.com/christoomey/vim-tmux-navigator)
--- missing auto-tagging (https://github.com/windwp/nvim-ts-autotag)
--- missing better jump motions (https://github.com/hadronized/hop.nvim)
 -- missing better joining/splitting of lines (https://github.com/AckslD/nvim-trevJ.lua)

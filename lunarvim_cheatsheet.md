@@ -96,7 +96,7 @@
 - **Vertical   Window Split**: `<C-w> v`
 - **Horizontal Window Split**: `<C-w> h`
 
-- **Cycle Through Windows**: `<C-w> w`
+- **Cycle Through Windows**: `<C-w> <C-w>`
 
 - **Close Window**:                     `:q`
 - **Close Window and Save Changes**:    `:x name`
@@ -113,6 +113,10 @@
 
 - **Switch from Telescope to Quickfix**:  `<C-q>`
 - **Switch from Quickfix  to Telescope**: `<C-g>`
+
+## File Explorer
+
+- **Show Hidden Files**: `H`
 
 ## Git
 

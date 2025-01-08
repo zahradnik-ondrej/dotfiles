@@ -22,6 +22,7 @@ require("todo-comments").setup {
     WARN = { icon = "", color = "background" },
     PERF = { icon = "", color = "background" },
     FIX = { icon = "", color = "red", alt = { "BUG" } },
+    FIXED = { icon = "", color = "green" },
     NOTE = { icon = "", color = "comment" },
     TEST = { icon = "", color = "cyan" },
     DONE = { icon = "", color = "green" },
@@ -31,16 +32,17 @@ require("todo-comments").setup {
   },
 }
 
--- # TODO
--- # HACK
--- # WARN
--- # PERF
--- # TEST
--- # FIX
--- # BUG
+-- #TODO
+-- #HACK
+-- #WARN
+-- #PERF
+-- #TEST
+-- #FIX
+-- #BUG
+-- #FIXED
 
--- # NOTE
--- # DONE
--- # TODO_HIGH
--- # TODO_MID
--- # TODO_LOW
+-- #NOTE
+-- #DONE
+-- #TODO_HIGH
+-- #TODO_MID
+-- #TODO_LOW

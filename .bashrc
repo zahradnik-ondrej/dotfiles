@@ -55,7 +55,14 @@ if [ -f ~/.bash_ps1 ]; then
 	. ~/.bash_ps1
 fi
 
-export LS_COLORS="di=34:*.yaml=31:*.yml=31:*.ini=31:*.toml=31:*.conf=31:*.md=31:*.txt=31:*.json=31:*.pdf=31:*.doc=31:*.docx=31:*.h=32:*.sh=32:*.py=32:*.c=32:*.cpp=32:*.js=32:*.ts=32:*.lua=32:*.tar.gz=33:*.zip=33:*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.png=90:*.jpg=90:*.svg=90:*Dockerfile=36"
+export LS_COLORS=""
+export LS_COLORS=$LS_COLORS"di=34:"
+export LS_COLORS=$LS_COLORS"*.yaml=31:*.yml=31:*.ini=31:*.toml=31:*.conf=31:*.md=31:*.txt=31:*.json=31:*.pdf=31:*.doc=31:*.docx=31:"
+export LS_COLORS=$LS_COLORS"*.h=32:*.sh=32:*.py=32:*.c=32:*.cpp=32:*.js=32:*.ts=32:*.lua=32:"
+export LS_COLORS=$LS_COLORS"*.tar.gz=33:*.zip=33:"
+export LS_COLORS=$LS_COLORS"*Dockerfile=36"
+export LS_COLORS=$LS_COLORS"*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.sl2=37:*.slx=37:"
+export LS_COLORS=$LS_COLORS"*.png=90:*.jpg=90:*.svg=90:"
 
 # if [ -z "$TMUX" ]; then
 # 	if tmux has-session 2>/dev/null; then
