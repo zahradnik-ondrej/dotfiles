@@ -109,17 +109,14 @@
 
 - **Open File in New Tab**: `<C-t>`
 
-- **Switch from Telescope to Quickfix**:  `<C-q>`
-- **Switch from Quickfix  to Telescope**: `<C-g>`
-
 ## File Explorer
 
 - **Show Hidden Files**: `H`
 
-## Git
+<!-- ## Git -->
 
-- **Open Diff View**:    `<leader> g d`
-- **Open Repo History**: `<leader> g h`
-- **Open File History**: `<leader> g f`
-- **Close Diff View**:   `<leader> g q`
+<!-- - **Open Diff View**:    `<leader> g d` -->
+<!-- - **Open Repo History**: `<leader> g h` -->
+<!-- - **Open File History**: `<leader> g f` -->
+<!-- - **Close Diff View**:   `<leader> g q` -->
 

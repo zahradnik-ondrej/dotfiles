@@ -9,12 +9,13 @@
   a  = add
   au = add -u
 	cm = commit -m
+	co = checkout
 	d  = diff
 	ds = diff --stat
-	s  = status
-	ss = status -s
-	co = checkout
 	lg = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred(%h)%Creset %Cgreen(%cr) %C(blue)<%an>%Creset %s %C(yellow)%d%Creset' --all
+	s  = status
+  ss = status -s
+  t  = tag
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
