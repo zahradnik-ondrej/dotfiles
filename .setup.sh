@@ -229,7 +229,7 @@ install_software() {
 		
 		# lunarvim
 		printf "lunarvim"
-		LV_BRANCH='master' bash <(wget -qO- https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.sh) <<< $'n\ny'
+		LV_BRANCH="master" bash <(wget -qO- https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.sh) <<< $'n\ny'
 
 		# midnight-commander
 		printf "midnight-commander"
@@ -328,9 +328,17 @@ install_software() {
 		printf "flameshot"
 		run sudo apt install -y flameshot
 
+    # gimp
+    printf "gimp"
+    run sudo apt install -y gimp
+
 		# inkscape
 		printf "inkscape"
 		run sudo apt install -y inkscape
+
+		# kicad
+		printf "kicad"
+		run sudo apt install -y kicad
 
 		# libreoffice
 		printf "libreoffice"
@@ -360,9 +368,6 @@ install_software() {
 
 	if [ "$misc" -eq 1 ]; then
 
-		# kicad
-		printf "kicad"
-		run sudo apt install -y kicad
 
 		# proton-mail
 		printf "proton-mail"
@@ -409,18 +414,23 @@ install_software() {
 
 install_themes() {
 
+  THEMES_PATH="$HOME/.themes"
+  mkdir -p "$THEMES_PATH"
+
 	if [ "$dev_env" -eq 1 ]; then
 
 		# dracula (for midnight-commander)
 		printf "dracula (for midnight-commander)\n"
-		DRACULA_MC_PATH="$HOME/dracula-mc-theme"
-		clone_repo "https://github.com/dracula/midnight-commander.git" "$DRACULA_MC_PATH"
+		MC_DRACULA_PATH="$THEMES_PATH/mc-dracula"
+		clone_repo "https://github.com/dracula/midnight-commander.git" "$MC_DRACULA_PATH"
 		mkdir -p "$HOME/.local/share/mc/skins"
-		ln -sf "$DRACULA_MC_PATH/skins/dracula256.ini" "$HOME/.local/share/mc/skins"
+		ln -sf "$MC_DRACULA_PATH/skins/dracula256.ini" "$HOME/.local/share/mc/skins"
 
 		# gruvbox (for vim)
 		printf "gruvbox (for vim)\n"
-		clone_repo "https://github.com/morhetz/gruvbox.git" "$HOME/.vim/pack/themes/start/gruvbox"
+    VIM_GRUVBOX_PATH="$THEMES_PATH/vim-gruvbox"
+		clone_repo "https://github.com/morhetz/gruvbox.git" "$VIM_GRUVBOX_PATH"
+    ln -sf "$VIM_GRUVBOX_PATH" "$HOME/.vim/pack/themes/start/gruvbox"
 
 	fi
 
@@ -428,19 +438,30 @@ install_themes() {
 
 		# dracula (for openscad)
 		printf "dracula (for openscad)\n"
-		DRACULA_OPENSCAD_PATH="$HOME/dracula-openscad-theme"
-		clone_repo "https://github.com/dracula/openscad.git" "$DRACULA_OPENSCAD_PATH"
+		OPENSCAD_DRACULA_PATH="$THEMES_PATH/openscad-dracula"
+		clone_repo "https://github.com/dracula/openscad.git" "$OPENSCAD_DRACULA_PATH"
 		mkdir -p "$HOME/.config/OpenSCAD/color-schemes/editor" "$HOME/.config/OpenSCAD/color-schemes/render"
-		ln -sf "$DRACULA_OPENSCAD_PATH/openscad/dracula.json" "$HOME/.config/OpenSCAD/color-schemes/editor"
-		ln -sf "$DRACULA_OPENSCAD_PATH/openscad/transylvania.json" "$HOME/.config/OpenSCAD/color-schemes/render"
+		ln -sf "$OPENSCAD_DRACULA_PATH/openscad/dracula.json" "$HOME/.config/OpenSCAD/color-schemes/editor"
+		ln -sf "$OPENSCAD_DRACULA_PATH/openscad/transylvania.json" "$HOME/.config/OpenSCAD/color-schemes/render"
 
 	fi
+
+  if [ "$misc" -eq 1 ]; then
+
+    # dracula (for gimp)
+    printf "dracula (for gimp)\n"
+    GIMP_DRACULA_PATH="$THEMES_PATH/gimp-dracula"
+    clone_repo "https://github.com/dracula/gimp.git" "$GIMP_DRACULA_PATH"
+    ln -sf "$GIMP_DRACULA_PATH/Dracula" "$HOME/.config/GIMP/2.10/themes/Dracula"
+  
+  fi
 
 	if [ "$misc" -eq 1 ]; then
 
 		# dracula (for telegram)
 		printf "dracula (for telegram)\n"
-		clone_repo "https://github.com/dracula/telegram.git" "$HOME/dracula-telegram-theme"
+    TELEGRAM_DRACULA_PATH="$THEMES_PATH/telegram-dracula"
+		clone_repo "https://github.com/dracula/telegram.git" "$TELEGRAM_DRACULA_PATH"
 
 	fi
 
@@ -526,7 +547,9 @@ printf "${reset}"
 echo "- deluge"
 echo "- ffmpeg"
 echo "- flameshot"
+echo "- gimp"
 echo "- inkscape"
+echo "- kicad"
 echo "- libreoffice"
 echo "- obs"
 echo "- peek"
@@ -539,7 +562,6 @@ category="Miscellaneous"
 printf "${cyan}${bold}"
 printf "❏ ${category}\n"
 printf "${reset}"
-echo "- kicad"
 echo "- proton-mail"
 echo "- slack"
 echo "- spotify"

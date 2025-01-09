@@ -1,3 +1,4 @@
+reload("user.ascii")
 reload("user.auto-save")
 reload("user.core")
 -- reload("user.diffview")

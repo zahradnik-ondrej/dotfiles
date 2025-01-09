@@ -6,8 +6,6 @@
 - **Move Forward  in the Jump List**: `<C-i>`
 - **Execute Command**: `:!command`
 - **Show Documentation**: `K`
-- **Open LunarVim Cheatsheet**: `<leader> cs`
-- **Switch Color Scheme**: `<leader> sc`
 
 ## Modes
 

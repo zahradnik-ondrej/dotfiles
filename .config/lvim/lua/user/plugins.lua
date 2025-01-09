@@ -23,4 +23,5 @@ lvim.plugins = {
   },
   { "smoka7/hop.nvim" },
   { "christoomey/vim-tmux-navigator" },
+  { "MaximilianLloyd/ascii.nvim",    dependencies = { "MunifTanjim/nui.nvim" } },
 }
