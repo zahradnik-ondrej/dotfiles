@@ -1,11 +1,13 @@
-# LunarVim Cheat Sheet
+# LunarVim Cheatsheet
 
 ## Core
 
+- **Show LunarVim Cheatsheet** `<leader> c s`
 - **Move Backward in the Jump List**: `<C-o>`
 - **Move Forward  in the Jump List**: `<C-i>`
 - **Execute Command**: `:!command`
 - **Show Documentation**: `K`
+- **Toggle Terminal**: `<C-t>`
 
 ## Modes
 

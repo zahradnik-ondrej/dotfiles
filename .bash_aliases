@@ -2,11 +2,22 @@ alias godot='flatpak run org.godotengine.Godot'
 alias browsh='sudo docker run -it browsh/browsh'
 alias cura='/opt/cura/Cura.AppImage'
 alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
+alias ac='$HOME/alacritty/target/release/alacritty'
+
+# lunarvim
+lvim_open() {
+  if command -v nvr >/dev/null 2>&1 && [[ -n "$NVIM_LISTEN_ADDRESS" ]]; then
+    nvr -s --nostart --remote-tab "$@" || lvim "$@"
+  else
+    lvim "$@"
+  fi
+}
+
 alias nvim='/opt/nvim-linux64/bin/nvim'
+alias nv='neovide'
+alias lvim='lvim_open'
 alias lv='lvim'
 alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
-alias nv='neovide'
-alias ac='$HOME/alacritty/target/release/alacritty'
 
 # test.sh
 test_sh() {

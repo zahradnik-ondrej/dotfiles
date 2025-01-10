@@ -16,4 +16,12 @@ require("neo-tree").setup({
       border = "rounded",
     },
   },
+  default_component_configs = {
+    last_modified = {
+      enabled = false,
+    },
+    extension = {
+      enabled = true,
+    },
+  },
 })

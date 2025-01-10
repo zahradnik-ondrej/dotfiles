@@ -57,7 +57,7 @@ lvim.builtin.which_key.mappings["f"] = {
   R = { ":Telescope lsp_references<CR>", "Find References" },
   d = { ":Telescope lsp_definitions<CR>", "Find Definitions" },
   D = { ":Telescope lsp_type_definitions<CR>", "Find Type Definitions" },
-  w = { ":lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>') })<cr>", "Grep Word Under Cursor" },
+  w = { ":lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>') })<CR>", "Grep Word Under Cursor" },
   p = { ":Telescope projects<CR>", "View All Projects" },
   m = { ":Telescope man_pages<CR>", "Search Man Pages" },
 }
@@ -132,6 +132,10 @@ lvim.builtin.which_key.mappings["n"] = {
   f = { ":Telekasten find_notes<CR>", "Find Notes" },
 }
 
+lvim.builtin.which_key.mappings["o"] = {
+  ":enew<CR>", "Open New File"
+}
+
 lvim.builtin.which_key.mappings["p"] = {
   ":Lazy<CR>", "Plugin Manager (Lazy)"
 }
@@ -155,9 +159,9 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 
 lvim.builtin.which_key.mappings["T"] = nil -- unbind <leader> T (Treesitter)
-lvim.builtin.which_key.mappings["T"] = {
-  ":terminal<CR>", "Open Terminal"
-}
+-- lvim.builtin.which_key.mappings["T"] = {
+--   ":terminal<CR>", "Open Terminal"
+-- }
 
 lvim.builtin.which_key.mappings["w"] = {
   ":w<CR>", "Save File"

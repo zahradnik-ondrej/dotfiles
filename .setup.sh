@@ -162,6 +162,10 @@ install_dependencies() {
 		wget -qO- https://sh.rustup.rs | sh -s -- -y
 		source "$HOME/.bashrc"
 
+    # neovim-remote
+    printf "neovim-remote (for lunarvim)"
+    run pip3 install neovim-remote 
+
 		# tpm (for tmux)
 		printf "tpm (for tmux)"
 		clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
