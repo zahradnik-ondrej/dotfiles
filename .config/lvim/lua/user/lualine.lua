@@ -59,11 +59,18 @@ lvim.builtin.lualine.sections.lualine_a = {
   "mode",
 }
 lvim.builtin.lualine.sections.lualine_b = {}
+
+
+local time_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#bd93f9" } or nil
+local date_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#8be9fd" } or nil
+local ram_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#50fa7b" } or nil
+local internet_status_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#ff5555" } or nil
+
 lvim.builtin.lualine.sections.lualine_c = {
-  { time_component,  color = { fg = "#282a36", bg = "#bd93f9" } },
-  { date_component,  color = { fg = "#282a36", bg = "#8be9fd" } },
-  { ram_usage,       color = { fg = "#282a36", bg = "#50fa7b" } },
-  -- { internet_status, color = { fg = "#282a36", bg = "#ff5555" } },
+  { time_component,  color = time_color },
+  { date_component,  color = date_color },
+  { ram_usage,       color = ram_color },
+  -- { internet_status, color = internet_status_color },
 }
 
 lvim.builtin.lualine.sections.lualine_x = {
@@ -82,4 +89,3 @@ lvim.builtin.lualine.sections.lualine_z = {
   components.progress,
   components.location
 }
-
