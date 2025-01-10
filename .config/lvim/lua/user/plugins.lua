@@ -3,7 +3,7 @@ lvim.plugins = {
   { "catppuccin/nvim" },
   { "dracula/vim" },
   { "szw/vim-maximizer" },
-  -- { "sindrets/diffview.nvim" },
+  { "sindrets/diffview.nvim" },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
@@ -23,5 +23,5 @@ lvim.plugins = {
   },
   { "smoka7/hop.nvim" },
   { "christoomey/vim-tmux-navigator" },
-  { "MaximilianLloyd/ascii.nvim",    dependencies = { "MunifTanjim/nui.nvim" } },
+  { "MaximilianLloyd/ascii.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
 }

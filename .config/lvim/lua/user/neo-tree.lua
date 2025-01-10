@@ -1,5 +1,4 @@
 lvim.builtin.nvimtree.active = false
-lvim.builtin.which_key.mappings["e"] = { ":Neotree toggle<CR>", "Toggle File Explorer" }
 
 require("neo-tree").setup({
   close_if_last_window = true,
