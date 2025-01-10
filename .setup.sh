@@ -258,6 +258,7 @@ install_software() {
 		sudo rm -rf /opt/nvim
 		sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
+    rm -r "$NEOVIM_ARCHIVE_PATH"
 		# tmux
 		printf "tmux"
 		run sudo apt install -y tmux
@@ -488,6 +489,7 @@ install_fonts() {
 		wget -qO "$HACK_NERD_FONT_ARCHIVE_PATH" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
 		mkdir -p "$FONTS_PATH"
 		unzip -oq "$HACK_NERD_FONT_ARCHIVE_PATH" -d "$FONTS_PATH"
+    rm -r "$HACK_NERD_FONT_ARCHIVE_PATH"
 	
 	fi
     

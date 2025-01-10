@@ -2,7 +2,6 @@
 
 ## Core
 
-- **Show LunarVim Cheatsheet** `<leader> c s`
 - **Move Backward in the Jump List**: `<C-o>`
 - **Move Forward  in the Jump List**: `<C-i>`
 - **Execute Command**: `:!command`
@@ -114,11 +113,3 @@
 ## File Explorer
 
 - **Show Hidden Files**: `H`
-
-<!-- ## Git -->
-
-<!-- - **Open Diff View**:    `<leader> g d` -->
-<!-- - **Open Repo History**: `<leader> g h` -->
-<!-- - **Open File History**: `<leader> g f` -->
-<!-- - **Close Diff View**:   `<leader> g q` -->
-
