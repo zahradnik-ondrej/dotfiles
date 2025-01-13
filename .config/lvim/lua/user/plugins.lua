@@ -3,7 +3,14 @@ lvim.plugins = {
   { "catppuccin/nvim" },
   { "dracula/vim" },
   { "szw/vim-maximizer" },
-  { "sindrets/diffview.nvim" },
+  {
+    "sindrets/diffview.nvim",
+    config = function()
+      require('diffview').setup {
+        enhanced_diff_hl = true
+      }
+    end,
+  },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
@@ -24,4 +31,20 @@ lvim.plugins = {
   { "smoka7/hop.nvim" },
   { "christoomey/vim-tmux-navigator" },
   { "MaximilianLloyd/ascii.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
+  {
+        "folke/trouble.nvim",
+        cmd = "Trouble",
+        config = function()
+            require("trouble").setup({})
+        end,
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    config = function()
+      require("persistence").setup({})
+    end,
+  },
+  { "MattesGroeger/vim-bookmarks" },
+  { "tom-anders/telescope-vim-bookmarks.nvim" },
 }
