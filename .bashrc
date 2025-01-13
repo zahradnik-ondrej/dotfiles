@@ -80,4 +80,4 @@ fi
 . "$HOME/.cargo/env"
 export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/amro_custom.omp.json)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/dracula.omp.yaml)"
