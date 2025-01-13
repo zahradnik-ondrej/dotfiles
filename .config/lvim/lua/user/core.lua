@@ -14,6 +14,8 @@ lvim.keys.normal_mode["DA"] = ":<C-U>%d<CR>"                                    
 -- vim.api.nvim_set_keymap('t', '<C-w>', [[<C-\><C-n><C-w>]], { noremap = true, silent = true }) -- cycle through windows from terminal mode
 -- vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true }) -- enter normal mode from terminal window
 
+lvim.keys.normal_mode["<C-m>"] = ":MaximizerToggle<CR>"
+
 lvim.keys.normal_mode["<C-n>"] = ":tabnext<CR>"
 lvim.keys.normal_mode["<C-p>"] = ":tabprev<CR>"
 

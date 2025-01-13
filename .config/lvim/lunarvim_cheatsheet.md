@@ -95,6 +95,8 @@
 - **Vertical   Window Split**: `<C-w> v`
 - **Horizontal Window Split**: `<C-w> h`
 
+- **Maximize Window**: `<C-m>`
+
 - **Cycle Through Windows**: `<C-w> <C-w>`
 
 - **Close Window**:                     `:q`
