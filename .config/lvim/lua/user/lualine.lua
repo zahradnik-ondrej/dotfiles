@@ -60,7 +60,6 @@ lvim.builtin.lualine.sections.lualine_a = {
 }
 lvim.builtin.lualine.sections.lualine_b = {}
 
-
 local time_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#bd93f9" } or nil
 local date_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#8be9fd" } or nil
 local ram_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#50fa7b" } or nil

@@ -16,6 +16,15 @@ lvim.builtin.which_key.mappings["a"] = {
 }
 
 lvim.builtin.which_key.mappings["b"] = nil -- unbind <leader> b (Buffers)
+lvim.builtin.which_key.mappings["b"] = {
+   name = "Bookmarks",
+   b = { ":BookmarkToggle<CR>", "Toggle Bookmark" },
+   n = { ":BookmarkNext<CR>", "Next Bookmark" },
+   p = { ":BookmarkPrev<CR>", "Previous Bookmark" },
+   a = { ":BookmarkAnnotate<CR>", "Annotate Bookmark" },
+   l = { ":Telescope vim_bookmarks all<CR>", "List All Bookmarks" },
+   f = { ":Telescope vim_bookmarks current_file<CR>", "File Bookmarks" },
+}
 
 lvim.builtin.which_key.mappings["c"] = nil -- unbind <leader> c (Close Buffer)
 lvim.builtin.which_key.mappings["c"] = {
@@ -30,7 +39,8 @@ lvim.builtin.which_key.mappings["d"] = {
   b = { ":lua require'dap'.step_back()<CR>", "Step Back" },
   C = { ":lua require'dap'.run_to_cursor()<CR>", "Run To Cursor" },
   c = { ":lua require'dap'.continue()<CR>", "Continue" },
-  d = { ":lua require'dap'.disconnect()<CR>", "Disconnect" },
+  d = { ":Trouble diagnostics toggle<CR>", "Toggle Diagnostics" },
+  D = { ":lua require'dap'.disconnect()<CR>", "Disconnect" },
   g = { ":lua require'dap'.get_session()<CR>", "Session Info" },
   i = { ":lua require'dap'.step_into()<CR>", "Step Into" },
   o = { ":lua require'dap'.step_over()<CR>", "Step Over" },
@@ -68,16 +78,13 @@ lvim.builtin.which_key.mappings["g"] = {
   b = { ":Telescope git_branches<CR>", "Checkout Branch" },
   C = { ":Telescope git_bcommits<CR>", "Checkout Commit (for current file)" },
   c = { ":Telescope git_commits<CR>", "Checkout Commit" },
-  d = { ":Gitsigns diffthis<CR>", "Git Diff" },
+  d = { ":DiffviewOpen<CR>", "Open Diff View" },
+  -- d = { ":Gitsigns diffthis<CR>", "Git Diff" },
+  f = { ":DiffviewFileHistory %<CR>", "Open File History" },
   l = { ":Gitsigns blame_line<CR>", "Blame Line" },
+  r = { ":DiffviewFileHistory<CR>", "Open Repo History" },
+  q = { ":DiffviewClose<CR>", "Close Diff View" },
 }
-
--- lvim.builtin.which_key.mappings["g"] = {
---   d = { ":DiffviewOpen<CR>", "Open Diff View" },
---   h = { ":DiffviewFileHistory<CR>", "Open Repo History" },
---   f = { ":DiffviewFileHistory %<CR>", "Open File History" },
---   q = { ":DiffviewClose<CR>", "Close Diff View" },
--- }
 
 lvim.builtin.which_key.mappings["h"] = {
   ":nohlsearch<CR>", "Clear Highlighting"
@@ -149,6 +156,12 @@ lvim.builtin.which_key.mappings["Q"] = {
 }
 
 lvim.builtin.which_key.mappings["s"] = nil -- unbind <leader> s (Search)
+lvim.builtin.which_key.mappings["s"] = {
+  name = "Session",
+  l = { ":lua require('persistence').load()<CR>", "Load Session" },
+  L = { ":lua require('persistence').load({ last = true })<CR>", "Load Last Session" },
+  s = { ":lua require('persistence').select()<CR>", "Select Session" }
+}
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "Tabs",
@@ -159,9 +172,9 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 
 lvim.builtin.which_key.mappings["T"] = nil -- unbind <leader> T (Treesitter)
--- lvim.builtin.which_key.mappings["T"] = {
---   ":terminal<CR>", "Open Terminal"
--- }
+lvim.builtin.which_key.mappings["T"] = {
+  ":terminal<CR>", "Open Terminal"
+}
 
 lvim.builtin.which_key.mappings["w"] = {
   ":w<CR>", "Save File"

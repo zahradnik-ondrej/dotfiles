@@ -76,5 +76,8 @@ if command -v neofetch &> /dev/null; then
     neofetch
 fi
 
+# eval "$(zoxide init bash)"
 . "$HOME/.cargo/env"
-export NVIM_LISTEN_ADDRESS=/tmp/lvim_server
+export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/amro_custom.omp.json)"

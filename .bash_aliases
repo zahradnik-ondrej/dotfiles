@@ -3,6 +3,8 @@ alias browsh='sudo docker run -it browsh/browsh'
 alias cura='/opt/cura/Cura.AppImage'
 alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
 alias ac='$HOME/alacritty/target/release/alacritty'
+alias fuck='thefuck'
+alias fk='thefuck'
 
 # lunarvim
 lvim_open() {
@@ -15,8 +17,8 @@ lvim_open() {
 
 alias nvim='/opt/nvim-linux64/bin/nvim'
 alias nv='neovide'
-alias lvim='lvim_open'
-alias lv='lvim'
+alias lvim='lvim'
+alias lv='lvim_open'
 alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
 
 # test.sh
@@ -34,16 +36,17 @@ test_sh() {
 alias testsh='test_sh'
 
 # bash
-alias ls='ls --color -la'
-alias rm='rm -rf'
+alias cat='batcat'
+alias ls='eza -l --icons --git --no-permissions --no-user --no-time'
+alias lsa='ls -a'
+# alias ls='ls --color -la'
+# alias rm='rm -rf'
 alias diff='diff --color'
 alias cls='clear'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias grep='grep -rnI --color=always'
+alias egrep='egrep -rnI --color=always'
 alias dir='vdir'
-alias vdir='vdir --color'
-alias grep='grep -I --color=always'
+alias vdir='ls'
 
 # git
 git_bl() {

@@ -151,6 +151,17 @@ install_dependencies() {
 	printf "docker"
 	run sudo snap install docker --classic
 
+  # rustup
+	echo "rustup"
+	wget -qO- https://sh.rustup.rs | sh -s -- -y
+	source "$HOME/.bashrc"
+
+  # homebrew
+  printf "homebrew"
+  wget -qO- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh > install.sh
+  /bin/bash install.sh
+  rm install.sh
+
 	if [ "$dev_env" -eq 1 ]; then
 
     # libfontconfig1-dev (for alacritty)
@@ -165,6 +176,14 @@ install_dependencies() {
     # neovim-remote
     printf "neovim-remote (for lunarvim)"
     run pip3 install neovim-remote 
+    
+    # oh-my-posh
+    printf "oh-my-posh"
+    run brew install oh-my-posh
+
+    # thefuck
+    printf "thefuck"
+    run pip3 install thefuck
 
 		# tpm (for tmux)
 		printf "tpm (for tmux)"
@@ -173,6 +192,10 @@ install_dependencies() {
 		# xsel (for tmux-yank)
 		printf "xsel (for tmux)"
 		run sudo apt install -y xsel
+
+    # zoxide
+    printf "zoxide"
+    run cargo install zoxide --locked
 
 	fi
 
@@ -199,6 +222,10 @@ install_software() {
     cargo build --release
     cd "$cwd"
 
+    # bat
+    printf "bat"
+    run sudo apt install -y bat
+
 		# btop
 		printf "btop"
 		run sudo apt install -y btop
@@ -211,6 +238,10 @@ install_software() {
 		printf "dotnet-sdk"
 		run sudo apt install -y dotnet-sdk-8.0
 
+    # eza
+    printf "eza"
+    run cargo install eza
+    
 		# g++
 		printf "g++"
 		run sudo apt install -y g++
