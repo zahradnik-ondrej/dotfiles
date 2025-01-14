@@ -157,21 +157,21 @@ install_dependencies() {
 	source "$HOME/.bashrc"
 
   # homebrew
-  printf "homebrew"
-  wget -qO- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh > install.sh
-  /bin/bash install.sh
-  rm install.sh
+  printf "homebrew\n"
+  HOMEBREW_INSTALL_SCRIPT_PATH="$HOME/install.sh"
+  wget -qO "$HOMEBREW_INSTALL_SCRIPT_PATH" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  NONINTERACTIVE=1 /bin/bash "$HOMEBREW_INSTALL_SCRIPT_PATH"
+  rm -f "$HOMEBREW_INSTALL_SCRIPT_PATH"
 
 	if [ "$dev_env" -eq 1 ]; then
 
-    # libfontconfig1-dev (for alacritty)
-    printf "libfontconfig1-dev (for alacritty)"
-    run sudo apt install -y libfontconfig1-dev
+    # lazygit
+    printf "lazygit"
+    run brew install jesseduffield/lazygit/lazygit
 
-		# rustup (for lunarvim)
-		echo "rustup (for lunarvim)"
-		wget -qO- https://sh.rustup.rs | sh -s -- -y
-		source "$HOME/.bashrc"
+    # libfontconfig1-dev (for alacritty)
+    printf "libfontconfig1-dev (for alacritty)\n"
+    sudo apt install -y libfontconfig1-dev
 
     # neovim-remote
     printf "neovim-remote (for lunarvim)"
@@ -181,13 +181,26 @@ install_dependencies() {
     printf "oh-my-posh"
     run brew install oh-my-posh
 
+		# rustup (for lunarvim)
+		echo "rustup (for lunarvim)"
+		wget -qO- https://sh.rustup.rs | sh -s -- -y
+		source "$HOME/.bashrc"
+
     # thefuck
     printf "thefuck"
     run pip3 install thefuck
 
 		# tpm (for tmux)
-		printf "tpm (for tmux)"
+		printf "tpm (for tmux)\n"
 		clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
+
+    # vim-tmux-cycle (for tmux)
+    printf "vim-tmux-cycle (for tmux)\n"
+    VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
+    VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
+    clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"
+    sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
+    chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle" 
 
 		# xsel (for tmux-yank)
 		printf "xsel (for tmux)"
@@ -214,7 +227,7 @@ install_software() {
 	if [ "$dev_env" -eq 1 ]; then
 
     # alacritty
-    printf "alacritty"
+    printf "alacritty\n"
     ALACRITTY_PATH="$HOME/alacritty"
     clone_repo "https://github.com/alacritty/alacritty.git" "$ALACRITTY_PATH"
     cwd=$(pwd)

@@ -29,7 +29,13 @@ lvim.plugins = {
     },
   },
   { "smoka7/hop.nvim" },
-  { "christoomey/vim-tmux-navigator" },
+  {
+    "slarwise/vim-tmux-cycle",
+    keys = {
+      { "<C-h>", "<cmd>VimTmuxCyclePrevious<cr>" },
+      { "<C-l>", "<cmd>VimTmuxCycleNext<cr>" },
+    },
+  },
   { "MaximilianLloyd/ascii.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
   {
         "folke/trouble.nvim",
@@ -47,4 +53,5 @@ lvim.plugins = {
   },
   { "MattesGroeger/vim-bookmarks" },
   { "tom-anders/telescope-vim-bookmarks.nvim" },
+  { "kdheepak/lazygit.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 }

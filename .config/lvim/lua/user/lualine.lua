@@ -1,4 +1,3 @@
-
 local function date_component(icon)
   local day = os.date("%a")
   local date = os.date("%d/%m/%Y")

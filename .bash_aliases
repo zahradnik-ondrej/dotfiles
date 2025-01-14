@@ -37,7 +37,7 @@ alias testsh='test_sh'
 
 # bash
 alias cat='batcat'
-alias ls='eza -l --icons --git --no-permissions --no-user --no-time'
+alias ls='eza -l --icons --git --no-permissions --no-user --no-time --color=always --icons=always'
 alias lsa='ls -a'
 # alias ls='ls --color -la'
 # alias rm='rm -rf'

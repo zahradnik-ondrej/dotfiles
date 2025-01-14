@@ -1,8 +1,10 @@
-lvim.builtin.which_key.mappings["/"] = {
+local wk = lvim.builtin.which_key
+
+wk.mappings["/"] = {
   ":lua require('Comment.api').toggle.linewise.current()<CR>", "Comment / Uncomment"
 }
 
-lvim.builtin.which_key.mappings["a"] = {
+wk.mappings["a"] = {
   name = "Automatic Functions",
   f = {
     function()
@@ -15,8 +17,8 @@ lvim.builtin.which_key.mappings["a"] = {
   s = { ":ASToggle<CR>", "Toggle Auto-saving" },
 }
 
-lvim.builtin.which_key.mappings["b"] = nil -- unbind <leader> b (Buffers)
-lvim.builtin.which_key.mappings["b"] = {
+wk.mappings["b"] = nil -- unbind <leader> b (Buffers)
+wk.mappings["b"] = {
    name = "Bookmarks",
    b = { ":BookmarkToggle<CR>", "Toggle Bookmark" },
    n = { ":BookmarkNext<CR>", "Next Bookmark" },
@@ -26,15 +28,15 @@ lvim.builtin.which_key.mappings["b"] = {
    f = { ":Telescope vim_bookmarks current_file<CR>", "File Bookmarks" },
 }
 
-lvim.builtin.which_key.mappings["c"] = nil -- unbind <leader> c (Close Buffer)
-lvim.builtin.which_key.mappings["c"] = {
+wk.mappings["c"] = nil -- unbind <leader> c (Close Buffer)
+wk.mappings["c"] = {
   name = "Custom",
   c = { ":Telescope colorscheme<CR>", "Change Colorscheme" },
   s = { ":tabnew " .. vim.fn.stdpath("config") .. "/lunarvim_cheatsheet.md<CR>", "Open LunarVim Cheatsheet" },
 }
 
-lvim.builtin.which_key.mappings["d"] = nil -- unbind <leader> d (Debug)
-lvim.builtin.which_key.mappings["d"] = {
+wk.mappings["d"] = nil -- unbind <leader> d (Debug)
+wk.mappings["d"] = {
   name = "Debug",
   b = { ":lua require'dap'.step_back()<CR>", "Step Back" },
   C = { ":lua require'dap'.run_to_cursor()<CR>", "Run To Cursor" },
@@ -53,11 +55,11 @@ lvim.builtin.which_key.mappings["d"] = {
   u = { ":lua require'dap'.step_out()<CR>", "Step Out" },
 }
 
-lvim.builtin.which_key.mappings["e"] = {
+wk.mappings["e"] = {
   ":Neotree toggle<CR>", "Toggle File Explorer"
 }
 
-lvim.builtin.which_key.mappings["f"] = {
+wk.mappings["f"] = {
   name = "Find",
   f = { ":Telescope find_files<CR>", "Find File" },
   r = { ":Telescope oldfiles<CR>", "View Recent Files" },
@@ -72,8 +74,8 @@ lvim.builtin.which_key.mappings["f"] = {
   m = { ":Telescope man_pages<CR>", "Search Man Pages" },
 }
 
-lvim.builtin.which_key.mappings["g"] = nil -- unbind <leader> g (Git)
-lvim.builtin.which_key.mappings["g"] = {
+wk.mappings["g"] = nil -- unbind <leader> g (Git)
+wk.mappings["g"] = {
   name = "Git",
   b = { ":Telescope git_branches<CR>", "Checkout Branch" },
   C = { ":Telescope git_bcommits<CR>", "Checkout Commit (for current file)" },
@@ -84,14 +86,15 @@ lvim.builtin.which_key.mappings["g"] = {
   l = { ":Gitsigns blame_line<CR>", "Blame Line" },
   r = { ":DiffviewFileHistory<CR>", "Open Repo History" },
   q = { ":DiffviewClose<CR>", "Close Diff View" },
+  L = { ":LazyGit<CR>", "Lazygit" },
 }
 
-lvim.builtin.which_key.mappings["h"] = {
+wk.mappings["h"] = {
   ":nohlsearch<CR>", "Clear Highlighting"
 }
 
-lvim.builtin.which_key.mappings["l"] = nil -- unbind <leader> l (LSP)
-lvim.builtin.which_key.mappings["l"] = {
+wk.mappings["l"] = nil -- unbind <leader> l (LSP)
+wk.mappings["l"] = {
   name = "LSP",
   r = { ":lua vim.lsp.buf.rename()<CR>", "Global Rename" },
   a = { ":lua vim.lsp.buf.code_action()<CR>", "Suggested Actions" },
@@ -104,8 +107,8 @@ lvim.builtin.which_key.mappings["l"] = {
   s = { ":Telescope lsp_document_symbols<CR>", "Document Symbols" },
 }
 
-lvim.builtin.which_key.mappings["L"] = nil -- unbind <leader> L (LunarVim)
-lvim.builtin.which_key.mappings["L"] = {
+wk.mappings["L"] = nil -- unbind <leader> L (LunarVim)
+wk.mappings["L"] = {
   name = "LunarVim",
   s = { ":Telescope find_files cwd=~/.config/lvim<CR>", "Search LunarVim files" },
   g = { ":Telescope live_grep cwd=~/.config/lvim<CR>", "Grep LunarVim files" },
@@ -128,42 +131,42 @@ lvim.builtin.which_key.mappings["L"] = {
   },
 }
 
-lvim.builtin.which_key.mappings["m"] = {
+wk.mappings["m"] = {
   ":MaximizerToggle<CR>", "Maximize Window"
 }
 
-lvim.builtin.which_key.mappings["n"] = {
+wk.mappings["n"] = {
   name = "Notes",
   c = { ":Telekasten show_calendar<CR>", "Show Calendar" },
   n = { ":Telekasten new_note<CR>", "New Note" },
   f = { ":Telekasten find_notes<CR>", "Find Notes" },
 }
 
-lvim.builtin.which_key.mappings["o"] = {
+wk.mappings["o"] = {
   ":enew<CR>", "Open New File"
 }
 
-lvim.builtin.which_key.mappings["p"] = {
+wk.mappings["p"] = {
   ":Lazy<CR>", "Plugin Manager (Lazy)"
 }
 
-lvim.builtin.which_key.mappings["q"] = {
+wk.mappings["q"] = {
   ":q<CR>", "Close File"
 }
 
-lvim.builtin.which_key.mappings["Q"] = {
+wk.mappings["Q"] = {
   ":qa!<CR>", "Quit LunarVim"
 }
 
-lvim.builtin.which_key.mappings["s"] = nil -- unbind <leader> s (Search)
-lvim.builtin.which_key.mappings["s"] = {
+wk.mappings["s"] = nil -- unbind <leader> s (Search)
+wk.mappings["s"] = {
   name = "Session",
   l = { ":lua require('persistence').load()<CR>", "Load Session" },
   L = { ":lua require('persistence').load({ last = true })<CR>", "Load Last Session" },
   s = { ":lua require('persistence').select()<CR>", "Select Session" }
 }
 
-lvim.builtin.which_key.mappings["t"] = {
+wk.mappings["t"] = {
   name = "Tabs",
   t = { ":tabnew<CR>", "New Tab" },
   q = { ":tabclose<CR>", "Close Tab" },
@@ -171,12 +174,12 @@ lvim.builtin.which_key.mappings["t"] = {
   p = { ":tabprev<CR>", "Previous Tab" },
 }
 
-lvim.builtin.which_key.mappings["T"] = nil -- unbind <leader> T (Treesitter)
-lvim.builtin.which_key.mappings["T"] = {
-  ":terminal<CR>", "Open Terminal"
-}
+wk.mappings["T"] = nil -- unbind <leader> T (Treesitter)
+-- wk.mappings["T"] = {
+--   ":terminal<CR>", "Open Terminal"
+-- }
 
-lvim.builtin.which_key.mappings["w"] = {
+wk.mappings["w"] = {
   ":w<CR>", "Save File"
 }
 
