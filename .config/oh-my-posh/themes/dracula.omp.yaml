@@ -1,0 +1,98 @@
+$schema: "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+blocks:
+  - alignment: left
+    newline: true
+    segments:
+      - foreground: "#44475A"
+        template: "┌──"
+        type: text
+      - background: "#F1FA8C"
+        foreground: "#282A36"
+        style: diamond
+        leading_diamond: ""
+        properties:
+          display_error: false
+          charging_icon: " "
+          discharging_icon: " "
+          charged_icon: " "
+        template: "{{ if not .Error }} {{ .Icon }}{{ .Percentage }} {{ end }}"
+        type: battery
+      - background: "#FF5555"
+        foreground: "#282A36"
+        style: powerline
+        powerline_symbol: ""
+        template: "  {{ .UserName }}"
+        type: session
+      - background: "#44475A"
+        foreground: "#F8F8F2"
+        style: powerline
+        powerline_symbol: ""
+        template: "  {{ .HostName }}"
+        type: session
+      - background: "#50FA7B"
+        foreground: "#282A36"
+        style: powerline
+        powerline_symbol: ""
+        properties:
+          style: full
+        template: "  {{ .Path }}"
+        type: path
+      - background: "#BD93F9"
+        foreground: "#282A36"
+        style: powerline
+        powerline_symbol: ""
+        properties:
+          fetch_status: true
+          fetch_upstream_icon: true
+          fetch_bare_info: true
+          branch_icon: ""
+          # branch_icon: " "
+          branch_identical_icon: "󱓏"
+          branch_ahead_icon: "󱓊"
+          branch_behind_icon: "󱓋"
+          branch_gone_icon: "󱓌"
+          commit_icon: " "
+          # tag_icon: "󰓹 "
+          github_icon: ""
+          gitlab_icon: ""
+          git_icon: ""
+        template: " {{ .UpstreamIcon }} {{ .BranchStatus }} {{ .HEAD }} {{ if .LatestTag }}󰓹 {{ .LatestTag }}{{ end }} {{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}"
+        type: git
+      - background: "#FF79C6"
+        foreground: "#282A36"
+        style: powerline
+        powerline_symbol: ""
+        properties:
+          time_format: "Mon 02/01/06"
+        template: "  {{ .CurrentDate | date .Format }}"
+        type: time
+      - background: "#8BE9FD"
+        foreground: "#282A36"
+        style: powerline
+        powerline_symbol: ""
+        properties:
+          always_enabled: true
+          style: roundrock
+        template: " 󱎫 {{ .FormattedMs }}"
+        type: executiontime
+      - background: "#8BE9FD"
+        foreground: "#282A36"
+        style: powerline
+        powerline_symbol: ""
+        properties:
+          always_enabled: true
+        template: "{{ if eq .Code 0 }}{{ else }}󰅖{{ end }}"
+        type: executiontime
+    type: prompt
+  - alignment: left
+    newline: true
+    segments:
+      - background: "#FFB86C"
+        foreground: "#282A36"
+        style: diamond
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: "\u276f"
+        type: text
+    type: prompt
+version: 3
