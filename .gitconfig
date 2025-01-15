@@ -2,7 +2,7 @@
 	name = Ondrej Zahradnik
 	email = ondraz@pm.me
 [credential]
-	helper = cache --timeout=3600
+	helper = netrc
 [init]
    defaultBranch = main
 [alias]

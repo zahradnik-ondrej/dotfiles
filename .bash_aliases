@@ -5,6 +5,7 @@ alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
 alias ac='$HOME/alacritty/target/release/alacritty'
 alias fuck='thefuck'
 alias fk='thefuck'
+alias tmux-kill='tmux kill-server'
 
 # lunarvim
 lvim_open() {
@@ -36,15 +37,21 @@ test_sh() {
 alias testsh='test_sh'
 
 # bash
-alias cat='batcat'
-alias ls='eza -l --icons --git --no-permissions --no-user --no-time --color=always --icons=always'
+if command -v batcat &> /dev/null; then
+    alias cat='batcat'
+fi
+
+if command -v eza &> /dev/null; then
+    alias ls='eza -l --icons --git --no-user --no-time --color=auto --icons=auto'
+else
+	alias ls='ls -l --color=auto'
+fi
+
 alias lsa='ls -a'
-# alias ls='ls --color -la'
-# alias rm='rm -rf'
-alias diff='diff --color'
+alias diff='diff --color=auto'
 alias cls='clear'
-alias grep='grep -rnI --color=always'
-alias egrep='egrep -rnI --color=always'
+alias grep='grep -rnI --color=auto'
+alias egrep='egrep -rnI --color=auto'
 alias dir='vdir'
 alias vdir='ls'
 
@@ -54,7 +61,7 @@ git_bl() {
 }
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
+alias dotfiles-private='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
 alias git-fpd='git fetch --prune && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs git branch -D'
 alias git-add100='find . -type f -size -100M -print0 | xargs -0 git add'
 alias git-bl=git_bl

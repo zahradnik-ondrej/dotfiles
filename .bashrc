@@ -64,6 +64,10 @@ export LS_COLORS=$LS_COLORS"*Dockerfile=36"
 export LS_COLORS=$LS_COLORS"*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.sl2=37:*.slx=37:"
 export LS_COLORS=$LS_COLORS"*.png=90:*.jpg=90:*.svg=90:"
 
+if [ -z "$TMUX" ]; then
+    tmux new-session -s 0
+fi
+
 # if [ -z "$TMUX" ]; then
 # 	if tmux has-session 2>/dev/null; then
 # 		tmux attach-session -d
@@ -77,7 +81,18 @@ if command -v neofetch &> /dev/null; then
 fi
 
 # eval "$(zoxide init bash)"
-. "$HOME/.cargo/env"
+
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
 export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/dracula.omp.yaml)"
+
+if command -v brew &> /dev/null; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+if command -v oh-my-posh &> /dev/null; then
+    eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/dracula.omp.yaml)"
+fi
+alias dotfiles-private='/usr/bin/git --git-dir=/home/ondra/.dotfiles-private/ --work-tree=/home/ondra'

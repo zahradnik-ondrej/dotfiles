@@ -1,0 +1,2 @@
+[general]
+import = ["~/.themes/alacritty-dracula/dracula.toml"]

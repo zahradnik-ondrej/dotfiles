@@ -21,7 +21,7 @@ ask_install() {
 		options="[${cyan}y/${red}N${cyan}]"
 	fi
 
-  while true; do
+	while true; do
 		read -p "$(echo -e "${cyan}Do you want to install packages in the ${bold}$name_upper${reset_bold} category? $options${cyan}: ${reset}")" answer
 
 		if [[ -z "$answer" ]]; then
@@ -80,10 +80,10 @@ install_appimage() {
 }
 
 add_ppas() {
- 
-  # multiverse (PPA)
-  printf "multiverse (PPA)"
-  run sudo add-apt-repository -y multiverse
+
+	# multiverse (PPA)
+	printf "multiverse (PPA)"
+	run sudo add-apt-repository -y multiverse
 
 	if [ "$dev_env" -eq 1 ]; then
 
@@ -124,6 +124,7 @@ add_ppas() {
 }
 
 update_apt() {
+	sudo add-apt-repository --remove -y ppa:peek-developers/stable
 	sudo apt update
 	sudo apt install -f --fix-missing
 	sudo apt upgrade -y
@@ -138,77 +139,78 @@ update_snap() {
 
 install_dependencies() {
 
+	# curl
+	printf "curl"
+	run sudo apt install -y curl
+
 	# flatpak
 	printf "flatpak"
 	run sudo apt install -y flatpak
 	sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-	# pip
-	printf "pip"
-	run sudo apt install -y python3-pip
-
 	# docker
 	printf "docker"
 	run sudo snap install docker --classic
 
-  # rustup
-	echo "rustup"
-	wget -qO- https://sh.rustup.rs | sh -s -- -y
-	source "$HOME/.bashrc"
+	# pipx
+	printf "pipx"
+	run sudo apt install -y pipx
 
-  # homebrew
-  printf "homebrew\n"
-  HOMEBREW_INSTALL_SCRIPT_PATH="$HOME/install.sh"
-  wget -qO "$HOMEBREW_INSTALL_SCRIPT_PATH" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-  NONINTERACTIVE=1 /bin/bash "$HOMEBREW_INSTALL_SCRIPT_PATH"
-  rm -f "$HOMEBREW_INSTALL_SCRIPT_PATH"
+	# rustup
+	printf "rustup"
+	run bash -c 'wget -qO- https://sh.rustup.rs | sh -s -- -y && . "$HOME/.bashrc"'
+
+	# homebrew
+	#printf "homebrew"
+	#HOMEBREW_INSTALL_SCRIPT_PATH="$HOME/install.sh"
+	#run bash -c 'HOMEBREW_INSTALL_SCRIPT_PATH="$HOME/install.sh" && wget -qO "$HOMEBREW_INSTALL_SCRIPT_PATH" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh && NONINTERACTIVE=1 /bin/bash "$HOMEBREW_INSTALL_SCRIPT_PATH" && rm -f "$HOMEBREW_INSTALL_SCRIPT_PATH"'
 
 	if [ "$dev_env" -eq 1 ]; then
 
-    # lazygit
-    printf "lazygit"
-    run brew install jesseduffield/lazygit/lazygit
+		# lazygit
+    	#printf "lazygit"
+    	#run brew install jesseduffield/lazygit/lazygit
 
-    # libfontconfig1-dev (for alacritty)
-    printf "libfontconfig1-dev (for alacritty)\n"
-    sudo apt install -y libfontconfig1-dev
+    	# libfontconfig1-dev (for alacritty)
+    	printf "libfontconfig1-dev (for alacritty)"
+    	run sudo apt install -y libfontconfig1-dev
 
-    # neovim-remote
-    printf "neovim-remote (for lunarvim)"
-    run pip3 install neovim-remote 
-    
-    # oh-my-posh
-    printf "oh-my-posh"
-    run brew install oh-my-posh
+		# neovim (for lunarvim)
+		printf "neovim (for lunarvim)\n"
+		NEOVIM_ARCHIVE_PATH="$HOME/nvim-linux64.tar.gz"
+		[ -f "$NEOVIM_ARCHIVE_PATH" ] && rm -f "$NEOVIM_ARCHIVE_PATH"
+		wget -qO "$NEOVIM_ARCHIVE_PATH" https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+		sudo rm -rf /opt/nvim
+		sudo tar -C /opt -xzf nvim-linux64.tar.gz
+    	rm -r "$NEOVIM_ARCHIVE_PATH"
 
-		# rustup (for lunarvim)
-		echo "rustup (for lunarvim)"
-		wget -qO- https://sh.rustup.rs | sh -s -- -y
-		source "$HOME/.bashrc"
+    	# neovim-remote
+    	printf "neovim-remote (for lunarvim)"
+    	run pipx install neovim-remote
 
-    # thefuck
-    printf "thefuck"
-    run pip3 install thefuck
+    	# oh-my-posh
+    	#printf "oh-my-posh"
+    	#run brew install oh-my-posh
+
+		# pynvim (for lunarvim)
+		printf "pynvim (for lunarvim)"
+		run pip install --break-system-packages pynvim
 
 		# tpm (for tmux)
 		printf "tpm (for tmux)\n"
 		clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
 
-    # vim-tmux-cycle (for tmux)
-    printf "vim-tmux-cycle (for tmux)\n"
-    VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
-    VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
-    clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"
-    sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
-    chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle" 
+    	# vim-tmux-cycle (for tmux)
+    	printf "vim-tmux-cycle (for tmux)\n"
+    	VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
+    	VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
+    	clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"
+    	sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
+    	chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
 
 		# xsel (for tmux-yank)
 		printf "xsel (for tmux)"
 		run sudo apt install -y xsel
-
-    # zoxide
-    printf "zoxide"
-    run cargo install zoxide --locked
 
 	fi
 
@@ -226,35 +228,28 @@ install_software() {
 
 	if [ "$dev_env" -eq 1 ]; then
 
-    # alacritty
-    printf "alacritty\n"
-    ALACRITTY_PATH="$HOME/alacritty"
-    clone_repo "https://github.com/alacritty/alacritty.git" "$ALACRITTY_PATH"
-    cwd=$(pwd)
-    cd "$ALACRITTY_PATH"
-    cargo build --release
-    cd "$cwd"
+		# alacritty
+    	printf "alacritty"
+    	ALACRITTY_PATH="$HOME/alacritty"
+    	clone_repo "https://github.com/alacritty/alacritty.git" "$ALACRITTY_PATH"
+		run cargo build --release --manifest-path "$ALACRITTY_PATH/Cargo.toml"
 
-    # bat
-    printf "bat"
-    run sudo apt install -y bat
+    	# bat
+    	printf "bat"
+    	run sudo apt install -y bat
 
 		# btop
 		printf "btop"
 		run sudo apt install -y btop
 
-		# curl
-		printf "curl"
-		run sudo apt install -y curl
-
 		# dotnet-sdk
 		printf "dotnet-sdk"
 		run sudo apt install -y dotnet-sdk-8.0
 
-    # eza
-    printf "eza"
-    run cargo install eza
-    
+    	# eza
+    	printf "eza"
+    	run cargo install eza
+
 		# g++
 		printf "g++"
 		run sudo apt install -y g++
@@ -274,10 +269,10 @@ install_software() {
 		# lua
 		printf "lua"
 		run sudo apt install -y lua5.3
-		
+
 		# lunarvim
-		printf "lunarvim"
-		LV_BRANCH="master" bash <(wget -qO- https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.sh) <<< $'n\ny'
+		#printf "lunarvim"
+		#LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh) <<< $'n\nn\nn'
 
 		# midnight-commander
 		printf "midnight-commander"
@@ -301,8 +296,12 @@ install_software() {
 		run wget -qO "$NEOVIM_ARCHIVE_PATH" https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 		sudo rm -rf /opt/nvim
 		sudo tar -C /opt -xzf nvim-linux64.tar.gz
+    	rm -r "$NEOVIM_ARCHIVE_PATH"
 
-    rm -r "$NEOVIM_ARCHIVE_PATH"
+		# thefuck
+		printf "thefuck"
+		run pipx install thefuck
+
 		# tmux
 		printf "tmux"
 		run sudo apt install -y tmux
@@ -315,19 +314,21 @@ install_software() {
 		printf "vim"
 		run sudo apt install -y vim
 
+		# zoxide
+		printf "zoxide"
+		run cargo install zoxide --locked
+
 	fi
 
 	if [ "$typescript" -eq 1 ]; then
 
 		# nodejs
 		printf "nodejs\n"
-		if ! command -v node >/dev/null 2>&1; then
-			wget -qO- https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt install -y nodejs
-		fi
+		wget -qO- https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt install -y nodejs
 
 		# chai
-		printf "chai"
-		run sudo npm install chai @types/chai --save-dev
+		#printf "chai"
+		#sudo npm install chai @types/chai --save-dev
 
 		# mocha
 		printf "mocha"
@@ -350,8 +351,8 @@ install_software() {
 		run sudo snap install blender --classic
 
 		# freecad
-		printf "freecad"
-		run sudo apt install -y freecad
+		#printf "freecad"
+		#run sudo apt install -y freecad
 
 		# openscad
 		printf "openscad"
@@ -377,9 +378,9 @@ install_software() {
 		printf "flameshot"
 		run sudo apt install -y flameshot
 
-    # gimp
-    printf "gimp"
-    run sudo apt install -y gimp
+		# gimp
+    	printf "gimp"
+    	run sudo apt install -y gimp
 
 		# inkscape
 		printf "inkscape"
@@ -411,7 +412,7 @@ install_software() {
 
 		# yt-dlp
 		printf "yt-dlp"
-    	run pip3 install --upgrade yt-dlp --quiet --no-input
+		run pipx install yt-dlp --quiet
 
 	fi
 
@@ -431,8 +432,8 @@ install_software() {
 		run sudo snap install spotify
 
 		# steam
-		printf "steam"
-		run sudo apt install -y steam
+		#printf "steam"
+		#run sudo apt install -y steam
 
 		# telegram
 		printf "telegram"
@@ -453,7 +454,6 @@ install_software() {
 
 	# balenaEtcher
 	printf "balenaEtcher"
-
 	install_appimage \
 		"Version: effcebc" \
 		"https://github.com/balena-io/etcher/releases/download/v1.18.0/balenaEtcher-1.18.0-x64.AppImage" \
@@ -463,24 +463,31 @@ install_software() {
 
 install_themes() {
 
-  THEMES_PATH="$HOME/.themes"
-  mkdir -p "$THEMES_PATH"
+	THEMES_PATH="$HOME/.themes"
+	mkdir -p "$THEMES_PATH"
 
 	if [ "$dev_env" -eq 1 ]; then
+
+		# dracula (for alacritty)
+		printf "dracula (for alacritty)\n"
+		ALACRITTY_DRACULA_PATH="$THEMES_PATH/alacritty-dracula"
+		clone_repo "https://github.com/dracula/alacritty.git" "$ALACRITTY_DRACULA_PATH"
 
 		# dracula (for midnight-commander)
 		printf "dracula (for midnight-commander)\n"
 		MC_DRACULA_PATH="$THEMES_PATH/mc-dracula"
-    MC_THEMES_PATH="$HOME/.local/share/mc/skins"
+    	MC_THEMES_PATH="$HOME/.local/share/mc/skins"
 		clone_repo "https://github.com/dracula/midnight-commander.git" "$MC_DRACULA_PATH"
 		mkdir -p "$MC_THEMES_PATH"
 		ln -sf "$MC_DRACULA_PATH/skins/dracula256.ini" "$MC_THEMES_PATH"
 
 		# gruvbox (for vim)
 		printf "gruvbox (for vim)\n"
-    VIM_GRUVBOX_PATH="$THEMES_PATH/vim-gruvbox"
+    	VIM_GRUVBOX_PATH="$THEMES_PATH/vim-gruvbox"
+		VIM_THEMES_PATH="$HOME/.vim/pack/themes/start"
 		clone_repo "https://github.com/morhetz/gruvbox.git" "$VIM_GRUVBOX_PATH"
-    ln -sf "$VIM_GRUVBOX_PATH" "$HOME/.vim/pack/themes/start/gruvbox"
+		mkdir -p "$VIM_THEMES_PATH"
+    	ln -sf "$VIM_GRUVBOX_PATH" "$HOME/.vim/pack/themes/start/gruvbox"
 
 	fi
 
@@ -489,7 +496,7 @@ install_themes() {
 		# dracula (for openscad)
 		printf "dracula (for openscad)\n"
 		OPENSCAD_DRACULA_PATH="$THEMES_PATH/openscad-dracula"
-    OPENSCAD_THEMES_PATH="$HOME/.config/OpenSCAD/color-schemes"
+    	OPENSCAD_THEMES_PATH="$HOME/.config/OpenSCAD/color-schemes"
 		clone_repo "https://github.com/dracula/openscad.git" "$OPENSCAD_DRACULA_PATH"
 		mkdir -p "$OPENSCAD_THEMES_PATH/editor" "$OPENSCAD_THEMES_PATH/render"
 		ln -sf "$OPENSCAD_DRACULA_PATH/openscad/dracula.json" "$OPENSCAD_THEMES_PATH/editor"
@@ -497,23 +504,23 @@ install_themes() {
 
 	fi
 
-  if [ "$misc" -eq 1 ]; then
+	if [ "$misc" -eq 1 ]; then
 
-    # dracula (for gimp)
-    printf "dracula (for gimp)\n"
-    GIMP_DRACULA_PATH="$THEMES_PATH/gimp-dracula"
-    GIMP_THEMES_PATH="$HOME/.config/GIMP/2.10/themes"
-    clone_repo "https://github.com/dracula/gimp.git" "$GIMP_DRACULA_PATH"
-    mkdir -p "$GIMP_THEMES_PATH"
-    ln -sf "$GIMP_DRACULA_PATH/Dracula" "$GIMP_THEMES_PATH/Dracula"
-  
-  fi
+    	# dracula (for gimp)
+    	printf "dracula (for gimp)\n"
+    	GIMP_DRACULA_PATH="$THEMES_PATH/gimp-dracula"
+    	GIMP_THEMES_PATH="$HOME/.config/GIMP/2.10/themes"
+    	clone_repo "https://github.com/dracula/gimp.git" "$GIMP_DRACULA_PATH"
+    	mkdir -p "$GIMP_THEMES_PATH"
+    	ln -sf "$GIMP_DRACULA_PATH/Dracula" "$GIMP_THEMES_PATH/Dracula"
+
+	fi
 
 	if [ "$misc" -eq 1 ]; then
 
 		# dracula (for telegram)
 		printf "dracula (for telegram)\n"
-    TELEGRAM_DRACULA_PATH="$THEMES_PATH/telegram-dracula"
+    	TELEGRAM_DRACULA_PATH="$THEMES_PATH/telegram-dracula"
 		clone_repo "https://github.com/dracula/telegram.git" "$TELEGRAM_DRACULA_PATH"
 
 	fi
@@ -523,7 +530,7 @@ install_themes() {
 install_fonts() {
 
 	FONTS_PATH="$HOME/.local/share/fonts"
-	
+
 	if [ "$dev_env" -eq 1 ]; then
 
 		# hack nerd font (for lunarvim)
@@ -533,12 +540,12 @@ install_fonts() {
 		wget -qO "$HACK_NERD_FONT_ARCHIVE_PATH" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
 		mkdir -p "$FONTS_PATH"
 		unzip -oq "$HACK_NERD_FONT_ARCHIVE_PATH" -d "$FONTS_PATH"
-    rm -r "$HACK_NERD_FONT_ARCHIVE_PATH"
-	
+    	rm -r "$HACK_NERD_FONT_ARCHIVE_PATH"
+
 	fi
-    
+
     fc-cache -f
-    
+
 }
 
 cleanup() {
@@ -555,8 +562,9 @@ printf "${cyan}${bold}"
 printf "❏ ${category}\n"
 printf "${reset}"
 echo "- alacritty"
+echo "- bat"
 echo "- btop"
-echo "- curl"
+echo "- eza"
 echo "- dotnet-sdk"
 echo "- g++"
 echo "- godot"
@@ -568,9 +576,11 @@ echo "- midnight-commander"
 echo "- neofetch"
 echo "- neovide"
 echo "- neovim"
+echo "- thefuck"
 echo "- tmux"
 echo "- tree"
 echo "- vim"
+echo "- zoxide"
 dev_env=$(ask_install "${category}" "yes"; echo $?)
 
 category="TypeScript"
@@ -607,7 +617,7 @@ echo "- kicad"
 echo "- libreoffice"
 echo "- obs"
 echo "- peek"
-# echo "- virtualbox"
+echo "- virtualbox"
 echo "- vlc"
 echo "- yt-dlp"
 utilities=$(ask_install "${category}" "no"; echo $?)
