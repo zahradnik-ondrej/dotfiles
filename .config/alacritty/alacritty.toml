@@ -1,2 +1,8 @@
 [general]
 import = ["~/.themes/alacritty-dracula/dracula.toml"]
+
+[window]
+opacity = 0.75
+
+[font]
+size = 16

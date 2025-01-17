@@ -42,7 +42,7 @@ if command -v batcat &> /dev/null; then
 fi
 
 if command -v eza &> /dev/null; then
-    alias ls='eza -l --icons --git --no-user --no-time --color=auto --icons=auto'
+  alias ls='eza -l --icons --git --no-user --no-time --color=auto --icons=auto'
 else
 	alias ls='ls -l --color=auto'
 fi

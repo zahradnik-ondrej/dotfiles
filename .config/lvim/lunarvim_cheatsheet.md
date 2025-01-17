@@ -82,13 +82,19 @@
 - **Copy to the End of Line**:    `Y`
 - **Copy Entire File's Content**: `YA`
 
-- **Swap Lines**: `ddp`
-- **Join Lines**: `J`
-
 - **Paste**: `p`
 
 - **Undo**: `u`
 - **Redo**: `<C-r>`
+
+- **Indent   Line(s)**: `>`
+- **Unindent Line(s)**: `<`
+
+- **Move Line Down**: `<C-J>`
+- **Move Line   Up**: `<C-K>`
+
+- **Swap Lines**: `ddp`
+- **Join Lines**: `J`
 
 ## Windows
 

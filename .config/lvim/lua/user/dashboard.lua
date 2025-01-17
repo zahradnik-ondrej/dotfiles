@@ -26,6 +26,7 @@ dashboard.section.buttons.val = {
     dashboard.button("q", "󰅖  Quit", ":q<CR>"),
 }
 
-lvim.builtin.alpha.dashboard.section.header.val = ascii.get_random("anime", "onepiece")
+lvim.builtin.alpha.dashboard.section.header.val = ascii.art.anime.onepiece.robin
+-- lvim.builtin.alpha.dashboard.section.header.val = ascii.get_random("anime", "onepiece")
 lvim.builtin.alpha.dashboard.section.buttons = dashboard.section.buttons
 lvim.builtin.alpha.dashboard.section.footer.val = ""
