@@ -42,11 +42,11 @@ run() {
 
 	if [ $exit_code -eq 0 ]; then
 		printf "${green} ✓${reset}\n"
+    return 1
 	else
 		printf "${red} ✗${reset}\n"
+    return 0
 	fi
-
-	return $exit_code
 }
 
 clone_repo() {
@@ -140,6 +140,11 @@ install_dependencies() {
 	printf "build-essential"
 	run sudo apt-get install -y build-essential
 
+	# cargo
+	printf "cargo"
+	run bash -c 'wget -qO- https://sh.rustup.rs | sh -s -- -y && . "$HOME/.bashrc"'
+  cargo=$?
+
 	# curl
 	printf "curl"
 	run sudo apt-get install -y curl
@@ -153,9 +158,10 @@ install_dependencies() {
 	run sudo apt-get install -y flatpak
 	sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-  # hyprland
-  printf "hyprland"
-  run sudo apt-get install -y hyprland
+  # nodejs
+  printf "nodejs\n"
+  wget -qO- https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt-get install -y nodejs
+  nodejs=$?
 
   # pip3
   printf "pip3"
@@ -169,28 +175,17 @@ install_dependencies() {
   printf "setuptools"
   run pip3 install --upgrade setuptools --break-system-packages
 
-	# rustup
-	printf "rustup"
-	run bash -c 'wget -qO- https://sh.rustup.rs | sh -s -- -y && . "$HOME/.bashrc"'
-
 	# homebrew
 	# printf "homebrew"
 	# HOMEBREW_INSTALL_SCRIPT_PATH="$HOME/install.sh"
-	# run bash -c 'HOMEBREW_INSTALL_SCRIPT_PATH="$HOME/install.sh" && wget -qO "$HOMEBREW_INSTALL_SCRIPT_PATH" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh && NONINTERACTIVE=1 /bin/bash "$HOMEBREW_INSTALL_SCRIPT_PATH" && rm -f "$HOMEBREW_INSTALL_SCRIPT_PATH"'
+	# run bash -c 'wget -qO "$HOMEBREW_INSTALL_SCRIPT_PATH" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh && NONINTERACTIVE=1 /bin/bash "$HOMEBREW_INSTALL_SCRIPT_PATH" && rm -f "$HOMEBREW_INSTALL_SCRIPT_PATH"'
+  # homebrew=$?
 
 	if [ "$dev_env" -eq 1 ]; then
 
     # black
     printf "black"
     run sudo apt-get install -y black
-
-    # lazygit (for lunarvim)
-    # printf "lazygit (for lunarvim)"
-    # run brew install jesseduffield/lazygit/lazygit
-
-    # libfontconfig1-dev (for alacritty)
-    printf "libfontconfig1-dev (for alacritty)"
-    run sudo apt-get install -y libfontconfig1-dev
 
     # libtmux (for tmux)
     printf "libtmux (for tmux)"
@@ -209,10 +204,6 @@ install_dependencies() {
     printf "neovim-remote (for lunarvim)"
     run pipx install neovim-remote
 
-    # oh-my-posh
-    # printf "oh-my-posh"
-    # run brew install oh-my-posh
-
 		# pynvim (for lunarvim)
 		printf "pynvim (for lunarvim)"
 		run pip install --break-system-packages pynvim
@@ -226,18 +217,43 @@ install_dependencies() {
 		clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
 
     # vim-tmux-cycle (for tmux)
-    printf "vim-tmux-cycle (for tmux)\n"
+    printf "vim-tmux-cycle (for tmux)"
     VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
     VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
-    clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"
-    sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
-    chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
+    run bash -c "clone_repo 'https://github.com/slarwise/vim-tmux-cycle' \"\$VIM_TMUX_CYCLE_REPO_PATH\" && sudo mv \"\$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle\" \"\$VIM_TMUX_CYCLE_BIN_PATH\" && chmod +x \"\$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle\""
 
 		# xsel (for tmux-yank)
 		printf "xsel (for tmux)"
 		run sudo apt-get install -y xsel
 
+    # if [ "$homebrew" -eq 1 ]; then
+      # lazygit (for lunarvim)
+      printf "lazygit (for lunarvim)"
+      run brew install jesseduffield/lazygit/lazygit
+      
+      # oh-my-posh
+      printf "oh-my-posh"
+      run brew install oh-my-posh
+    # fi
+
 	fi
+
+  if [[ "$dev_env" -eq 1 || "$hyprland" -eq 1 ]]; then
+    
+    # libfontconfig1-dev (for alacritty)
+    printf "libfontconfig1-dev (for alacritty)"
+    run sudo apt-get install -y libfontconfig1-dev
+
+  fi
+
+	if [ "$hyprland" -eq 1 ]; then
+
+    # hyprland
+    printf "hyprland"
+    run sudo apt-get install -y hyprland
+    hyprland=$?
+
+  fi
 
 	if [ "$typescript" -eq 1 ]; then
 
@@ -253,13 +269,6 @@ install_software() {
 
   if [ "$dev_env" -eq 1 ]; then
 
-		# alacritty
-    printf "alacritty"
-    ALACRITTY_PATH="$HOME/alacritty"
-    clone_repo "https://github.com/alacritty/alacritty.git" "$ALACRITTY_PATH"
-		run cargo build --release --manifest-path "$ALACRITTY_PATH/Cargo.toml"
-    sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator "$HOME/alacritty/target/release/alacritty" 50
-
     # bat
     printf "bat"
     run sudo apt-get install -y bat
@@ -271,14 +280,6 @@ install_software() {
 		# dotnet-sdk
 		printf "dotnet-sdk"
 		run sudo apt-get install -y dotnet-sdk-8.0
-
-    # eza
-    printf "eza"
-    run cargo install eza
-
-    # fzf
-    printf "fzf"
-    run brew install fzf
 
 		# g++
 		printf "g++"
@@ -304,6 +305,14 @@ install_software() {
 		printf "lunarvim"
     LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh) <<< $'n\nn\nn'
 
+    # midnight-commander
+		printf "midnight-commander"
+		run sudo apt-get install -y mc
+
+		# neofetch
+		printf "neofetch"
+		run sudo apt-get install -y neofetch
+
 		# thefuck
 		printf "thefuck"
 		run pipx install thefuck
@@ -320,33 +329,69 @@ install_software() {
 		printf "vim"
 		run sudo apt-get install -y vim
 
-		# zoxide
-		printf "zoxide"
-		run cargo install zoxide --locked
+    # if [ "$homebrew" -eq 1 ]; then
+
+      # fzf
+      printf "fzf"
+      run brew install fzf
+
+    # fi
+
+    if [ "$cargo" -eq 1 ]; then
+
+      # eza
+      printf "eza"
+      run cargo install eza
+
+      # zoxide
+      printf "zoxide"
+      run cargo install zoxide --locked
+
+    fi
+
+  fi
+
+  if [ "$hyprland" -eq 1 ]; then
+
+    # rofi
+    printf "rofi"
+    run sudo apt-get install -y rofi
+
+    # waybar
+    printf "waybar"
+    run sudo apt-get install -y waybar
+
+  fi
+
+  if [[ "$dev_env" -eq 1 || "$hyprland" -eq 1 ]]; then
+
+    # alacritty
+    printf "alacritty"
+    run sudo snap install alacritty
 
   fi
 
 	if [ "$typescript" -eq 1 ]; then
 
-		# nodejs
-		# printf "nodejs\n"
-		# wget -qO- https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt-get install -y nodejs
+    if [ "$nodejs" -eq 1 ]; then
 
-		# chai
-		# printf "chai"
-		# sudo npm install chai @types/chai --save-dev
+      # chai
+      printf "chai"
+      sudo npm install chai @types/chai --save-dev
 
-		# mocha
-		printf "mocha"
-		run sudo npm install mocha @types/mocha --save-dev
+      # mocha
+      printf "mocha"
+      run sudo npm install mocha @types/mocha --save-dev
 
-		# puppeteer
-		printf "puppeteer"
-		run sudo npm install puppeteer --save-dev
+      # puppeteer
+      printf "puppeteer"
+      run sudo npm install puppeteer --save-dev
 
-		# typescript
-		printf "typescript"
-		run sudo npm install typescript @types/node --save-dev
+      # typescript
+      printf "typescript"
+      run sudo npm install typescript @types/node --save-dev
+
+    fi
 
 	fi
 
@@ -474,11 +519,6 @@ install_themes() {
 
 	if [ "$dev_env" -eq 1 ]; then
 
-		# dracula (for alacritty)
-		printf "dracula (for alacritty)"
-		ALACRITTY_DRACULA_PATH="$THEMES_PATH/alacritty-dracula"
-		run clone_repo "https://github.com/dracula/alacritty.git" "$ALACRITTY_DRACULA_PATH"
-
 		# dracula (for midnight-commander)
 		printf "dracula (for midnight-commander)\n"
 		MC_DRACULA_PATH="$THEMES_PATH/mc-dracula"
@@ -496,6 +536,15 @@ install_themes() {
     ln -sf "$VIM_GRUVBOX_PATH" "$HOME/.vim/pack/themes/start/gruvbox"
 
 	fi
+
+  if [[ "$dev_env" -eq 1 || "$hyprland" -eq 1 ]]; then
+
+		# dracula (for alacritty)
+		printf "dracula (for alacritty)"
+		ALACRITTY_DRACULA_PATH="$THEMES_PATH/alacritty-dracula"
+		run clone_repo "https://github.com/dracula/alacritty.git" "$ALACRITTY_DRACULA_PATH"
+
+  fi
 
 	if [ "$three_d" -eq 1 ]; then
 

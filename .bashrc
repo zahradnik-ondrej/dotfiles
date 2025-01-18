@@ -85,7 +85,7 @@ fi
 
 export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv >/dev/null 2>&1)" 
 
 if command -v fzf &> /dev/null; then
   eval "$(fzf --bash)"
