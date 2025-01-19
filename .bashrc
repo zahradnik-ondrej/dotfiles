@@ -77,8 +77,6 @@ if command -v neofetch &> /dev/null; then
     neofetch
 fi
 
-# eval "$(zoxide init bash)"
-
 if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi

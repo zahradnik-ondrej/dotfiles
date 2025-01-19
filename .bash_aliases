@@ -50,8 +50,8 @@ fi
 alias lsa='ls -a'
 alias diff='diff --color=auto'
 alias cls='clear'
-alias grep='grep -rnI --color=auto'
-alias egrep='egrep -rnI --color=auto'
+alias grep='grep -nI --color=auto'
+alias egrep='egrep -nI --color=auto'
 alias dir='vdir'
 alias vdir='ls'
 

@@ -54,11 +54,11 @@ clone_repo() {
 	local target_path="$2"
 
 	if [ -z "$target_path" ]; then
-		git clone -q "$repo_url"
-	else
-		[ -d "$target_path" ] && rm -rf "$target_path"
-    git clone -q "$repo_url" "$target_path"
+    target_path=$(basename -s .git "$repo_url")
   fi
+
+  [ -e "$target_path" ] && rm -rf "$target_path"
+  git clone -q "$repo_url" "$target_path"
 }
 
 install_appimage() {
@@ -81,9 +81,12 @@ install_appimage() {
 
 add_ppas() {
 
+  # multiverse
+  printf "multiverse (PPA)"
+  run sudo add-apt-repository -y multiverse
+
 	if [ "$dev_env" -eq 1 ]; then
 
-		printf ""
 		# love2d
 		printf "love2d (PPA)"
 		run sudo add-apt-repository -y ppa:bartbes/love-stable
@@ -92,7 +95,6 @@ add_ppas() {
 
 	if [ "$three_d" -eq 1 ]; then
 
-		printf ""
 		# freecad
 		printf "freecad (PPA)"
 		run sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
@@ -145,6 +147,10 @@ install_dependencies() {
 	run bash -c 'wget -qO- https://sh.rustup.rs | sh -s -- -y && . "$HOME/.bashrc"'
   cargo=$?
 
+  # cmake
+  printf "cmake"
+  run sudo apt-get install -y cmake
+
 	# curl
 	printf "curl"
 	run sudo apt-get install -y curl
@@ -157,6 +163,10 @@ install_dependencies() {
 	printf "flatpak"
 	run sudo apt-get install -y flatpak
 	sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+  # meson
+  printf "meson"
+  run sudo apt-get install -y meson
 
   # nodejs
   printf "nodejs\n"
@@ -248,10 +258,77 @@ install_dependencies() {
 
 	if [ "$hyprland" -eq 1 ]; then
 
+    HYPRLAND_PATH="$HOME/.hyprland"
+    mkdir -p "$HYPRLAND_PATH"
+
     # hyprland
     printf "hyprland"
     run sudo apt-get install -y hyprland
     hyprland=$?
+
+    # libpugixml-dev (for hyprwayland-scanner)
+    printf "libpugixml-dev (for hyprwayland-scanner)"
+    run sudo apt-get install -y libpugixml-dev
+
+    # hyprwayland-scanner
+    printf "hyprwayland-scanner\n"
+    HYPRWAYLANDSCANNER_PATH="$HYPRLAND_PATH/hyprwayland-scanner"
+    clone_repo "https://github.com/hyprwm/hyprwayland-scanner.git" "$HYPRWAYLANDSCANNER_PATH"
+    cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE=Release -S "$HYPRWAYLANDSCANNER_PATH" -B "$HYPRWAYLANDSCANNER_PATH/build"
+    cmake --build "$HYPRWAYLANDSCANNER_PATH/build" --config Release -j$(nproc)
+    sudo cmake --install "$HYPRWAYLANDSCANNER_PATH/build"
+
+    # hyprlock (dependencies)
+    printf "hyprlock (dependencies)"
+    run sudo apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libopengl-dev libxkbcommon-dev libjpeg-dev libwebp-dev libmagic-dev libcairo2-dev libpango1.0-dev libdrm-dev libgbm-dev libsdbus-c++-dev libwayland-dev wayland-protocols libpam0g-dev
+
+    # sdbus-cpp (for hyprlock)
+    printf "sdbus-cpp (for hyprlock)\n"
+    SDBUSCPP_PATH="$HYPRLAND_PATH/sdbus-cpp"
+    clone_repo "https://github.com/Kistler-Group/sdbus-cpp.git" "$SDBUSCPP_PATH"
+    mkdir -p "$SDBUSCPP_PATH/build"
+    cmake -S "$SDBUSCPP_PATH" -B "$SDBUSCPP_PATH/build"
+    make -C "$SDBUSCPP_PATH/build"
+    sudo make -C "$SDBUSCPP_PATH/build" install
+
+    # hyprutils
+    printf "hyprutils\n"
+    HYPRUTILS_PATH="$HYPRLAND_PATH/hyprutils"
+    clone_repo "https://github.com/hyprwm/hyprutils.git" "$HYPRUTILS_PATH"
+    mkdir -p "$HYPRLAND_PATH/hyprutils/build"
+    cmake "$HYPRLAND_PATH/hyprutils" -B "$HYPRLAND_PATH/hyprutils/build"
+    make -C "$HYPRLAND_PATH/hyprutils/build"
+    sudo make -C "$HYPRLAND_PATH/hyprutils/build" install
+
+    # hyprgraphics (for hyprlock)
+    printf "hyprgraphics (for hyprlock)\n"
+    HYPRGRAPHICS_PATH="$HYPRLAND_PATH/hyprgraphics"
+    clone_repo "https://github.com/hyprwm/hyprgraphics.git" "$HYPRGRAPHICS_PATH"
+    mkdir -p "$HYPRLAND_PATH/hyprgraphics/build"
+    cmake "$HYPRLAND_PATH/hyprgraphics" -B "$HYPRLAND_PATH/hyprgraphics/build"
+    make -C "$HYPRLAND_PATH/hyprgraphics/build"
+    sudo make -C "$HYPRLAND_PATH/hyprgraphics/build" install
+
+    # hyprlang (for hyprlock)
+    printf "hyprlang (for hyprlock)\n"
+    HYPRLANG_PATH="$HYPRLAND_PATH/hyprlang"
+    clone_repo "https://github.com/hyprwm/hyprlang.git" "$HYPRLANG_PATH"
+    mkdir -p "$HYPRLAND_PATH/hyprlang/build"
+    cmake "$HYPRLAND_PATH/hyprlang" -B "$HYPRLAND_PATH/hyprlang/build"
+    make -C "$HYPRLAND_PATH/hyprlang/build"
+    sudo make -C "$HYPRLAND_PATH/hyprlang/build" install
+
+    # rofi (dependencies)
+    printf "rofi (dependencies)"
+    run sudo apt-get install -y libgdk-pixbuf-2.0-dev libxcb-util-dev libxcb-xkb-dev libxkbcommon-x11-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev flex bison
+
+    # slurp (for hyprshot)
+    printf "slurp (for hyprshot)"
+    run sudo apt-get install -y slurp
+
+    # wl-clipboard (for hyprshot)
+    printf "wl-clipboard (for hyprshot)"
+    run sudo apt-get install -y wl-clipboard
 
   fi
 
@@ -353,9 +430,45 @@ install_software() {
 
   if [ "$hyprland" -eq 1 ]; then
 
+    # hyprlock
+    printf "hyprlock\n"
+    HYPRLOCK_PATH="$HYPRLAND_PATH/hyprlock"
+    clone_repo "https://github.com/hyprwm/hyprlock.git" "$HYPRLOCK_PATH"
+    cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S "$HYPRLOCK_PATH" -B "$HYPRLOCK_PATH/build"
+    cmake --build "$HYPRLOCK_PATH/build" --config Release --target hyprlock -j$(nproc)
+    sudo cmake --install "$HYPRLOCK_PATH/build"
+
+    # hyprpaper
+    printf "hyprpaper\n"
+    HYPRPAPER_PATH="$HYPRLAND_PATH/hyprpaper"
+    clone_repo "https://github.com/hyprwm/hyprpaper.git" "$HYPRPAPER_PATH"
+    cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S "$HYPRPAPER_PATH" -B "$HYPRPAPER_PATH/build"
+    cmake --build "$HYPRPAPER_PATH/build" --config Release --target hyprpaper -j$(nproc)
+    sudo cmake --install "$HYPRPAPER_PATH/build"
+
+    # hyprshot
+    printf "hyprshot\n"
+    HYPRSHOT_REPO_PATH="$HYPRLAND_PATH/hyprshot"
+    HYPRSHOT_BIN_PATH="$HOME/.local/bin/hyprshot"
+    clone_repo "https://github.com/Gustash/Hyprshot.git" "$HYPRSHOT_REPO_PATH"
+    ln -sf "$HYPRSHOT_REPO_PATH/hyprshot" "$HYPRSHOT_BIN_PATH"
+    chmod +x "$HYPRSHOT_REPO_PATH/hyprshot"
+
     # rofi
-    printf "rofi"
-    run sudo apt-get install -y rofi
+    printf "rofi\n"
+    ROFI_PATH="$HYPRLAND_PATH/rofi-wayland"
+    clone_repo "https://github.com/in0ni/rofi-wayland.git" "$ROFI_PATH"
+    meson setup "$ROFI_PATH" "$ROFI_PATH/build"
+    meson compile -C "$ROFI_PATH/build"
+    sudo meson install -C "$ROFI_PATH/build"
+
+    # # rofi
+    # printf "rofi"
+    # run sudo apt-get install -y rofi
+
+    # sway-notification-center
+    printf "sway-notification-center"
+    run sudo apt-get install -y sway-notification-center
 
     # waybar
     printf "waybar"
@@ -529,7 +642,7 @@ install_themes() {
 
 		# gruvbox (for vim)
 		printf "gruvbox (for vim)\n"
-    	VIM_GRUVBOX_PATH="$THEMES_PATH/vim-gruvbox"
+    VIM_GRUVBOX_PATH="$THEMES_PATH/vim-gruvbox"
 		VIM_THEMES_PATH="$HOME/.vim/pack/themes/start"
 		clone_repo "https://github.com/morhetz/gruvbox.git" "$VIM_GRUVBOX_PATH"
 		mkdir -p "$VIM_THEMES_PATH"
@@ -543,6 +656,18 @@ install_themes() {
 		printf "dracula (for alacritty)"
 		ALACRITTY_DRACULA_PATH="$THEMES_PATH/alacritty-dracula"
 		run clone_repo "https://github.com/dracula/alacritty.git" "$ALACRITTY_DRACULA_PATH"
+
+  fi
+
+	if [ "$hyprland" -eq 1 ]; then
+
+    # dracula (for rofi)
+    printf "dracula (for rofi)\n"
+    ROFI_DRACULA_PATH="$THEMES_PATH/rofi-dracula"
+    ROFI_THEMES_PATH="$HOME/.config/rofi"
+    clone_repo "https://github.com/dracula/rofi.git" "$ROFI_DRACULA_PATH"
+    mkdir -p "$ROFI_THEMES_PATH"
+    ln -sf "$ROFI_DRACULA_PATH/theme/config1.rasi" "$ROFI_THEMES_PATH/config.rasi"
 
   fi
 
@@ -636,6 +761,19 @@ echo "- tree"
 echo "- vim"
 echo "- zoxide"
 dev_env=$(ask_install "${category}" "yes"; echo $?)
+
+category="Hyprland"
+printf "${cyan}${bold}"
+printf "❏ ${category}\n"
+printf "${reset}"
+echo "- hyprland"
+echo "- hyprlock"
+echo "- hyprpaper"
+echo "- hyprshot"
+echo "- rofi"
+echo "- sway-notification-center"
+echo "- waybar"
+hyprland=$(ask_install "${category}" "no"; echo $?)
 
 category="TypeScript"
 printf "${cyan}${bold}"
