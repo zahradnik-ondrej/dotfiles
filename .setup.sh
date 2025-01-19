@@ -462,10 +462,6 @@ install_software() {
     meson compile -C "$ROFI_PATH/build"
     sudo meson install -C "$ROFI_PATH/build"
 
-    # # rofi
-    # printf "rofi"
-    # run sudo apt-get install -y rofi
-
     # sway-notification-center
     printf "sway-notification-center"
     run sudo apt-get install -y sway-notification-center
@@ -480,7 +476,7 @@ install_software() {
 
     # alacritty
     printf "alacritty"
-    run sudo snap install alacritty
+    run sudo snap install alacritty --classic
 
   fi
 
