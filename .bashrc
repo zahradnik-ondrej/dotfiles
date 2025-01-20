@@ -48,7 +48,7 @@ if ! shopt -oq posix; then
 fi
 
 export EDITOR=lvim
-export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/games
 export PATH=$PATH:/opt/nvim-linux64/bin
 
 if [ -f ~/.bash_ps1 ]; then
@@ -63,6 +63,12 @@ export LS_COLORS=$LS_COLORS"*.tar.gz=33:*.zip=33:"
 export LS_COLORS=$LS_COLORS"*Dockerfile=36"
 export LS_COLORS=$LS_COLORS"*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.sl2=37:*.slx=37:"
 export LS_COLORS=$LS_COLORS"*.png=90:*.jpg=90:*.svg=90:"
+
+export EZA_COLORS=""
+export EZA_COLORS=$EZA_COLORS"fi=36:di=36:ln=36:pi=36:so=36:bd=36:cd=36:ex=36:"
+export EZA_COLORS=$EZA_COLORS"ur=34:uw=35:ux=32:"
+export EZA_COLORS=$EZA_COLORS"gr=34:gw=35:gx=32:"
+export EZA_COLORS=$EZA_COLORS"tr=34:tw=35:tx=32:"
 
 # if [ -z "$TMUX" ]; then
 # 	if tmux has-session 2>/dev/null; then
