@@ -137,7 +137,7 @@ install_apps
 printf "${yellow}${bold}"
 echo "===== Install cursors ======"
 printf "${reset}"
-# install_cursors
+install_cursors
 
 printf "${yellow}${bold}"
 echo "====== Install themes ======"
@@ -152,7 +152,7 @@ install_fonts
 printf "${yellow}${bold}"
 echo "====== Install icons ======"
 printf "${reset}"
-# install_icons
+install_icons
 
 printf "${yellow}${bold}"
 echo "===== Cleanup ====="

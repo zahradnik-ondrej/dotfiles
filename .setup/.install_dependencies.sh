@@ -125,6 +125,18 @@ install_dependencies() {
     HYPRLAND_PATH="$HOME/.hyprland"
     mkdir -p "$HYPRLAND_PATH"
 
+    # hyprcursor
+    printf "hyprcursor\n"
+    HYPRCURSOR_PATH="$HYPRLAND_PATH/hyprcursor"
+    clone_repo "https://github.com/hyprwm/hyprcursor.git" "$HYPRCURSOR_PATH"
+    clone_repo "https://github.com/marzer/tomlplusplus.git" "$HOME/.local/include/tomlplusplus"
+    mv "$HOME/.local/include/tomlplusplus/"*.h "$HOME/.local/include"
+    sed -i '/^pkg_check_modules(/s/tomlplusplus//;/^project(/a include_directories("'"$HOME"'/.local/include")' "$HYPRCURSOR_PATH/CMakeLists.txt"
+    mkdir -p "$HYPRCURSOR_PATH/build"
+    cmake "$HYPRCURSOR_PATH" -B "$HYPRCURSOR_PATH/build"
+    make -C "$HYPRCURSOR_PATH/build"
+    sudo make -C "$HYPRCURSOR_PATH/build" install
+
     # hyprland
     printf "hyprland"
     run sudo apt-get install -y hyprland

@@ -1,103 +1,67 @@
-@import "mocha.css";
+@import "dracula.css";
 
 * {
-  font-family: FantasqueSansMono Nerd Font;
-  font-size: 17px;
-  min-height: 0;
+  font-family: Hack Nerd Font;
+  font-size: 16px;
 }
 
 #waybar {
-  background: transparent;
   color: @text;
+  background: transparent;
   margin: 5px 5px;
 }
 
 #workspaces {
+  background-color: @background;
   border-radius: 1rem;
   margin: 5px;
-  background-color: @surface0;
   margin-left: 1rem;
 }
 
 #workspaces button {
-  color: @lavender;
+  color: @purple;
   border-radius: 1rem;
   padding: 0.4rem;
 }
 
 #workspaces button.active {
-  color: @sky;
+  color: @cyan;
   border-radius: 1rem;
 }
 
 #workspaces button:hover {
-  color: @sapphire;
+  color: @selection;
   border-radius: 1rem;
 }
 
-#custom-music,
-#tray,
-#backlight,
-#clock,
-#battery,
-#pulseaudio,
-#custom-lock,
-#custom-power {
-  background-color: @surface0;
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
+#pulseaudio, #memory, #network, #battery, #clock {
+  background-color: @background;
+  border-radius: 1rem;
+  margin: 5px;
+  padding: 0.4rem;
 }
 
-#clock {
-  color: @blue;
-  border-radius: 0px 1rem 1rem 0px;
-  margin-right: 1rem;
+#pulseaudio {
+  color: @yellow;
 }
 
-#battery {
-  color: @green;
+#memory {
+  color: @orange;
 }
 
-#battery.charging {
-  color: @green;
+#network {
+  color: @cyan;
+}
+
+#battery, #battery.charging {
+  color: @pink;
 }
 
 #battery.warning:not(.charging) {
   color: @red;
 }
 
-#backlight {
-  color: @yellow;
-}
-
-#backlight, #battery {
-    border-radius: 0;
-}
-
-#pulseaudio {
-  color: @maroon;
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
-}
-
-#custom-music {
-  color: @mauve;
-  border-radius: 1rem;
-}
-
-#custom-lock {
-    border-radius: 1rem 0px 0px 1rem;
-    color: @lavender;
-}
-
-#custom-power {
-    margin-right: 1rem;
-    border-radius: 0px 1rem 1rem 0px;
-    color: @red;
-}
-
-#tray {
-  margin-right: 1rem;
-  border-radius: 1rem;
+#clock {
+  color: @purple;
 }
 

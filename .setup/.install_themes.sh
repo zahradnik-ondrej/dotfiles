@@ -34,18 +34,6 @@ install_themes() {
 
   fi
 
-	if [ "$hyprland" -eq 1 ]; then
-
-    # dracula (for rofi)
-    printf "dracula (for rofi)\n"
-    ROFI_DRACULA_PATH="$THEMES_PATH/rofi-dracula"
-    ROFI_THEMES_PATH="$HOME/.config/rofi"
-    clone_repo "https://github.com/dracula/rofi.git" "$ROFI_DRACULA_PATH"
-    mkdir -p "$ROFI_THEMES_PATH"
-    ln -sf "$ROFI_DRACULA_PATH/theme/config1.rasi" "$ROFI_THEMES_PATH/config.rasi"
-
-  fi
-
 	if [ "$three_d" -eq 1 ]; then
 
 		# dracula (for openscad)

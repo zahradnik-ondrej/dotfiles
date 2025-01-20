@@ -1,0 +1,14 @@
+configuration{
+    modi: "drun,window,ssh";
+    icon-theme: "Papirus";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    disable-history: false;
+    display-drun: "󰀻  Apps ";
+    display-window: "󰕰  Windows";
+    display-ssh: "  SSH";
+    sidebar-mode: true;
+}
+
+@theme "dracula"

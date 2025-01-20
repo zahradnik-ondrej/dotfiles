@@ -6,6 +6,10 @@ add_ppas() {
   printf "multiverse (PPA)"
   run sudo add-apt-repository -y multiverse
 
+  # papirus
+  printf "papirus (PPA)"
+  run sudo add-apt-repository -y ppa:papirus/papirus
+
 	if [ "$dev_env" -eq 1 ]; then
 
 		# love2d
