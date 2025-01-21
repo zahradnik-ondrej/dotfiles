@@ -5,7 +5,9 @@ alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
 alias ac='alacritty'
 alias fuck='thefuck'
 alias fk='thefuck'
+alias tmux='tmux -f ~/.config/.tmux.conf'
 alias tmux-kill='tmux kill-server'
+alias nano='nano --rcfile ~/.config/.nanorc'
 
 # lunarvim
 lvim_open() {
