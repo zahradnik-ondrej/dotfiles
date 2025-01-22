@@ -7,11 +7,11 @@
       "hyprland/workspaces",
   ],
   "modules-right": [
-      "pulseaudio",
-      "memory",
-      "network",
-      "battery",
-      "clock",
+    "pulseaudio",
+    "memory",
+    "network",
+    "battery",
+    "clock",
   ],
   "hyprland/workspaces": {
       "disable-scroll": true,
@@ -37,6 +37,7 @@
       "format-wifi": "󰖩  {essid}",
       "format-ethernet": "  Ethernet",
       "format-disconnected": "󰤮 ",
+      "interval": 1,
   },
   "battery": {
       "states": {

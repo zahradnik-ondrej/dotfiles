@@ -50,6 +50,7 @@ fi
 export EDITOR=lvim
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/games
 export PATH=$PATH:/opt/nvim-linux64/bin
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 if [ -f ~/.bash/ps1 ]; then
 	. ~/.bash/ps1
@@ -88,8 +89,6 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv >/dev/null 2>&1)" 
 
 if command -v fzf &> /dev/null; then
   eval "$(fzf --bash)"

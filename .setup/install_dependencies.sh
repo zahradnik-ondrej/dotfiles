@@ -57,10 +57,10 @@ install_dependencies() {
 
 	# homebrew
 	printf "homebrew"
-	HOMEBREW_INSTALL_SCRIPT_PATH="$HOME/install.sh"
-  wget -qO "$HOMEBREW_INSTALL_SCRIPT_PATH" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-  NONINTERACTIVE=1 /bin/bash "$HOMEBREW_INSTALL_SCRIPT_PATH"
-  run rm -f "$HOMEBREW_INSTALL_SCRIPT_PATH"
+	HOMEBREW_PATH="$HOME/install.sh"
+  wget -qO "$HOMEBREW_PATH" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  NONINTERACTIVE=1 /bin/bash "$HOMEBREW_PATH"
+  run rm -f "$HOMEBREW_PATH"
   check brew
   homebrew=$?
 

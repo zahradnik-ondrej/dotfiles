@@ -20,9 +20,15 @@ install_apps() {
 		printf "g++"
 		check sudo apt-get install -y g++
 
+    # github-cli
+    printf "github-cli"
+    check sudo snap install gh
+
 		# godot
 		printf "godot"
-		run sudo flatpak install -y flathub org.godotengine.Godot
+    if ! godot --version >/dev/null 2>&1; then
+		  run sudo flatpak install -y flathub org.godotengine.Godot
+    fi
     check godot --version
 
 		# gparted
