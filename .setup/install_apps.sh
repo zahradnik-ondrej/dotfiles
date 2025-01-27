@@ -72,6 +72,10 @@ install_apps() {
 		printf "vim"
 		check sudo apt-get install -y vim
 
+    # vs-code
+    printf "vs-code"
+    check sudo snap install --classic code
+
     if [ "$cargo" -eq 1 ]; then
 
       # eza
