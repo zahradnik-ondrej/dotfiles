@@ -18,19 +18,7 @@ add_ppas() {
 
 	fi
 
-	if [ "$three_d" -eq 1 ]; then
-
-		# freecad
-		printf "freecad"
-		check sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
-
-	fi
-
 	if [ "$utilities" -eq 1 ]; then
-
-		# obs
-		printf "obs"
-		check sudo add-apt-repository -y ppa:obsproject/obs-studio
 
 		# peek
 		printf "peek"

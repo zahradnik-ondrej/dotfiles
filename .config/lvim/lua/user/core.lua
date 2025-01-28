@@ -1,6 +1,7 @@
 lvim.colorscheme = "dracula"
 lvim.builtin.bufferline.active = false
 vim.opt.relativenumber = true -- relative line numbers
+vim.opt.cursorline = true
 lvim.transparent_window = true
 lvim.builtin.terminal.active = true
 
@@ -11,7 +12,7 @@ lvim.keys.normal_mode["DA"] = ":<C-U>%d<CR>"                                    
 
 -- vim.api.nvim_set_keymap('t', '<C-w>', [[<C-\><C-n><C-w>]], { noremap = true, silent = true }) -- cycle through windows from terminal mode
 -- vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true }) -- enter normal mode from terminal window
---
+
 lvim.keys.normal_mode["<C-J>"] = "ddjP"
 lvim.keys.normal_mode["<C-K>"] = "ddkP"
 

@@ -6,11 +6,10 @@ install_dependencies() {
 	printf "build-essential"
 	check sudo apt-get install -y build-essential
 
-	# cargo
-	printf "cargo"
-  run wget -qO- https://sh.rustup.rs | sh -s -- -y
-  check cargo
-  cargo=$?
+	# rustup
+	printf "rustup"
+  check sudo snap install rustup --classic
+  rustup=$?
 
   # cmake
   printf "cmake"
@@ -30,7 +29,7 @@ install_dependencies() {
   
   # go
   printf "go"
-  check sudo apt-get install -y golang
+  check sudo snap install go --classic
 
   # meson
   printf "meson"
@@ -38,9 +37,7 @@ install_dependencies() {
 
   # nodejs
   printf "nodejs"
-  run wget -qO- https://deb.nodesource.com/setup_current.x | sudo -E bash -
-  run sudo apt-get install -y nodejs
-  check nodejs -v
+  check sudo snap install node --classic
   nodejs=$?
 
   # pip3
@@ -72,7 +69,7 @@ install_dependencies() {
 
 		# chromium (for puppeteer)
 		printf "chromium (for puppeteer)"
-		check sudo apt-get install -y chromium-browser
+    check sudo snap install chromium
 
     # libtmux (for tmux)
     printf "libtmux (for tmux)"

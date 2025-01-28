@@ -15,51 +15,51 @@ You will never have to put all your dotfiles into one folder or use symlinks eve
 ### Create a new dotfiles repository:
 1. `mkdir $HOME/.dotfiles`  
 2. `git init --bare $HOME/.dotfiles`  
-3. `echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc`  
+3. `echo "alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc`  
 4. `bash`  
-5. `dotfiles config --local status.showUntrackedFiles no`  
+5. `dots config --local status.showUntrackedFiles no`  
 6. create a new repository on GitHub *(or any other Git server hosting service)* but do **NOT** include a `README.md` or any other files such as a license  
-7. `dotfiles remote add origin https://github.com/<username>/<repository_name>.git`  
+7. `dots remote add origin https://github.com/<username>/<repository_name>.git`  
 
 ***
 
 ### Add / update a dotfile:
-1. `dotfiles add <file/directory_name>`  
-2. `dotfiles commit -m "Add/Update <file/directory_name(s)>"`  
-3. `dotfiles push` [^3]
+1. `dots add <file/directory_name>`  
+2. `dots commit -m "Add/Update <file/directory_name(s)>"`  
+3. `dots push` [^3]
 
 ### Update all dotfiles:
-1. `dotfiles add -u`
-2. `dotfiles commit -m "Update all files"`  
-3. `dotfiles push` [^3]
+1. `dots add -u`
+2. `dots commit -m "Update all files"`  
+3. `dots push` [^3]
 
 ### Remove a dotfile:
-1. `dotfiles rm <file_name>` or `dotfiles rm -r <directory_name>` 
-2. `dotfiles commit -m "Remove <file/directory_name(s)>"`  
-3. `dotfiles push` [^3]
+1. `dots rm <file_name>` or `dotfiles rm -r <directory_name>` 
+2. `dots commit -m "Remove <file/directory_name(s)>"`  
+3. `dots push` [^3]
 
 ***
 
 ### Update the local repository:
-* `dotfiles pull`
+* `dots pull`
 
 ***
 
 ### Clone *(download)* a dotfiles repository:
-1. `echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc`  
+1. `echo "alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc`  
 2. `echo '.dotfiles' >> .gitignore`  
 3a. `git clone --bare https://github.com/<username>/<repository_name>.git $HOME/.dotfiles` *(general dotfiles repository)*  
 3b. `git clone --bare https://github.com/zahradnik-ondrej/dotfiles.git $HOME/.dotfiles` *(this dotfiles repository)*
 4. `bash`
-5. `dotfiles checkout -f`  
-6. `dotfiles config --local status.showUntrackedFiles no`
+5. `dots checkout -f`  
+6. `dots config --local status.showUntrackedFiles no`
 7. `bash`
 
 [^1]: Inspired by a YouTube video from [DistroTube](https://www.youtube.com/@DistroTube) - [Git Bare Repository - A Better Way To Manage Dotfiles](https://www.youtube.com/watch?v=tBoLDpTWVOM&ab_channel=DistroTube) and a blog post by [Nicola Paolucci](https://twitter.com/durdn) - [Dotfiles: Best Way to Store in a Bare Git Repository](https://www.atlassian.com/git/tutorials/dotfiles).
 
 [^2]: While this approach mainly serves as a better way to manage dotfiles, there is nothing special about it so that it couldn't be used for other types of files. That means you could use this approach for backing up any kind of data such as documents *(Word, PDF, etc.)*, media files *(pictures, videos, music)* or software, especially if you are hosting your own Git server or paying for one *(that's mainly due to storage, security and privacy concerns when it comes to backing up your data this way)*.
 
-[^3]: You might sometimes come across this or similar error message which prevents you from pushing *(uploading)* your dotfiles to the repository when you run the `dotfiles push` command:
+[^3]: You might sometimes come across this or similar error message which prevents you from pushing *(uploading)* your dotfiles to the repository when you run the `dots push` command:
 `To https://github.com/<username>/<repository_name>.git ! [rejected] main -> main (fetch first) error: failed to push some refs to 'https://github.com/<username>/<repository_name>.git' 
 hint: Updates were rejected because the remote contains work that you do not have locally. This is usually caused by another repository pushing to the same ref. You may want to first integrate the remote changes (e.g., 'git pull ...') before pushing again. See the 'Note about fast-forwards' in 'git push --help' for details.`
-To solve this issue, simply run the `dotfiles pull` command which will then proceed to open your default text editor. You can then just exit the text editor *(for **nano:** `Ctrl + x` / for **emacs:** `Ctrl + x` followed by `Ctrl + c`)* and run the `dotfiles push` command once again and everyting should be taken care of.
+To solve this issue, simply run the `dots pull` command which will then proceed to open your default text editor. You can then just exit the text editor *(for **nano:** `Ctrl + x` / for **emacs:** `Ctrl + x` followed by `Ctrl + c`)* and run the `dots push` command once again and everyting should be taken care of.

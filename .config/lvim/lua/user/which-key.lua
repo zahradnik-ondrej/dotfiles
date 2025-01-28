@@ -69,7 +69,7 @@ wk.mappings["f"] = {
   d = { ":Telescope lsp_definitions<CR>", "Find Definitions" },
   D = { ":Telescope lsp_type_definitions<CR>", "Find Type Definitions" },
   w = { ":lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>') })<CR>", "Grep Word Under Cursor" },
-  p = { ":Telescope projects<CR>", "View All Projects" },
+  -- p = { ":Telescope projects<CR>", "View All Projects" },
   m = { ":Telescope man_pages<CR>", "Search Man Pages" },
 }
 

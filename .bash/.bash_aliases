@@ -5,7 +5,6 @@ alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
 alias ac='alacritty'
 alias fuck='thefuck'
 alias fk='thefuck'
-alias tmux='tmux -f ~/.config/.tmux.conf'
 alias tmux-kill='tmux kill-server'
 alias nano='nano --rcfile ~/.config/.nanorc'
 
@@ -62,8 +61,8 @@ git_bl() {
 	git blame "$@"
 }
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-alias dotfiles-private='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias dots-private='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
 alias git-fpd='git fetch --prune && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs git branch -D'
 alias git-add100='find . -type f -size -100M -print0 | xargs -0 git add'
 alias git-bl=git_bl

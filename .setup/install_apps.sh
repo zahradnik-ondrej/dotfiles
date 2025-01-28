@@ -10,11 +10,11 @@ install_apps() {
 
 		# btop
 		printf "btop"
-		check sudo apt-get install -y btop
+    check sudo snap install btop
 
 		# dotnet-sdk
 		printf "dotnet-sdk"
-		check sudo apt-get install -y dotnet-sdk-8.0
+    check sudo snap install dotnet-sdk --classic
 
 		# g++
 		printf "g++"
@@ -52,9 +52,17 @@ install_apps() {
 		printf "midnight-commander"
 		check sudo apt-get install -y mc
 
+    # nano
+    printf "nano"
+    check sudo snap install nano --classic
+
 		# neofetch
 		printf "neofetch"
 		check sudo apt-get install -y neofetch
+
+    # pycharm
+    printf "pycharm"
+    check sudo snap install pycharm-community --classic
 
 		# thefuck
 		printf "thefuck"
@@ -76,7 +84,7 @@ install_apps() {
     printf "vs-code"
     check sudo snap install --classic code
 
-    if [ "$cargo" -eq 1 ]; then
+    if [ "$rustup" -eq 1 ]; then
 
       # eza
       printf "eza"
@@ -189,11 +197,11 @@ install_apps() {
 
 		# freecad
 		printf "freecad"
-		check sudo apt-get install -y freecad
+    check sudo snap install freecad
 
 		# openscad
 		printf "openscad"
-		check sudo apt-get install -y openscad
+    check sudo snap install openscad
 
 		# prusaslicer
 		printf "prusaslicer"
@@ -216,7 +224,11 @@ install_apps() {
 
 		# ffmpeg
 		printf "ffmpeg"
-		check sudo apt-get install -y ffmpeg
+    check sudo snap install ffmpeg
+
+    # firefox
+    printf "firefox"
+    check sudo snap install firefox
 
 		# flameshot
 		printf "flameshot"
@@ -224,11 +236,11 @@ install_apps() {
 
 		# gimp
     printf "gimp"
-    check sudo apt-get install -y gimp
+    check sudo snap install gimp
 
 		# inkscape
 		printf "inkscape"
-		check sudo apt-get install -y inkscape
+    check sudo snap install inkscape
 
 		# kicad
 		printf "kicad"
@@ -236,11 +248,11 @@ install_apps() {
 
 		# libreoffice
 		printf "libreoffice"
-		check sudo apt-get install -y libreoffice
+    check sudo snap install libreoffice
 
 		# obs
 		printf "obs"
-		check sudo apt-get install -y obs-studio
+    check sudo snap install obs-studio
 
 		# peek
 		printf "peek"
@@ -253,7 +265,7 @@ install_apps() {
 
 		# vlc
 		printf "vlc"
-		check sudo apt-get install -y vlc
+    check sudo snap install vlc
 
 		# yt-dlp
 		printf "yt-dlp"
@@ -263,9 +275,17 @@ install_apps() {
 
 	if [ "$misc" -eq 1 ]; then
 
-		# proton-mail
+    # discord
+    printf "discord"
+    check sudo snap install discord
+
+    # proton-mail
 		printf "proton-mail"
 		check sudo snap install proton-mail
+
+    # signal
+    printf "signal"
+    check sudo snap install signal-desktop
 
 		# slack
 		printf "slack"

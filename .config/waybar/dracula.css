@@ -1,11 +1,32 @@
 @define-color background #282a36;
+@define-color background-transparent rgba(40, 42, 54, 0.75);
+
 @define-color selection #44475a;
+@define-color selection-transparent rgba(68, 71, 90, 0.25);
+
 @define-color foreground #f8f8f2;
+@define-color foreground-transparent rgba(248, 248, 242, 0.25);
+
 @define-color comment #6272a4;
+@define-color comment-transparent rgba(98, 114, 164, 0.25);
+
 @define-color cyan #8be9fd;
+@define-color cyan-transparent rgba(139, 233, 253, 0.25);
+
 @define-color green #50fa7b;
+@define-color green-transparent rgba(80, 250, 123, 0.25);
+
 @define-color orange #ffb86c;
+@define-color orange-transparent rgba(255, 184, 108, 0.25);
+
 @define-color pink #ff79c6;
+@define-color pink-transparent rgba(255, 121, 198, 0.25);
+
 @define-color purple #bd93f9;
+@define-color purple-transparent rgba(189, 147, 249, 0.25);
+
 @define-color red #ff5555;
+@define-color red-transparent rgba(255, 85, 85, 0.25);
+
 @define-color yellow #f1fa8c;
+@define-color yellow-transparent rgba(241, 250, 140, 0.25);

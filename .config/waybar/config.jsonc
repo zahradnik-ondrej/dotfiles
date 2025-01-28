@@ -4,9 +4,10 @@
   "position": "top",
   "spacing": 4,
   "modules-left": [
-      "hyprland/workspaces",
+    "hyprland/workspaces",
   ],
   "modules-right": [
+    "tray",
     "pulseaudio",
     "memory",
     "network",
@@ -14,13 +15,16 @@
     "clock",
   ],
   "hyprland/workspaces": {
-      "disable-scroll": true,
-      "all-outputs": true,
-      "format": "{name}:{icon}",
-      "format-icons": {
-          "default": " ",
-          "active": " ",
-      }
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}:{icon}",
+    "format-icons": {
+      "default": " ",
+      "active": " ",
+    }
+  },
+  "tray": {
+      "icon-size": 16
   },
   "pulseaudio": {
     "scroll-step": 2,
@@ -30,29 +34,29 @@
     },
   },
   "memory": {
-      "format": "  {used:.1f}/{total:.1f} GiB",
-      "interval": 1,
+    "format": "  {used:.1f}/{total:.1f} GiB",
+    "interval": 1,
   },
   "network": {
-      "format-wifi": "󰖩  {essid}",
-      "format-ethernet": "  Ethernet",
-      "format-disconnected": "󰤮 ",
-      "interval": 1,
-  },
+    "format-wifi": "󰖩  {essid}",
+    "format-ethernet": "  Ethernet",
+    "format-disconnected": "󰤮 ",
+    "interval": 1,
+},
   "battery": {
-      "states": {
-          "warning": 30,
-          "critical": 15,
-      },
-      "format": "{icon} {capacity}%",
-      "format-full": "{icon} {capacity}%",
-      "format-charging": "󱐋 {capacity}%",
-      "format-plugged": "  {capacity}%",
-      "format-icons": [" ", " ", " ", " ", " "],
-      "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon} {capacity}%",
+    "format-full": "{icon} {capacity}%",
+    "format-charging": "󱐋 {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-icons": [" ", " ", " ", " ", " "],
+    "interval": 60,
   },
   "clock": {
-      "format": " {:%d/%m/%Y  %H:%M:%S}",
-      "interval": 1,
+    "format": " {:%d/%m/%Y  %H:%M:%S}",
+    "interval": 1,
   }
 }

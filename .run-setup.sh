@@ -10,7 +10,7 @@ source "$HOME/.setup/clone_repo.sh"
 source "$HOME/.setup/colors.sh"
 source "$HOME/.setup/install_appimage.sh"
 source "$HOME/.setup/install_apps.sh"
-# source "$HOME/.setup/install_cursors.sh"
+source "$HOME/.setup/install_cursors.sh"
 source "$HOME/.setup/install_dependencies.sh"
 source "$HOME/.setup/install_fonts.sh"
 source "$HOME/.setup/install_icons.sh"
@@ -134,7 +134,7 @@ install_apps
 printf "${yellow}${bold}"
 echo "===== Install cursors ======"
 printf "${reset}"
-# install_cursors
+install_cursors
 
 printf "${yellow}${bold}"
 echo "====== Install themes ======"
