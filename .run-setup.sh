@@ -15,6 +15,7 @@ source "$HOME/.setup/install_dependencies.sh"
 source "$HOME/.setup/install_fonts.sh"
 source "$HOME/.setup/install_icons.sh"
 source "$HOME/.setup/install_themes.sh"
+source "$HOME/.setup/load_cron_jobs.sh"
 source "$HOME/.setup/run.sh"
 source "$HOME/.setup/update_apt.sh"
 source "$HOME/.setup/update_snap.sh"
@@ -105,6 +106,11 @@ echo "- steam"
 echo "- telegram"
 echo "- vivaldi"
 misc=$(ask_install "${category}" "no"; echo $?)
+
+printf "${yellow}${bold}"
+echo "====== Load cron jobs ======"
+printf "${reset}"
+load_cron_jobs
 
 printf "${yellow}${bold}"
 echo "========= Add PPAs ========="

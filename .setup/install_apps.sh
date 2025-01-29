@@ -128,6 +128,10 @@ install_apps() {
 
   if [ "$hyprland" -eq 1 ]; then
 
+    # gammastep
+    printf "gammastep"
+    check sudo apt-get install -y gammastep
+
     # hyprlock
     printf "hyprlock"
     HYPRLOCK_PATH="$HYPRLAND_PATH/hyprlock"

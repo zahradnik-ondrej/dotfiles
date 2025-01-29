@@ -2,48 +2,46 @@
 
 export HYPRLAND_INSTANCE_SIGNATURE=$(cat $HOME/.config/hypr/hyprland_signature.txt)
 
-latitude=50.08804
-longitude=14.42076
-
-api_response=$(curl -s "https://api.sunrise-sunset.org/json?lat=$latitude&lng=$longitude&formatted=0")
-
-dawn=$(echo $api_response | jq -r '.results.civil_twilight_begin')
-sunrise=$(echo $api_response | jq -r '.results.sunrise')
-sunset=$(echo $api_response | jq -r '.results.sunset')
-dusk=$(echo $api_response | jq -r '.results.civil_twilight_end')
-
-dawn=$(date -d "$dawn" +%H:%M)
-sunrise=$(date -d "$sunrise" +%H:%M)
-sunset=$(date -d "$sunset" +%H:%M)
-dusk=$(date -d "$dusk" +%H:%M)
-
-echo "Dawn: $dawn"
-echo "Day: $sunrise"
-echo "Dusk: $sunset"
-echo "Night: $dusk"
+source /tmp/sun_times.env
 
 current_time=$(date +%H:%M)
 
-if [[ "$current_time" > "$dawn" && "$current_time" < "$sunrise" ]]; then
+echo "Current Time: $current_time"
+echo "Dawn: $DAWN, Sunrise: $SUNRISE, Sunset: $SUNSET, Dusk: $DUSK"
+
+if [[ "$current_time" > "$DAWN" && "$current_time" < "$SUNRISE" ]]; then
     variant="dawn.png"
-elif [[ "$current_time" > "$sunrise" && "$current_time" < "$sunset" ]]; then
+    echo "Time of day detected: Dawn"
+elif [[ "$current_time" > "$SUNRISE" && "$current_time" < "$SUNSET" ]]; then
     variant="day.png"
-elif [[ "$current_time" > "$sunset" && "$current_time" < "$dusk" ]]; then
+    echo "Time of day detected: Day"
+elif [[ "$current_time" > "$SUNSET" && "$current_time" < "$DUSK" ]]; then
     variant="dusk.png"
+    echo "Time of day detected: Dusk"
 else
     variant="night.png"
+    echo "Time of day detected: Night"
 fi
 
 wallpapers=("$HOME/.wallpapers/forest" "$HOME/.wallpapers/lake" "$HOME/.wallpapers/mountain")
+
 day_of_year=$(date +%-j)
+echo "Day of the Year: $day_of_year"
+
 folder_index=$((day_of_year % ${#wallpapers[@]}))
 folder="${wallpapers[$folder_index]}"
 
+echo "Selected Wallpaper Folder: $folder"
 wallpaper_path="$folder/$variant"
+echo "Final Wallpaper Path: $wallpaper_path"
 
 current_wallpaper=$(hyprctl hyprpaper listactive | grep -P '^ = ' | awk '{print $2}')
+echo "Current Active Wallpaper: $current_wallpaper"
 
 if [[ "$current_wallpaper" != "$wallpaper_path" ]]; then
+  echo "Wallpaper change detected. Applying new wallpaper..."
   hyprctl hyprpaper preload "$wallpaper_path"
   hyprctl hyprpaper wallpaper ,$wallpaper_path
+else
+  echo "Wallpaper is already set. No changes applied."
 fi
