@@ -222,6 +222,10 @@ install_apps() {
 		printf "deluge"
 		check sudo apt-get install -y deluge
 
+    # draw.io
+    printf "draw.io"
+    check sudo snap install drawio
+
 		# ffmpeg
 		printf "ffmpeg"
     check sudo snap install ffmpeg
