@@ -25,14 +25,12 @@ alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
 
 # test.sh
 test_sh() {
-
-	if [ -d ~/test.sh ] && [ -f ~/test.sh/test.sh ]; then
-		bash ~/test.sh/test.sh "$@";
-	else
-		git clone https://github.com/zahradnik-ondrej/test.sh.git ~/test.sh;
-		bash ~/test.sh/test.sh "$@";
-	fi
-
+  if [ -d ~/test.sh ] && [ -f ~/test.sh/test.sh ]; then
+    bash ~/test.sh/test.sh "$@"
+  else
+    git clone https://github.com/zahradnik-ondrej/test.sh.git ~/test.sh
+    bash ~/test.sh/test.sh "$@"
+  fi
 }
 
 alias testsh='test_sh'
@@ -45,7 +43,7 @@ fi
 if command -v eza &> /dev/null; then
   alias ls='eza -l --icons --git --no-user --no-time --color=auto --icons=auto'
 else
-	alias ls='ls -l --color=auto'
+  alias ls='ls -l --color=auto'
 fi
 
 alias lsa='ls -a'
@@ -58,7 +56,7 @@ alias vdir='ls'
 
 # git
 git_bl() {
-	git blame "$@"
+  git blame "$@"
 }
 
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
@@ -68,12 +66,12 @@ alias git-add100='find . -type f -size -100M -print0 | xargs -0 git add'
 alias git-bl=git_bl
 
 git_lgbs() {
-    local current_branch=$(git rev-parse --abbrev-ref HEAD)
-    git log --branches --not $(git branch --format "%(refname:short)" | grep -v "$current_branch" | xargs) --pretty="%H" |
-    while IFS= read -r hash; do
-        git show --color --pretty=format:"%C(bold red)(%h)%Creset %C(bold green)(%ar)%Creset %C(bold blue)<%an>%Creset %C(bold yellow)%s%Creset" $hash
-        echo -e "\n"
-    done
+  local current_branch=$(git rev-parse --abbrev-ref HEAD)
+  git log --branches --not $(git branch --format "%(refname:short)" | grep -v "$current_branch" | xargs) --pretty="%H" |
+  while IFS= read -r hash; do
+    git show --color --pretty=format:"%C(bold red)(%h)%Creset %C(bold green)(%ar)%Creset %C(bold blue)<%an>%Creset %C(bold yellow)%s%Creset" $hash
+    echo -e "\n"
+  done
 }
 
 alias git-lgbs='git_lgbs'
@@ -87,6 +85,6 @@ alias fray='ssh zahraon1@fray1.fit.cvut.cz'
 alias usbsdmux='/usr/bin/usbsdmux'
 alias ctrl='(cwd=$(pwd) && cd /home/ondra/prusa/meta-sl1-hw-tests/ && python3 tools/control.py && cd "$cwd")'
 vnc() {
-    ssh root@$1 "touch-ui -platform vnc &"
-    vncviewer $1:5900 -geometry 800x500
+  ssh root@$1 "touch-ui -platform vnc &"
+  vncviewer $1:5900 -geometry 800x500
 }

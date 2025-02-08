@@ -1,0 +1,12 @@
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+reset="%{$(print -P '\e[0m')%}"
+bold="%{$(print -P '\e[1m')%}"
+green="%{$(print -P '\e[32m')%}"
+yellow="%{$(print -P '\e[33m')%}"
+blue="%{$(print -P '\e[34m')%}"
+red="%{$(print -P '\e[35m')%}"
+gray="%{$(print -P '\e[90m')%}"
+
+export PS1=$'\n'"${gray}┌──${red}${bold}%n${reset}@${gray}%m${reset}:${green}${bold}%~${reset} ${blue}${vcs_info_msg_0_}${reset}"$'\n'"${gray}└─${bold}$ ${reset}"

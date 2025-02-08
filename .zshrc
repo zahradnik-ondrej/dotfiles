@@ -4,25 +4,17 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+HISTFILE=~/.zsh_history
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(< /etc/debian_chroot)
 fi
@@ -31,24 +23,15 @@ if [ -f ~/.sh_aliases ]; then
   . ~/.sh_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
+autoload -Uz compinit && compinit
 
 export EDITOR=lvim
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/games
 export PATH=$PATH:/opt/nvim-linux64/bin
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
-if [ -f ~/.bash_ps1 ]; then
-  . ~/.bash_ps1
+if [ -f ~/.zsh_ps1 ]; then
+  . ~/.zsh_ps1
 fi
 
 export LS_COLORS=""
@@ -86,14 +69,13 @@ fi
 export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
 
 if command -v fzf &> /dev/null; then
-  eval "$(fzf --bash)"
+  eval "$(fzf --zsh)"
 fi
 
 if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init bash)"
+  eval "$(zoxide init zsh)"
 fi
 
 if command -v oh-my-posh &> /dev/null; then
-  eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/dracula.omp.yaml)"
+  eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/dracula.omp.yaml)"
 fi
-
