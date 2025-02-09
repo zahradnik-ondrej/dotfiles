@@ -1,0 +1,3 @@
+neovim-remote
+thefuck
+yt-dlp

@@ -4,18 +4,27 @@ CRON_DIR="$HOME/.cron"
 
 load_cron_jobs() {
 
-    mkdir -p "$CRON_DIR"
+  if [ "$os" = "manjaro" ]; then
+    sudo pacman -S --needed --noconfirm cronie
+    sudo systemctl enable --now cronie.service
+  fi
 
-    CRON_TEMP=$(mktemp)
+  mkdir -p "$CRON_DIR"
 
-    for cron_file in "$CRON_DIR"/*; do
-      cat "$cron_file" >> "$CRON_TEMP"
-    done
+  CRON_TEMP=$(mktemp)
 
-    crontab "$CRON_TEMP"
+  for cron_file in "$CRON_DIR"/*; do
+    cat "$cron_file" >> "$CRON_TEMP"
+  done
 
-    rm "$CRON_TEMP"
+  crontab "$CRON_TEMP"
 
+  rm "$CRON_TEMP"
+
+  if [ "$os" = "manjaro" ]; then
+    sudo systemctl restart cronie
+  elif [ "$os" = "ubuntu" ]; then
     sudo systemctl restart cron
+  fi
 
 }

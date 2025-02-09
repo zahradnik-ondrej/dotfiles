@@ -1,0 +1,4 @@
+org.godotengine.Godot
+org.freecadweb.FreeCAD
+org.openscad.OpenSCAD
+com.prusa3d.PrusaSlicer

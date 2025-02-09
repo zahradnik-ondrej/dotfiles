@@ -2,16 +2,14 @@
 
 clone_repo() {
 
-	local repo_url="$1"
-	local target_path="$2"
+  local repo_url="$1"
+  local target_path="$2"
 
-	if [ -z "$target_path" ]; then
-
-    target_path=$(basename -s .git "$repo_url")
-
-  fi
-
+  [ -z "$target_path" ] && target_path=$(basename -s .git "$repo_url")
   [ -e "$target_path" ] && sudo rm -rf "$target_path"
   run git clone -q "$repo_url" "$target_path"
+
+  [ -d "$target_path/.git" ]
+  check "$?"
 
 }

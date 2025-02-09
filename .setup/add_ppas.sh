@@ -2,36 +2,9 @@
 
 add_ppas() {
 
-  # multiverse
-  printf "multiverse"
-  check sudo add-apt-repository -y multiverse
-
-  # papirus
-  printf "papirus"
-  check sudo add-apt-repository -y ppa:papirus/papirus
-
-	if [ "$dev_env" -eq 1 ]; then
-
-		# love2d
-		printf "love2d"
-		check sudo add-apt-repository -y ppa:bartbes/love-stable
-
-	fi
-
-	if [ "$utilities" -eq 1 ]; then
-
-		# peek
-		printf "peek"
-		check sudo add-apt-repository -y ppa:peek-developers/stable
-
-	fi
-
-	if [ "$misc" -eq 1 ]; then
-
-		# kicad
-		printf "kicad"
-		check sudo add-apt-repository -y ppa:kicad/kicad-8.0-releases
-
-	fi
+  while IFS= read -r repo; do
+    printf "$repo"
+    check bash -c "grep -rh \"^deb .*$(echo $repo | awk '{print $NF}')\" /etc/apt/sources.list /etc/apt/sources.list.d/ >/dev/null || sudo add-apt-repository -y '$repo'"
+  done < "${HOME}/.setup/apt-repositories.txt"
 
 }

@@ -1,0 +1,25 @@
+alacritty --classic
+blender --classic
+btop
+code --classic
+discord
+dotnet-sdk --classic
+drawio
+ffmpeg
+firefox
+gimp
+gh
+inkscape
+libreoffice
+nano --classic
+obs-studio
+proton-mail
+pycharm-community --classic
+rustup --classic
+signal-desktop
+slack
+spotify
+steam
+telegram-desktop
+vivaldi
+vlc

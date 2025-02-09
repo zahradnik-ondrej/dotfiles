@@ -1,0 +1,5 @@
+ppa:bartbes/love-stable
+ppa:kicad/kicad-8.0-releases
+multiverse
+ppa:papirus/papirus
+ppa:peek-developers/stable

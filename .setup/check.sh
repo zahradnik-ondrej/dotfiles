@@ -2,17 +2,18 @@
 
 check() {
 
-	run "$@"
-	local exit_code=$?
+  run "$@"
+  local exit_code=$?
 
-	if [ $exit_code -eq 0 ]; then
+  if [ $exit_code -eq 0 ]; then
 
-		printf "${green} ✓${reset}\n"
+    printf "${green} ✓${reset}\n"
+    rm "$ERR_FILE"
     return 1
 
-	else
+  else
 
-		printf "${red} ✗${reset}\n"
+    printf "${red} ✗${reset}\n"
 
     if [[ -f "$ERR_FILE" && -s "$ERR_FILE" ]]; then
 
@@ -26,6 +27,6 @@ check() {
 
     return 0
 
-	fi
+  fi
 
 }

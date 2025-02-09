@@ -3,161 +3,80 @@
 ERR_FILE="$HOME/.setup/error.log"
 
 source "$HOME/.setup/add_ppas.sh"
-source "$HOME/.setup/ask_install.sh"
 source "$HOME/.setup/check.sh"
 source "$HOME/.setup/cleanup.sh"
 source "$HOME/.setup/clone_repo.sh"
 source "$HOME/.setup/colors.sh"
+source "$HOME/.setup/get_os.sh"
 source "$HOME/.setup/install_appimage.sh"
 source "$HOME/.setup/install_apps.sh"
+#source "$HOME/.setup/install_apps_for_ubuntu.sh"
 source "$HOME/.setup/install_cursors.sh"
-source "$HOME/.setup/install_dependencies.sh"
+source "$HOME/.setup/install_flatpak.sh"
 source "$HOME/.setup/install_fonts.sh"
+source "$HOME/.setup/install_homebrew.sh"
 source "$HOME/.setup/install_icons.sh"
+source "$HOME/.setup/install_snap.sh"
 source "$HOME/.setup/install_themes.sh"
+source "$HOME/.setup/install_yay.sh"
 source "$HOME/.setup/load_cron_jobs.sh"
+source "$HOME/.setup/print_title.sh"
 source "$HOME/.setup/run.sh"
 source "$HOME/.setup/update_apt.sh"
-source "$HOME/.setup/update_snap.sh"
 
 sudo -v
 
-category="Dev Environment"
-printf "${cyan}${bold}"
-printf "❏ ${category}\n"
-printf "${reset}"
-echo "- alacritty"
-echo "- bat"
-echo "- btop"
-echo "- chai"
-echo "- eza"
-echo "- dotnet-sdk"
-echo "- g++"
-echo "- godot"
-echo "- gparted"
-echo "- love2d"
-echo "- lua"
-echo "- lunarvim"
-echo "- midnight-commander"
-echo "- mocha"
-echo "- neofetch"
-echo "- neovide"
-echo "- nodejs"
-echo "- puppeteer"
-echo "- thefuck"
-echo "- tmux"
-echo "- tree"
-echo "- typescript"
-echo "- vim"
-echo "- zoxide"
-dev_env=$(ask_install "${category}" "yes"; echo $?)
+os=$(get_os)
 
-category="Hyprland"
-printf "${cyan}${bold}"
-printf "❏ ${category}\n"
-printf "${reset}"
-echo "- hyprland"
-echo "- hyprlock"
-echo "- hyprpaper"
-echo "- hyprshot"
-echo "- rofi"
-echo "- sway-notification-center"
-echo "- waybar"
-hyprland=$(ask_install "${category}" "no"; echo $?)
+if [ "$os" = "ubuntu" ]; then
 
-category="3D"
-printf "${cyan}${bold}"
-printf "❏ ${category}\n"
-printf "${reset}"
-echo "- blender"
-echo "- cura"
-echo "- freecad"
-echo "- openscad"
-echo "- prusaslicer"
-three_d=$(ask_install "${category}" "no"; echo $?)
+  check sudo apt-get install -y build-essential
 
-category="Utilities"
-printf "${cyan}${bold}"
-printf "❏ ${category}\n"
-printf "${reset}"
-echo "- balena-etcher"
-echo "- deluge"
-echo "- ffmpeg"
-echo "- flameshot"
-echo "- gimp"
-echo "- inkscape"
-echo "- kicad"
-echo "- libreoffice"
-echo "- obs"
-echo "- peek"
-echo "- virtualbox"
-echo "- vlc"
-echo "- yt-dlp"
-utilities=$(ask_install "${category}" "no"; echo $?)
+  print_title "Add PPAs"
+  add_ppas
 
-category="Miscellaneous"
-printf "${cyan}${bold}"
-printf "❏ ${category}\n"
-printf "${reset}"
-echo "- proton-mail"
-echo "- slack"
-echo "- spotify"
-echo "- steam"
-echo "- telegram"
-echo "- vivaldi"
-misc=$(ask_install "${category}" "no"; echo $?)
+  print_title "Update apt"
+  check update_apt
 
-printf "${yellow}${bold}"
-echo "====== Load cron jobs ======"
-printf "${reset}"
-load_cron_jobs
+fi
 
-printf "${yellow}${bold}"
-echo "========= Add PPAs ========="
-printf "${reset}"
-add_ppas
+print_title "Install snap"
+check install_snap
 
-printf "${yellow}${bold}"
-echo "======== Update apt ========"
-printf "${reset}"
-check update_apt
+if [ "$os" = "manjaro" ]; then
 
-printf "${yellow}${bold}"
-echo "======= Update snap ========"
-printf "${reset}"
-check update_snap
+  pacman -Qi base-devel >/dev/null || sudo pacman -S --noconfirm base-devel
 
-printf "${yellow}${bold}"
-echo "=== Install dependencies ==="
-printf "${reset}"
-install_dependencies
+  print_title "Install yay"
+  check install_yay
 
-printf "${yellow}${bold}"
-echo "======= Install apps ======="
-printf "${reset}"
+fi
+
+print_title "Install Flatpak"
+check install_flatpak
+
+print_title "Install Homebrew"
+check install_homebrew
+
+print_title "Install apps"
 install_apps
 
-printf "${yellow}${bold}"
-echo "===== Install cursors ======"
-printf "${reset}"
-install_cursors
+print_title "Install cursors"
+#install_cursors
 
-printf "${yellow}${bold}"
-echo "====== Install themes ======"
-printf "${reset}"
+print_title "Install themes"
 install_themes
 
-printf "${yellow}${bold}"
-echo "====== Install fonts ======="
-printf "${reset}"
+print_title "Install fonts"
 install_fonts
 
-printf "${yellow}${bold}"
-echo "====== Install icons ======="
-printf "${reset}"
+print_title "Install icons"
 install_icons
 
-printf "${yellow}${bold}"
-echo "========= Cleanup ========="
-printf "${reset}"
-check cleanup
+print_title "Load cron jobs"
+load_cron_jobs
+
+if [ "$os" = "ubuntu" ]; then
+  print_title "Cleanup"
+  check cleanup
+fi

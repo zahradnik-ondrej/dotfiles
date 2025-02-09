@@ -1,0 +1,3 @@
+fzf
+jesseduffield/lazygit/lazygit
+oh-my-posh
