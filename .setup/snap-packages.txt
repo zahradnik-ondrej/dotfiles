@@ -21,5 +21,6 @@ slack
 spotify
 steam
 telegram-desktop
+tigervnc
 vivaldi
 vlc

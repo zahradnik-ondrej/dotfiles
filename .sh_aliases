@@ -37,7 +37,7 @@ alias testsh='test_sh'
 
 # bash
 if command -v batcat &> /dev/null; then
-    alias cat='batcat'
+    alias cat='batcat -n'
 fi
 
 if command -v eza &> /dev/null; then
@@ -71,5 +71,5 @@ alias ctrl='(cwd=$(pwd) && cd /home/ondra/prusa/meta-sl1-hw-tests/ && python3 to
 
 vnc() {
   ssh root@$1 "touch-ui -platform vnc &"
-  vncviewer $1:5900 -geometry 800x500
+  tigervnc $1:5900 -geometry 800x500
 }
