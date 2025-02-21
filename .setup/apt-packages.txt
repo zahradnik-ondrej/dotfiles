@@ -17,9 +17,9 @@ peek
 python3-pip
 pipx
 ripgrep
+solaar
 tmux
 tree
 vim
 virtualbox
-virtualbox-ext-pack
 xsel

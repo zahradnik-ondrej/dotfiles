@@ -35,7 +35,7 @@ install_apps() {
   # lunarvim
   printf "lunarvim\n"
   LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh) <<< $'n\nn\nn'
-  check "run command -v lvim"
+  check command -v lvim
 
   # tpm
   printf "tpm\n"

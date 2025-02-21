@@ -24,6 +24,7 @@ peek
 python-pip
 python-pipx
 ripgrep
+solaar
 tmux
 tree
 vim

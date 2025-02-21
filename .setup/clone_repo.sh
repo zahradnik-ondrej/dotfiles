@@ -9,7 +9,6 @@ clone_repo() {
   [ -e "$target_path" ] && sudo rm -rf "$target_path"
   run git clone -q "$repo_url" "$target_path"
 
-  [ -d "$target_path/.git" ]
-  check "$?"
+  check test -f "$appimage_file"
 
 }

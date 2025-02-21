@@ -13,11 +13,11 @@ install_appimage() {
   if [ "$current_version" != "$expected_version" ]; then
 
     sudo mkdir -p "$appimage_path"
-    #run sudo wget -O "$appimage_file" "$download_url"
+    run sudo wget -O "$appimage_file" "$download_url"
     sudo chmod +x "$appimage_file"
 
   fi
 
-  check "[ -x \"$appimage_file\" ]"
+  check test -f "$appimage_file"
 
 }

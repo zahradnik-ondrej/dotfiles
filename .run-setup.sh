@@ -30,7 +30,7 @@ os=$(get_os)
 
 if [ "$os" = "ubuntu" ]; then
 
-  check sudo apt-get install -y build-essential
+  sudo apt-get install -y build-essential
 
   print_title "Add PPAs"
   add_ppas
