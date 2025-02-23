@@ -15,11 +15,14 @@ go
 gparted
 hypridle
 hyprland
+hyprland-qt-support
 hyprlock
 hyprpaper
 hyprpicker
+hyprpolkitagent
 hyprshot
 hyprsunset
+hyprsysteminfo
 kicad
 libtmux
 love
