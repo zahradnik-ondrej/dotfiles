@@ -7,7 +7,7 @@ local docformatter = {
     "--wrap-summaries", "120",
     "--wrap-descriptions", "120",
   },
-  stdin = false,
+  stdin = true,
 }
 
 local black = {
@@ -18,6 +18,6 @@ local black = {
 
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-  { command = "docformatter", filetypes = { "python" }, args = docformatter.args },
+  -- { command = "docformatter", filetypes = { "python" }, args = docformatter.args, stdin = true },
   { command = "black",        filetypes = { "python" }, args = black.args },
 })

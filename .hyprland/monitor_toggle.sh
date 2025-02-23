@@ -6,10 +6,10 @@ EXTERNAL="DP-1"
 SETUP_1="810TL04"
 SETUP_2="GJHJ804"
 
-EDP1_SCALE=1.0
+EDP1_SCALE=1
 DP1_SCALE=1.0
 
-current_setup=0
+current_setup=-1
 
 while true; do
 
@@ -18,11 +18,19 @@ while true; do
 
     if [ -z "$external_serial" ]; then
 
+      echo "No external monitor detected."
+
       if [ "$current_setup" != 0 ]; then
 
-          hyprctl keyword monitor "$INTERNAL, preferred, auto, $EDP1_SCALE"
+        echo "Switching to internal monitor setup..."
 
-          current_setup=0
+        hyprctl keyword monitor "$INTERNAL, preferred, auto, $EDP1_SCALE"
+
+        current_setup=0
+
+      else
+
+        echo "Internal monitor setup is already active. No changes applied."
 
       fi
 
@@ -30,18 +38,30 @@ while true; do
 
       if [ "$external_serial" == "$SETUP_1" ]; then
 
+        echo "Detected Setup 1 ($SETUP_1)."
+
         if [ "$current_setup" != 1 ]; then
+
+          echo "Applying Setup 1 configuration..."
 
           hyprctl keyword monitor "$EXTERNAL, preferred, auto, $DP1_SCALE"
           hyprctl keyword monitor "$INTERNAL, disable"
 
           current_setup=1
 
+        else
+
+          echo "Setup 1 is already active. No changes applied."
+
         fi
 
       elif [ "$external_serial" == "$SETUP_2" ]; then
 
+        echo "Detected Setup 2 ($SETUP_2)."
+
         if [ "$current_setup" != 2 ]; then
+
+          echo "Applying Setup 2 configuration..."
 
           internal_resolution=$(hyprctl monitors all | grep -wA 1 "$INTERNAL" | awk '/@/')
           internal_width=$(echo "$internal_resolution" | awk -F 'x' '{print $1}')
@@ -62,7 +82,15 @@ while true; do
 
           current_setup=2
 
+        else
+
+          echo "Setup 2 is already active. No changes applied."
+
         fi
+
+      else
+
+        echo "Unrecognized external monitor setup. No changes applied."
 
       fi
 

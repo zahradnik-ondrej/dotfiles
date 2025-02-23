@@ -1,3 +1,4 @@
+docformatter
 neovim-remote
 thefuck
 yt-dlp

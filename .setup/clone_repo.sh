@@ -7,8 +7,6 @@ clone_repo() {
 
   [ -z "$target_path" ] && target_path=$(basename -s .git "$repo_url")
   [ -e "$target_path" ] && sudo rm -rf "$target_path"
-  run git clone -q "$repo_url" "$target_path"
-
-  check test -f "$appimage_file"
+  check git clone -q "$repo_url" "$target_path"
 
 }

@@ -5,7 +5,11 @@ CRON_DIR="$HOME/.cron"
 load_cron_jobs() {
 
   if [ "$os" = "manjaro" ]; then
-    sudo pacman -S --needed --noconfirm cronie
+    
+    if ! pacman -Q cronie &>/dev/null; then
+      sudo pacman -S --noconfirm cronie
+    fi
+
     sudo systemctl enable --now cronie.service
   fi
 

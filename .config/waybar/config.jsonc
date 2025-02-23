@@ -10,6 +10,7 @@
     "tray",
     "pulseaudio",
     "memory",
+    "custom/keyboard-layout",
     "network",
     "battery",
     "clock",
@@ -36,6 +37,10 @@
   "memory": {
     "format": "  {used:.1f}/{total:.1f} GiB",
     "interval": 1,
+  },
+  "custom/keyboard-layout": {
+    "exec": "echo ' '$(hyprctl -j devices | jq -r '.keyboards[] | select(.main==true) | .active_keymap')",
+    "interval": 1
   },
   "network": {
     "format-wifi": "󰖩  {essid}",

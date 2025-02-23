@@ -5,7 +5,9 @@ curl
 deluge
 flameshot
 g++
+gammastep
 gparted
+hyprland
 kicad
 libfontconfig1-dev
 love
@@ -18,8 +20,10 @@ python3-pip
 pipx
 ripgrep
 solaar
+sway-notification-center
 tmux
 tree
 vim
 virtualbox
+waybar
 xsel

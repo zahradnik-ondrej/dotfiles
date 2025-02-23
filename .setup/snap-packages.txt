@@ -3,6 +3,7 @@ blender --classic
 btop
 code --classic
 discord
+dolphin
 dotnet-sdk --classic
 drawio
 ffmpeg
@@ -15,7 +16,6 @@ nano --classic
 obs-studio
 proton-mail
 pycharm-community --classic
-rustup --classic
 signal-desktop
 slack
 spotify
@@ -24,3 +24,4 @@ telegram-desktop
 tigervnc
 vivaldi
 vlc
+wireguard-dtp

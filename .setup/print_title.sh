@@ -6,7 +6,7 @@ print_title() {
     local text_length=${#text}
 
     if (( text_length > 20 )); then
-        return
+        return 1
     fi
 
     local adjusted_text_length=$((text_length + 2))

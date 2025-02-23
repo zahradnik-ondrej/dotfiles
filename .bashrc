@@ -1,8 +1,6 @@
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+if [ -f ~/.shrc ]; then
+  . ~/.shrc
+fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -11,25 +9,9 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-  debian_chroot=$(< /etc/debian_chroot)
-fi
-
-if [ -f ~/.sh_aliases ]; then
-  . ~/.sh_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -42,48 +24,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export EDITOR=lvim
-export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/games
-export PATH=$PATH:/opt/nvim-linux64/bin
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-
 if [ -f ~/.bash_ps1 ]; then
   . ~/.bash_ps1
 fi
-
-export LS_COLORS=""
-export LS_COLORS=$LS_COLORS"di=34:"
-export LS_COLORS=$LS_COLORS"*.yaml=31:*.yml=31:*.ini=31:*.toml=31:*.conf=31:*.md=31:*.txt=31:*.json=31:*.pdf=31:*.doc=31:*.docx=31:"
-export LS_COLORS=$LS_COLORS"*.h=32:*.sh=32:*.py=32:*.c=32:*.cpp=32:*.js=32:*.ts=32:*.lua=32:"
-export LS_COLORS=$LS_COLORS"*.tar.gz=33:*.zip=33:"
-export LS_COLORS=$LS_COLORS"*Dockerfile=36"
-export LS_COLORS=$LS_COLORS"*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.sl2=37:*.slx=37:"
-export LS_COLORS=$LS_COLORS"*.png=90:*.jpg=90:*.svg=90:"
-
-export EZA_COLORS=""
-export EZA_COLORS=$EZA_COLORS"fi=36:di=36:ln=36:pi=36:so=36:bd=36:cd=36:ex=36:"
-export EZA_COLORS=$EZA_COLORS"ur=34:uw=35:ux=32:"
-export EZA_COLORS=$EZA_COLORS"gr=34:gw=35:gx=32:"
-export EZA_COLORS=$EZA_COLORS"tr=34:tw=35:tx=32:"
-
-# if [ -z "$TMUX" ]; then
-#   if tmux has-session 2>/dev/null; then
-#     tmux attach-session -d
-#   else
-#     tmux new-session -s 0
-#   fi
-# fi
-
-if command -v neofetch &> /dev/null; then
-  echo
-  neofetch
-fi
-
-if [ -f "$HOME/.cargo/env" ]; then
-  . "$HOME/.cargo/env"
-fi
-
-export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
 
 if command -v fzf &> /dev/null; then
   eval "$(fzf --bash)"
