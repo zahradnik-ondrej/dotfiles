@@ -10,6 +10,7 @@ gparted
 hyprland
 kicad
 libfontconfig1-dev
+libfuse2
 love
 lua5.3
 mc
