@@ -26,42 +26,6 @@ install_apps() {
     run rm -r "$NEOVIM_ARCHIVE_PATH"
     check nvim -v
 
-    # # hyprlock
-    # printf "hyprlock"
-    # HYPRLOCK_PATH="$HYPRLAND_PATH/hyprlock"
-    # clone_repo "https://github.com/hyprwm/hyprlock.git" "$HYPRLOCK_PATH"
-    # run cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S "$HYPRLOCK_PATH" -B "$HYPRLOCK_PATH/build"
-    # run cmake --build "$HYPRLOCK_PATH/build" --config Release --target hyprlock -j$(nproc)
-    # run cmake --install "$HYPRLOCK_PATH/build"
-    # check hyprlock
-
-    # hyprpaper
-    printf "hyprpaper\n"
-    HYPRPAPER_PATH="$HYPRLAND_PATH/hyprpaper"
-    clone_repo "https://github.com/hyprwm/hyprpaper.git" "$HYPRPAPER_PATH"
-    run cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S "$HYPRPAPER_PATH" -B "$HYPRPAPER_PATH/build"
-    run cmake --build "$HYPRPAPER_PATH/build" --config Release --target hyprpaper -j$(nproc)
-    run sudo cmake --install "$HYPRPAPER_PATH/build"
-    rm -f "$ERR_FILE"
-
-    # # hyprshot
-    # printf "hyprshot"
-    # HYPRSHOT_REPO_PATH="$HYPRLAND_PATH/hyprshot"
-    # HYPRSHOT_BIN_PATH="$HOME/.local/bin/hyprshot"
-    # clone_repo "https://github.com/Gustash/Hyprshot.git" "$HYPRSHOT_REPO_PATH"
-    # run ln -sf "$HYPRSHOT_REPO_PATH/hyprshot" "$HYPRSHOT_BIN_PATH"
-    # run chmod +x "$HYPRSHOT_REPO_PATH/hyprshot"
-    # check hyprshot
-
-    # rofi
-    printf "rofi"
-    ROFI_PATH="$HYPRLAND_PATH/rofi"
-    clone_repo "https://github.com/in0ni/rofi-wayland.git" "$ROFI_PATH"
-    run meson setup "$ROFI_PATH" "$ROFI_PATH/build"
-    run meson compile -C "$ROFI_PATH/build"
-    run sudo meson install -C "$ROFI_PATH/build"
-    check rofi -v
-
   fi
 
   # balenaEtcher
