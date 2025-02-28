@@ -130,7 +130,7 @@ install_apps() {
 
   while IFS= read -r package; do
     printf "$package"
-    check bash -c "snap list | grep -qw \"$(echo $package | awk '{print $1}')\" || snap install $package"
+    check bash -c "snap list | grep -qw \"$(echo $package | awk '{print $1}')\" || sudo snap install $package"
   done < "${HOME}/.setup/snap-packages.txt"
 
   # rustup

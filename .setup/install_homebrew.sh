@@ -4,7 +4,7 @@ install_homebrew() {
 
   if [ "$os" = "manjaro" ]; then
 
-    yay -S --noconfirm homebrew
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   elif [ "$os" = "ubuntu" ]; then
 

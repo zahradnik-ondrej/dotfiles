@@ -12,3 +12,20 @@ configuration{
 }
 
 @theme "dracula"
+
+window {
+    width: 50%;
+    height: 50%;
+}
+
+element {
+    padding: 10px;
+}
+
+element-icon {
+    size: 48px;
+}
+
+element-text {
+    font: "Hack Nerd Font 24";
+}
