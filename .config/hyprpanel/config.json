@@ -1,0 +1,56 @@
+{
+  "bar.customModules.updates.pollingInterval": 1440000,
+  "theme.font.name": "Hack Nerd Font",
+  "theme.font.label": "Hack Nerd Font",
+  "theme.bar.menus.enableShadow": false,
+  "theme.bar.menus.menu.media.scaling": 100,
+  "theme.bar.floating": false,
+  "theme.bar.buttons.enableBorders": true,
+  "theme.bar.enableShadow": false,
+  "menus.dashboard.powermenu.avatar.image": "/home/ondra/.face.icon",
+  "bar.launcher.icon": "󱗼",
+  "theme.bar.buttons.dashboard.enableBorder": false,
+  "theme.bar.buttons.workspaces.enableBorder": false,
+  "bar.workspaces.monitorSpecific": true,
+  "bar.workspaces.show_numbered": true,
+  "bar.workspaces.show_icons": false,
+  "bar.workspaces.showWsIcons": false,
+  "menus.volume.raiseMaximumVolume": true,
+  "menus.clock.time.military": true,
+  "menus.clock.weather.location": "Prague",
+  "menus.clock.weather.unit": "metric",
+  "theme.bar.buttons.battery.enableBorder": false,
+  "bar.battery.label": true,
+  "theme.bar.buttons.systray.enableBorder": false,
+  "bar.notifications.show_total": false,
+  "menus.power.lowBatteryNotification": false,
+  "bar.layouts": {
+    "*": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "microphone",
+        "media",
+        "volume"
+      ],
+      "right": [
+        "systray",
+        "kbinput",
+        "weather",
+        "bluetooth",
+        "network",
+        "clock",
+        "battery",
+        "notifications",
+        "power"
+      ]
+    }
+  },
+  "bar.customModules.weather.unit": "metric",
+  "theme.bar.buttons.modules.weather.enableBorder": false,
+  "bar.customModules.hypridle.offIcon": "󰒳",
+  "bar.customModules.hypridle.onIcon": "󰒲"
+}

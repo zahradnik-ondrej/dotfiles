@@ -1,3 +1,4 @@
+ags-hyprpanel-git
 bat
 bc
 brightnessctl
@@ -35,6 +36,7 @@ neofetch
 neovim
 nodejs
 npm
+nwg-dock-hyprland
 peek
 python-pip
 python-pipx
@@ -42,6 +44,7 @@ ripgrep
 rofi
 solaar
 swaync
+swww
 tmux
 tree
 unzip
