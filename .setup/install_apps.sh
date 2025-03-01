@@ -9,6 +9,14 @@ install_apps() {
     check bash -c "pacman -Qi '$package' >/dev/null || yay -S --noconfirm '$package'"
     done < "${HOME}/.setup/yay-packages.txt"
 
+    # nwg-drawer
+    printf "nwg-drawer"
+    NWG_DRAWER_PATH="$HOME/nwg-drawer"
+    clone_repo "https://github.com/nwg-piotr/nwg-drawer.git" "$NWG_DRAWER_PATH"
+    make -C "$NWG_DRAWER_PATH" get
+    make -C "$NWG_DRAWER_PATH" build
+    sudo make -C "$NWG_DRAWER_PATH" install
+
   elif [ "$os" = "ubuntu" ]; then
 
     while IFS= read -r package; do
@@ -33,21 +41,23 @@ install_apps() {
   install_appimage \
     "Version: effcebc" \
     "https://github.com/balena-io/etcher/releases/download/v1.18.0/balenaEtcher-1.18.0-x64.AppImage" \
-    "/opt/balenaEtcher"
+    "/opt/balenaEtcher" \
+    "balenaEtcher.AppImage"
 
   # cura
   printf "cura"
   install_appimage \
     "Version: 5735cc5" \
     "https://github.com/Ultimaker/Cura/releases/download/5.7.2-RC2/UltiMaker-Cura-5.7.2-linux-X64.AppImage" \
-    "/opt/cura"
+    "/opt/cura" \
+    "cura.AppImage"
 
   # lunarvim
   printf "lunarvim"
   if ! command -v lvim &> /dev/null; then
     LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh) <<< $'n\nn\nn'
     echo
-  fi 
+  fi
   check command -v lvim
 
   # tpm

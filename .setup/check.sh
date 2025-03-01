@@ -8,7 +8,7 @@ check() {
   if [ $exit_code -eq 0 ]; then
 
     printf "${green} ✓${reset}\n"
-    rm "$ERR_FILE"
+    [ -f "$ERR_FILE" ] && rm "$ERR_FILE"
     return 1
 
   else

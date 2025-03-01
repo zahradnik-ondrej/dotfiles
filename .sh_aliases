@@ -36,8 +36,8 @@ test_sh() {
 alias testsh='test_sh'
 
 # bash
-if command -v batcat &> /dev/null; then
-    alias cat='batcat -n'
+if command -v bat &> /dev/null; then
+    alias cat='bat -n'
 fi
 
 if command -v eza &> /dev/null; then

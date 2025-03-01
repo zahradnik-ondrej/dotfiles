@@ -5,6 +5,7 @@ python-black
 chromium
 cmake
 curl
+cpio
 ddcutil
 deluge
 docker

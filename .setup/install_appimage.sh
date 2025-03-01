@@ -5,7 +5,7 @@ install_appimage() {
   local expected_version="$1"
   local download_url="$2"
   local appimage_path="$3"
-  local appimage_file="$appimage_path/$(basename "$download_url")"
+  local appimage_file="$4"
 
   local current_version="none"
   [ -f "$appimage_file" ] && current_version=$("$appimage_file" --appimage-version >/dev/null 2>&1)
