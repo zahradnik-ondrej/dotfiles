@@ -1,6 +1,12 @@
 # Tmux Cheat Sheet
 
-## Manipulation
+## General
+
+- **Prefix**: `Ctrl + s`
+- **Reload Config File**: `<prefix> r`
+- **Install Packages**: `<prefix> I`
+
+## Clipboard
 
 - **Copy**: `Ctrl + c`
 - **Paste**: `Ctrl + Shift + v`
@@ -17,6 +23,8 @@
 - **Close Pane**: `<prefix> x`
 - **Resize Pane**: `<prefix> Ctrl + arrows`
 - **Clear Pane**: `<prefix> j`
+- **Show Pane Numbers**: `<prefix> q`
+- **Turnj Pane Into Window**: `<prefix> !`
 
 ## Windows
 
@@ -29,20 +37,21 @@
 - **Close Window**: `<prefix> &`
 - **Toggle Between Last Two Windows**: `<prefix> l`
 
-## Sessions
+## Session Management
+
+### Within Tmux
 
 - **Detach Session**: `<prefix> d`
+- **List Sessions**: `<prefix> s`
+- **Kill Current Session**: `<prefix> k`
+- **Rename Current Session**: `<prefix> :rename-session <new_session_name>`
+
+### Outside Tmux
+
+- **New Session**: `tmux` or `tmux new -s <session_name>`
 - **List Sessions**: `tmux ls`
-- **List Sessions Within Tmux**: `<prefix> s`
 - **Attach Last Session**: `tmux a`
 - **Attach Session**: `tmux a -t <session_name>`
-- **Kill Current Session**: `<prefix> k`
 - **Kill Specific Session**: `tmux kill-session -t <session_name>`
 - **Kill All Sessions**: `tmux kill-server`
-- **Rename Current Session**: `<prefix> : rename-session <new_session_name>`
 
-## Other
-
-- **Prefix**: `Ctrl + s`
-- **Reload Config File**: `<prefix> r`
-- **Install Packages**: `<prefix> I`

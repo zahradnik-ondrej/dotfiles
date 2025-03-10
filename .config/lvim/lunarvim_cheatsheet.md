@@ -1,6 +1,6 @@
 # LunarVim Cheatsheet
 
-## Core
+## General
 
 - **Move Backward in the Jump List**: `<C-o>`
 - **Move Forward  in the Jump List**: `<C-i>`

@@ -5,8 +5,9 @@ brightnessctl
 python-black
 chromium
 cmake
-curl
+cowsay
 cpio
+curl
 ddcutil
 deluge
 docker
@@ -28,6 +29,7 @@ hyprshot
 hyprsunset
 hyprsysteminfo
 kicad
+lazydocker
 libtmux
 love
 lua
@@ -39,14 +41,17 @@ nodejs
 npm
 nwg-dock-hyprland
 peek
+ponysay
 python-pip
 python-pipx
 ripgrep
 rofi
+sl
 solaar
 swaync
 swww
 tmux
+toilet
 tree
 unzip
 vim

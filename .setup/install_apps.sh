@@ -107,6 +107,18 @@ install_apps() {
     check bash -c "snap list | grep -qw \"$(echo $package | awk '{print $1}')\" || sudo snap install $package"
   done < "${HOME}/.setup/snap-packages.txt"
 
+  if [ "$os" = "manjaro" ]; then
+
+    printf "hyprbars"
+    run hyprpm add https://github.com/hyprwm/hyprland-plugins
+    check hyprpm enable hyprbars
+
+    printf "hypr-dynamic-cursors"
+    run hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
+    check hyprpm enable dynamic-cursors
+
+  fi
+
   # rustup
   printf "rustup"
   run snap install rustup --classic

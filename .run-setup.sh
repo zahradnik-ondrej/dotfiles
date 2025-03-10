@@ -10,12 +10,9 @@ source "$HOME/.setup/colors.sh"
 source "$HOME/.setup/get_os.sh"
 source "$HOME/.setup/install_appimage.sh"
 source "$HOME/.setup/install_apps.sh"
-source "$HOME/.setup/install_cursors.sh"
 source "$HOME/.setup/install_flatpak.sh"
 source "$HOME/.setup/install_fonts.sh"
 source "$HOME/.setup/install_homebrew.sh"
-source "$HOME/.setup/install_hyprland_plugins.sh"
-source "$HOME/.setup/install_icons.sh"
 source "$HOME/.setup/install_snap.sh"
 source "$HOME/.setup/install_themes.sh"
 source "$HOME/.setup/install_yay.sh"
@@ -61,17 +58,11 @@ check install_homebrew
 print_title "Install apps"
 install_apps
 
-print_title "Install cursors"
-#install_cursors
-
 print_title "Install themes"
 install_themes
 
 print_title "Install fonts"
 install_fonts
-
-print_title "Install icons"
-install_icons
 
 print_title "Load cron jobs"
 load_cron_jobs
