@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ -f ~/.shrc ]; then
   . ~/.shrc
 fi

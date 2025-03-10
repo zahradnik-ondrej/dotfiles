@@ -15,6 +15,7 @@ fontconfig
 gammastep
 gcc
 go
+google-chrome
 gparted
 hypridle
 hyprland

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -28,11 +30,11 @@ export PATH=$PATH:/var/lib/snapd/snap/bin
 
 export LS_COLORS=""
 export LS_COLORS=$LS_COLORS"di=34:"
-export LS_COLORS=$LS_COLORS"*.yaml=31:*.yml=31:*.ini=31:*.toml=31:*.conf=31:*.md=31:*.txt=31:*.json=31:*.pdf=31:*.doc=31:*.docx=31:"
+export LS_COLORS=$LS_COLORS"*.yaml=37:*.yml=37:*.ini=37:*.toml=37:*.conf=37:*.md=37:*.txt=37:*.json=37:*.pdf=37:*.doc=37:*.docx=37:*.rst=37:"
 export LS_COLORS=$LS_COLORS"*.h=32:*.sh=32:*.py=32:*.c=32:*.cpp=32:*.js=32:*.ts=32:*.lua=32:"
 export LS_COLORS=$LS_COLORS"*.tar.gz=33:*.zip=33:"
-export LS_COLORS=$LS_COLORS"*Dockerfile=36"
-export LS_COLORS=$LS_COLORS"*.stl=37:*.sl1s=37:*.sl1=37:*.3mf=37:*.gcode=37:*.bgcode=37:*.sl2=37:*.slx=37:"
+export LS_COLORS=$LS_COLORS"*Dockerfile=36:"
+export LS_COLORS=$LS_COLORS"*.stl=31:*.sl1s=31:*.sl1=31:*.3mf=31:*.gcode=31:*.bgcode=31:*.sl2=31:*.slx=31:"
 export LS_COLORS=$LS_COLORS"*.png=90:*.jpg=90:*.svg=90:"
 
 export EZA_COLORS=""
