@@ -11,6 +11,7 @@ curl
 ddcutil
 deluge
 docker
+fastfetch
 flameshot
 fontconfig
 gammastep
@@ -39,6 +40,7 @@ neofetch
 neovim
 nodejs
 npm
+nwg-drawer
 nwg-dock-hyprland
 peek
 ponysay

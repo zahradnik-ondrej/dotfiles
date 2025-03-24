@@ -1,39 +1,44 @@
 #!/bin/bash
 
-DEFAULT_STEP=250
-DEFAULT_DELAY=0.05
-MIN_BRIGHTNESS=1
-
-MAX_BRIGHTNESS=$(brightnessctl m)
+DEFAULT_STEP=100
 
 adjust_brightness() {
-    local target=${1:-}
-    local step=${2:-$DEFAULT_STEP}
-    local current=$(brightnessctl get)
 
-    if [[ -z "$target" ]]; then
-        target=$([ "$3" == "in" ] && echo "$MAX_BRIGHTNESS" || echo "$MIN_BRIGHTNESS")
-    fi
+  local absolute_target="$1"
+  local step="${2:-$DEFAULT_STEP}"
 
-    if [[ "$target" == *% ]]; then
-        target=$(( MAX_BRIGHTNESS * ${target%\%} / 100 ))
-    fi
+  local current_value=$(brightnessctl g)
+  local ddc_displays=($(ddcutil detect | awk '/Display [0-9]/ { print $2 }'))
 
-    while (( current > target + step || current < target - step )); do
-        current=$(( current + (target > current ? step : -step) ))
+  local max=$(brightnessctl m)
+  local current_target=$(( current_value * 100 / max ))
 
-        if (( current < MIN_BRIGHTNESS )); then current=$MIN_BRIGHTNESS; fi
-        if (( current > MAX_BRIGHTNESS )); then current=$MAX_BRIGHTNESS; fi
+  if [[ "$absolute_target" == *% ]]; then
+    absolute_target=${absolute_target%\%}
+  fi
 
-        brightnessctl set "$current"
-        sleep "$DEFAULT_DELAY"
+  while (( current_target > absolute_target + step || current_target < absolute_target - step )); do
+
+    current_target=$(( current_target + (absolute_target > current_target ? step : -step) ))
+
+    if (( current_target < 1 )); then current_target=1; fi
+    if (( current_target > 100 )); then current_target=100; fi
+
+    brightnessctl set "${current_target}%"
+
+    for display in "${ddc_displays[@]}"; do
+      ddcutil --display "$display" setvcp 10 "$current_target"
     done
 
-    brightnessctl set "$target"
+  done
+
+  brightnessctl set "${absolute_target}%"
+  for display in "${ddc_displays[@]}"; do
+    ddcutil --display "$display" setvcp 10 "$absolute_target"
+  done
+
 }
 
-case "$1" in
-    --fade-out) adjust_brightness "${2:-}" "${3:-$DEFAULT_STEP}" "out" ;;
-    --fade-in) adjust_brightness "${2:-}" "${3:-$DEFAULT_STEP}" "in" ;;
-    *) echo "Usage: $0 --fade-out [target[%]] [step] | --fade-in [target[%]] [step]"; exit 1 ;;
-esac
+[[ "$1" =~ ^[0-9]{1,3}%?$ && ${1%\%} -ge 0 && ${1%\%} -le 100 && ( -z "$2" || "$2" =~ ^[0-9]+$ ) ]] || exit 1
+
+adjust_brightness "$1" "$2"

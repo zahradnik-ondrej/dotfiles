@@ -8,10 +8,11 @@
 [alias]
   a  = add
   au = add -u
+  c  = commit
 	cm = commit -m
 	co = checkout
   d  = diff
-	lg = log --pretty=format:'%C(red)(%h)%Creset %C(dim)[%cr | %cd]%Creset %C(green)<%an>%Creset %C(white)%s%Creset %C(magenta)%d%Creset' --abbrev-commit --decorate=short --date=format:'%a, %d %b %Y %H:%M:%S' --first-parent
+  lg = log --pretty=format:'%C(red)(%h)%Creset %C(dim)[%cr | %cd]%Creset %C(green)<%an>%Creset %C(white)%s%Creset %C(magenta)%d%Creset' --abbrev-commit --decorate=short --date=format:'%a, %d %b %Y %H:%M:%S' --first-parent
 	s  = status
   sl = stash list
   ss = status --short

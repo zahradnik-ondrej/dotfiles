@@ -9,14 +9,6 @@ install_apps() {
     check bash -c "pacman -Qi '$package' >/dev/null || yay -S --noconfirm '$package'"
     done < "${HOME}/.setup/yay-packages.txt"
 
-    # nwg-drawer
-    printf "nwg-drawer"
-    NWG_DRAWER_PATH="$HOME/nwg-drawer"
-    clone_repo "https://github.com/nwg-piotr/nwg-drawer.git" "$NWG_DRAWER_PATH"
-    make -C "$NWG_DRAWER_PATH" get
-    make -C "$NWG_DRAWER_PATH" build
-    sudo make -C "$NWG_DRAWER_PATH" install
-
   elif [ "$os" = "ubuntu" ]; then
 
     while IFS= read -r package; do
@@ -109,13 +101,19 @@ install_apps() {
 
   if [ "$os" = "manjaro" ]; then
 
+    hyprpm update
+
     printf "hyprbars"
-    run hyprpm add https://github.com/hyprwm/hyprland-plugins
+    yes | hyprpm add https://github.com/hyprwm/hyprland-plugins
     check hyprpm enable hyprbars
 
     printf "hypr-dynamic-cursors"
-    run hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
+    yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
     check hyprpm enable dynamic-cursors
+
+    printf "split-monitor-workspaces"
+    yes | hyprpm add https://github.com/Duckonaut/split-monitor-workspaces
+    check hyprpm enable split-monitor-workspaces
 
   fi
 

@@ -9,6 +9,9 @@ alias fuck='thefuck'
 alias fk='thefuck'
 alias tmux-kill='tmux kill-server'
 alias nano='nano --rcfile ~/.config/.nanorc'
+alias ponysay='ponysay 2>/dev/null'
+alias pony='ponysay --ponyonly'
+# alias neofetch='neofetch --ascii "$(cowsay lol)"'
 
 # lunarvim
 lvim_open() {
