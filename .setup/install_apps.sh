@@ -44,6 +44,14 @@ install_apps() {
     "/opt/cura" \
     "cura.AppImage"
 
+  # arduino-ide
+  printf "arduino-ide"
+  install_appimage \
+    "Version: effcebc" \
+    "https://downloads.arduino.cc/arduino-ide/nightly/arduino-ide_nightly-20250311_Linux_64bit.AppImage" \
+    "/opt/arduino-ide" \
+    "arduino-ide.AppImage"
+
   # lunarvim
   printf "lunarvim"
   if ! command -v lvim &> /dev/null; then
