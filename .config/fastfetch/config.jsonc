@@ -1,33 +1,88 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
   "logo": {
     "padding": {
-      "left": 1,
-    },
+      "left": 1
+    }
   },
+
   "modules": [
-    "title",
+    {
+      "type": "title",
+    },
+    {
+      "type": "separator"
+    },
 
-    "separator",
+    {
+      "type": "os",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "host",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "shell",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "display",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "theme",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "cpu",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "gpu",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "swap",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "localip",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "physicaldisk",
+      "keyColor": "magenta"
+    },
 
-    "os",
-    "host",
-    "shell",
-    "display",
-    "theme",
-    "cpu",
-    "gpu",
-    "swap",
-    "localip",
-    "physicaldisk",
+    {
+      "type": "separator"
+    },
 
-    "separator",
-
-    "uptime",
-    "memory",
-    "disk",
-    "battery",
-    "weather",
-    "wifi",
+    {
+      "type": "uptime",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "memory",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "disk",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "battery",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "weather",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "wifi",
+      "keyColor": "magenta"
+    }
   ]
 }

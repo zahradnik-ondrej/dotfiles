@@ -111,10 +111,6 @@ install_apps() {
     yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
     check hyprpm enable dynamic-cursors
 
-    printf "split-monitor-workspaces"
-    yes | hyprpm add https://github.com/Duckonaut/split-monitor-workspaces
-    check hyprpm enable split-monitor-workspaces
-
   fi
 
   # rustup

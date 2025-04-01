@@ -43,6 +43,7 @@ npm
 nwg-drawer
 nwg-dock-hyprland
 peek
+picocom
 ponysay
 python-pip
 python-pipx
@@ -50,6 +51,7 @@ ripgrep
 rofi
 sl
 solaar
+stlink
 swaync
 swww
 tmux
