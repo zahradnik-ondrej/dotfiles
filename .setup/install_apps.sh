@@ -29,20 +29,20 @@ install_apps() {
   fi
 
   # balenaEtcher
-  printf "balenaEtcher"
-  install_appimage \
-    "Version: effcebc" \
-    "https://github.com/balena-io/etcher/releases/download/v1.18.0/balenaEtcher-1.18.0-x64.AppImage" \
-    "/opt/balenaEtcher" \
-    "balenaEtcher.AppImage"
+  # printf "balenaEtcher"
+  # install_appimage \
+  #   "Version: effcebc" \
+  #   "https://github.com/balena-io/etcher/releases/download/v1.18.0/balenaEtcher-1.18.0-x64.AppImage" \
+  #   "/opt/balenaEtcher" \
+  #   "balenaEtcher.AppImage"
 
   # cura
-  printf "cura"
-  install_appimage \
-    "Version: 5735cc5" \
-    "https://github.com/Ultimaker/Cura/releases/download/5.7.2-RC2/UltiMaker-Cura-5.7.2-linux-X64.AppImage" \
-    "/opt/cura" \
-    "cura.AppImage"
+  # printf "cura"
+  # install_appimage \
+  #   "Version: 5735cc5" \
+  #   "https://github.com/Ultimaker/Cura/releases/download/5.7.2-RC2/UltiMaker-Cura-5.7.2-linux-X64.AppImage" \
+  #   "/opt/cura" \
+  #   "cura.AppImage"
 
   # arduino-ide
   printf "arduino-ide"
@@ -61,7 +61,7 @@ install_apps() {
   check command -v lvim
 
   # tpm
-  printf "tpm"
+  printf "tpm\n"
   clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
 
   # vim-tmux-cycle
