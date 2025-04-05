@@ -12,6 +12,7 @@ source=(
   "$pkgname.install"
   "ovim-install.sh"
   "lvim.tar.gz"
+  "ovim.desktop"
 )
 
 md5sums=('SKIP' 'SKIP' 'SKIP')
@@ -23,5 +24,7 @@ package() {
   mkdir -p "$pkgdir/usr/share/ovim"
   cp "$srcdir/ovim-install.sh" "$pkgdir/usr/share/ovim/"
   chmod +x "$pkgdir/usr/share/ovim/ovim-install.sh"
+
+  install -Dm644 "$srcdir/ovim.desktop" "$pkgdir/usr/share/applications/ovim.desktop"
 }
 

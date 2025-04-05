@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=OVim
+Comment=OVim - Neovim with LunarVim core
+Exec=ovim
+Terminal=true
+Type=Application
+Categories=Utility;TextEditor;
+Icon=neovim
