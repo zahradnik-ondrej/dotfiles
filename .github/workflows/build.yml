@@ -15,7 +15,7 @@ jobs:
 
       - name: Build Arch Package
         run: |
-          pacman -Syu --noconfirm git base-devel neovim nodejs npm ripgrep fd
+          pacman -Syu --noconfirm git base-devel neovim nodejs npm ripgrep fd tree
           useradd -m builder
           echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
           cd .packages/ovim
