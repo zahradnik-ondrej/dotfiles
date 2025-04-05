@@ -15,7 +15,7 @@ source=(
   "ovim.desktop"
 )
 
-md5sums=('SKIP' 'SKIP' 'SKIP')
+md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 package() {
   mkdir -p "$pkgdir/etc/skel/.config"
