@@ -12,7 +12,7 @@ md5sums=()
 
 package() {
   mkdir -p "$pkgdir/etc/skel/.config/lvim"
-  cp -r "$startdir/../../../.config/lvim/"* "$pkgdir/etc/skel/.config/lvim/"  # pull live config
+  cp -r "$srcdir/../../../../.config/lvim/"* "$pkgdir/etc/skel/.config/lvim/"
 
   mkdir -p "$pkgdir/usr/share/ovim"
   cp "$startdir/ovim-install.sh" "$pkgdir/usr/share/ovim/ovim-install.sh"

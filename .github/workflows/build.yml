@@ -20,6 +20,8 @@ jobs:
           echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
           cd .packages/ovim
           chown -R builder .
+          pwd
+          tree -L 3 -a
           su builder -c "makepkg --clean --syncdeps --install --noconfirm"
 
       - name: Upload Arch Artifact
