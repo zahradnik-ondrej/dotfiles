@@ -7,18 +7,21 @@ url="https://github.com/zahradnik-ondrej/dotfiles"
 license=('MIT')
 depends=('neovim' 'git' 'nodejs' 'npm' 'ripgrep' 'fd')
 install=ovim.install
+
 source=(
   "$pkgname.install"
   "ovim-install.sh"
-  "lvim::../../.config/lvim"
+  "lvim.tar.gz"
 )
+
 md5sums=('SKIP' 'SKIP' 'SKIP')
 
 package() {
   mkdir -p "$pkgdir/etc/skel/.config"
-  cp -r "$srcdir/lvim" "$pkgdir/etc/skel/.config/"
+  tar -xzf "$srcdir/lvim.tar.gz" -C "$pkgdir/etc/skel/.config"
 
   mkdir -p "$pkgdir/usr/share/ovim"
   cp "$srcdir/ovim-install.sh" "$pkgdir/usr/share/ovim/"
   chmod +x "$pkgdir/usr/share/ovim/ovim-install.sh"
 }
+
