@@ -4,6 +4,10 @@ vim.opt.relativenumber = true -- relative line numbers
 vim.opt.cursorline = true
 lvim.transparent_window = true
 lvim.builtin.terminal.active = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 
 lvim.keys.normal_mode["<C-w>h"] = "<C-w>s" -- horizontal window split
 

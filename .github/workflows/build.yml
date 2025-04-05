@@ -1,0 +1,53 @@
+name: Build OVim
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-arch:
+    name: Build OVim Arch Package
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Arch Package
+        run: |
+          pacman -Syu --noconfirm git base-devel neovim nodejs npm ripgrep fd
+          useradd -m builder
+          echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+          cd .packages/ovim
+          chown -R builder .
+          su builder -c "makepkg --clean --syncdeps --install --noconfirm"
+
+      - name: Upload Arch Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ovim-arch
+          path: .packages/ovim/*.pkg.tar.zst
+
+  build-deb:
+    name: Build OVim DEB Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build DEB Package
+        run: |
+          mkdir -p debbuild/DEBIAN
+          cp .packages/ovim/debian/control debbuild/DEBIAN/
+          mkdir -p debbuild/etc/skel/.config/lvim
+          cp -r .config/lvim/* debbuild/etc/skel/.config/lvim/
+          mkdir -p debbuild/usr/share/ovim
+          cp .packages/ovim/ovim-install.sh debbuild/usr/share/ovim/
+          chmod +x debbuild/usr/share/ovim/ovim-install.sh
+          dpkg-deb --build debbuild ovim.deb
+
+      - name: Upload DEB Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ovim-deb
+          path: ovim.deb
+

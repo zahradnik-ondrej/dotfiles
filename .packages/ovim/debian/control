@@ -1,0 +1,8 @@
+Package: ovim
+Version: 1.0
+Section: editors
+Priority: optional
+Architecture: all
+Depends: neovim, git, nodejs, npm, ripgrep, fd-find
+Maintainer: Ondra <you@example.com>
+Description: OVim - Heavily customized LunarVim setup

@@ -1,0 +1,7 @@
+post_install() {
+  echo ""
+  echo "OVim config installed to /etc/skel/.config/lvim"
+  echo "To install LunarVim core without overwriting config, run:"
+  echo "  /usr/share/ovim/ovim-install.sh"
+}
+

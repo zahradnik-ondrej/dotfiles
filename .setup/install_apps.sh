@@ -2,19 +2,7 @@
 
 install_apps() {
 
-  if [ "$os" = "manjaro" ]; then
-
-    while IFS= read -r package; do
-    printf "$package"
-    check bash -c "pacman -Qi '$package' >/dev/null || yay -S --noconfirm '$package'"
-    done < "${HOME}/.setup/yay-packages.txt"
-
-  elif [ "$os" = "ubuntu" ]; then
-
-    while IFS= read -r package; do
-      printf "$package"
-      check bash -c "dpkg -l | grep -qw '$package' || sudo apt-get install -y '$package'"
-    done < "${HOME}/.setup/apt-packages.txt"
+  if [ "$os" = "ubuntu" ]; then
 
     # neovim
     printf "neovim"
@@ -72,51 +60,20 @@ install_apps() {
   sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
   chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
 
-  while IFS= read -r package; do
-    printf "$package"
-    check bash -c "brew list --formula | grep -qw '$package' || brew install '$package'"
-  done < "${HOME}/.setup/brew-packages.txt"
-
-  while IFS= read -r package; do
-    printf "$package"
-    check bash -c "cargo install --list | grep -qw '$package' || cargo install '$package'"
-  done < "${HOME}/.setup/cargo-packages.txt"
-
-  while IFS= read -r package; do
-    printf "$package"
-    check bash -c "flatpak list --app | grep -qw '$package' || flatpak install -y flathub '$package'"
-  done < "${HOME}/.setup/flatpak-packages.txt"
-
-  while IFS= read -r package; do
-    printf "$package"
-    check bash -c "npm list -g --depth=0 | grep -qw '$package' || sudo npm install -g '$package'"
-  done < "${HOME}/.setup/npm-packages.txt"
-
-  while IFS= read -r package; do
-    printf "$package"
-    check bash -c "pip3 list | grep -qw '$package' || pip3 install --upgrade --break-system-packages '$package'"
-  done < "${HOME}/.setup/pip3-packages.txt"
-
-  while IFS= read -r package; do
-    printf "$package"
-    check bash -c "pipx list | grep -qw '$package' || pipx install --quiet '$package'"
-  done < "${HOME}/.setup/pipx-packages.txt"
-
-  while IFS= read -r package; do
-    printf "$package"
-    check bash -c "snap list | grep -qw \"$(echo $package | awk '{print $1}')\" || sudo snap install $package"
-  done < "${HOME}/.setup/snap-packages.txt"
-
   if [ "$os" = "manjaro" ]; then
 
     hyprpm update
 
     printf "hyprbars"
-    yes | hyprpm add https://github.com/hyprwm/hyprland-plugins
+    if ! hyprpm list | grep -q hyprbars; then
+      yes | hyprpm add https://github.com/hyprwm/hyprland-plugins
+    fi
     check hyprpm enable hyprbars
 
     printf "hypr-dynamic-cursors"
-    yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
+    if ! hyprpm list | grep -q dynamic-cursors; then
+      yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
+    fi
     check hyprpm enable dynamic-cursors
 
   fi

@@ -1,7 +1,0 @@
-chai
-@types/chai
-mocha
-@types/mocha
-puppeteer
-typescript
-@types/node

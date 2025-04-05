@@ -1,0 +1,20 @@
+pkgname=ovim
+pkgver=1.0
+pkgrel=1
+pkgdesc="OVim - Heavily customized LunarVim configuration"
+arch=('any')
+url="https://github.com/zahradnik-ondrej/dotfiles"
+license=('MIT')
+depends=('neovim' 'git' 'nodejs' 'npm' 'ripgrep' 'fd')
+install=ovim.install
+source=()
+md5sums=()
+
+package() {
+  mkdir -p "$pkgdir/etc/skel/.config/lvim"
+  cp -r "$startdir/../../../.config/lvim/"* "$pkgdir/etc/skel/.config/lvim/"  # pull live config
+
+  mkdir -p "$pkgdir/usr/share/ovim"
+  cp "$startdir/ovim-install.sh" "$pkgdir/usr/share/ovim/ovim-install.sh"
+  chmod +x "$pkgdir/usr/share/ovim/ovim-install.sh"
+}

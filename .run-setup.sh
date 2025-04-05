@@ -13,6 +13,7 @@ source "$HOME/.setup/install_apps.sh"
 source "$HOME/.setup/install_flatpak.sh"
 source "$HOME/.setup/install_fonts.sh"
 source "$HOME/.setup/install_homebrew.sh"
+source "$HOME/.setup/install_packages.sh"
 source "$HOME/.setup/install_snap.sh"
 source "$HOME/.setup/install_themes.sh"
 source "$HOME/.setup/install_yay.sh"
@@ -54,6 +55,9 @@ check install_flatpak
 
 print_title "Install Homebrew"
 check install_homebrew
+
+print_title "Install packages"
+install_packages
 
 print_title "Install apps"
 install_apps
