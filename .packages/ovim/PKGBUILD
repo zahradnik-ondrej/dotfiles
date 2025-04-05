@@ -10,7 +10,7 @@ install=ovim.install
 source=(
   "$pkgname.install"
   "ovim-install.sh"
-  "../../.config/lvim"
+  "lvim::../../.config/lvim"
 )
 md5sums=('SKIP' 'SKIP' 'SKIP')
 
