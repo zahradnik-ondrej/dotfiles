@@ -1,7 +1,10 @@
 name: Build OVim
 
 on:
-  workflow_dispatch:  # ← allows manual trigger
+  workflow_dispatch:  # ← manual trigger support
+  push:
+    branches: [ main ]
+  pull_request:
 
 jobs:
   build-arch:
@@ -22,6 +25,12 @@ jobs:
           tree -L 3 -a
           su builder -c "makepkg --clean --syncdeps --install --noconfirm"
 
+      - name: Upload Arch Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ovim-arch
+          path: .packages/ovim/*.pkg.tar.zst
+
   build-deb:
     name: Build OVim DEB Package
     runs-on: ubuntu-latest
@@ -39,25 +48,33 @@ jobs:
           chmod +x debbuild/usr/share/ovim/ovim-install.sh
           dpkg-deb --build debbuild ovim.deb
 
-  upload:
-    name: Upload to GitHub Release
+      - name: Upload DEB Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ovim-deb
+          path: ovim.deb
+
+  release:
+    name: Publish Release
     needs: [build-arch, build-deb]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          name: ovim-arch
+          path: dist
 
-      - name: Upload to GitHub Releases
+      - uses: actions/download-artifact@v4
+        with:
+          name: ovim-deb
+          path: dist
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          files: |
-            artifacts/ovim-arch/*.pkg.tar.zst
-            artifacts/ovim-deb/ovim.deb
-          overwrite: true
+          make_latest: true
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
