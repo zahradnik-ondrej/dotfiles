@@ -23,7 +23,7 @@ jobs:
           su builder -c "makepkg --clean --syncdeps --install --noconfirm"
 
       - name: Upload Arch Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ovim-arch
           path: .packages/ovim/*.pkg.tar.zst
@@ -46,7 +46,7 @@ jobs:
           dpkg-deb --build debbuild ovim.deb
 
       - name: Upload DEB Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ovim-deb
           path: ovim.deb

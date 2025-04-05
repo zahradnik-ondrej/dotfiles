@@ -13,6 +13,7 @@ alias nano='nano --rcfile ~/.config/.nanorc'
 alias ponysay='ponysay 2>/dev/null'
 alias pony='ponysay --ponyonly'
 alias fastfetch='echo && fastfetch'
+alias lg='lazygit'
 
 # lunarvim
 lvim_open() {
