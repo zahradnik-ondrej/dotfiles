@@ -16,7 +16,15 @@ install_apps() {
 
   fi
 
-  # balenaEtcher
+  # aseprite
+  printf "aseprite"
+  install_appimage \
+    "Version: 8bbf694" \
+    "https://cdn.humble.com/humblebundle/igara_studio_sa_bYpAP/Aseprite_1.3.13-x64.AppImage?gamekey=2xcSc7kD28qtWNrR&t=st=1743859114~exp=1743945514~hmac=312865bf783fe8d9163c6d50fe681f64c3550fe8bf6b527999cdf39756494d6d" \
+    "/opt/aseprite" \
+    "aseprite.AppImage"
+
+  # # balenaEtcher
   # printf "balenaEtcher"
   # install_appimage \
   #   "Version: effcebc" \
@@ -24,7 +32,7 @@ install_apps() {
   #   "/opt/balenaEtcher" \
   #   "balenaEtcher.AppImage"
 
-  # cura
+  # # cura
   # printf "cura"
   # install_appimage \
   #   "Version: 5735cc5" \

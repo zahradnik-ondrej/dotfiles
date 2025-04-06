@@ -13,9 +13,10 @@ source=(
   "ovim-install.sh"
   "lvim.tar.gz"
   "ovim.desktop"
+  "ovim-launcher.sh"  # ← added
 )
 
-md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
+md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')  # ← match source array count
 
 package() {
   mkdir -p "$pkgdir/etc/skel/.config"
@@ -25,6 +26,6 @@ package() {
   cp "$srcdir/ovim-install.sh" "$pkgdir/usr/share/ovim/"
   chmod +x "$pkgdir/usr/share/ovim/ovim-install.sh"
 
-  install -Dm644 "$srcdir/ovim.desktop" "$pkgdir/usr/share/applications/ovim.desktop"
+  install -Dm755 "$srcdir/ovim-launcher.sh" "$pkgdir/usr/bin/ovim"  # ← added
+  install -Dm644 "$srcdir/ovim.desktop" "$pkgdir/usr/share/applications/ovim.desktop"  # ← added
 }
-
