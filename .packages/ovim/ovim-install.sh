@@ -16,7 +16,7 @@ echo "Creating ovim launcher..."
 mkdir -p "$(dirname "$OVIM_BIN")"
 cat > "$OVIM_BIN" <<EOF
 #!/usr/bin/env bash
-NVIM_APPNAME=ovim exec nvim "\$@"
+NVIM_APPNAME=ovim exec lvim "\$@"
 EOF
 
 chmod +x "$OVIM_BIN"
