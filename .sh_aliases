@@ -35,6 +35,8 @@ alias nv='neovide'
 alias lvim='lvim'
 alias lv='lvim_open'
 alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
+alias ovim='lvim'
+alias ov='lv'
 
 # test.sh
 test_sh() {
@@ -86,3 +88,82 @@ vnc() {
   ssh root@$1 "touch-ui -platform vnc &"
   tigervnc $1:5900 -geometry 800x500
 }
+
+# todo
+print_todo() {
+  local file="$1"
+
+  declare -A TAG_COLORS=(
+    [#HACK]="1;37;40"
+    [#PERF]="1;37;40"
+    [#NOTE]="1;30;47"
+    [#INFO]="1;30;47"
+    [#LEGACY]="1;30;47"
+    [#DOCS]="1;30;47"
+    [#IDEA]="1;30;46"
+    [#CLEANUP]="1;30;46"
+    [#REFACTOR]="1;30;46"
+    [#OPTIMIZE]="1;30;46"
+    [#REVIEW]="1;30;46"
+    [#TEST]="1;30;46"
+    [#TODO]="1;30;46"
+    [#TESTED]="1;30;42"
+    [#FIXED]="1;30;42"
+    [#DONE]="1;30;42"
+    [#TODO_LOW]="1;30;43"
+    [#TEST_LOW]="1;30;43"
+    [#WARN]="1;30;45"
+    [#TODO_MID]="1;30;45"
+    [#TEST_MID]="1;30;45"
+    [#WIP]="1;30;45"
+    [#TEMP]="1;30;45"
+    [#DEPRECATED]="1;30;45"
+    [#CRITICAL]="1;30;41"
+    [#TODO_HIGH]="1;30;41"
+    [#TEST_HIGH]="1;30;41"
+    [#SECURITY]="1;30;41"
+    [#FIX]="1;30;41"
+    [#BUG]="1;30;41"
+  )
+
+  [[ -f "$file" ]] || return 0
+
+  if [[ -s "$file" ]]; then
+    if command -v figlet >/dev/null 2>&1; then
+      figlet -f slant "To - Do :"
+    else
+      banner="
+ _____               ____  
+|_   _|__           |  _ \  ___    _ 
+  | |/ _ \   _____  | | | |/ _ \  (_)
+  | | (_) | |_____| | |_| | (_) |  _ 
+  |_|\___/          |____/ \___/  (_)"
+      echo "$banner"
+      echo
+    fi
+    printf "\e[0m"
+  fi
+
+  local sorted_tags=($(for tag in "${!TAG_COLORS[@]}"; do echo "$tag"; done | awk '{ print length, $0 }' | sort -rn | cut -d' ' -f2-))
+
+  while IFS= read -r line; do
+    matched=false
+    for tag in "${sorted_tags[@]}"; do
+      [[ "$line" == *"$tag"* ]] || continue
+      color="${TAG_COLORS[$tag]}"
+      fg="${color#*;}"
+      fg="${fg%%;*}"
+      bg="${color##*;}"
+      [[ "$bg" == 40 ]] && text_fg="$fg" || text_fg=$(( bg - 10 ))
+      start="${line%%$tag*}"
+      rest="${line#*$tag}"
+      printf "%s\e[%sm\e[1m%s\e[0m \e[%sm%s\e[0m\n" "$start" "$color" "$tag" "$text_fg" "$rest"
+      matched=true
+      break
+    done
+    $matched || printf "%s\n" "$line"
+  done < "$file"
+}
+
+alias todo="print_todo $HOME/.todo.md"
+alias td='todo'

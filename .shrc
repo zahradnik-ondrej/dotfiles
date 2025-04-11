@@ -64,3 +64,4 @@ fi
 
 export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
 
+todo

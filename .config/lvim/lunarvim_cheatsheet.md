@@ -46,6 +46,9 @@
 
 - **Move to Line**: `number G`
 
+- **Move to Previous Top-Level Syntax Node**: `[[`
+- **Move to Next Top-Level Syntax Node**: `]]`
+
 ## Search
 
 - **Search**:                  `/query`
