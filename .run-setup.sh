@@ -18,6 +18,7 @@ source "$HOME/.setup/install_snap.sh"
 source "$HOME/.setup/install_themes.sh"
 source "$HOME/.setup/install_yay.sh"
 source "$HOME/.setup/load_cron_jobs.sh"
+source "$HOME/.setup/modify_grub_config.sh"
 source "$HOME/.setup/print_title.sh"
 source "$HOME/.setup/run.sh"
 source "$HOME/.setup/update_apt.sh"
@@ -69,7 +70,10 @@ print_title "Install fonts"
 install_fonts
 
 print_title "Load cron jobs"
-load_cron_jobs
+check load_cron_jobs
+
+print_title "Modify GRUB config"
+check modify_grub_config
 
 if [ "$os" = "ubuntu" ]; then
   print_title "Cleanup"

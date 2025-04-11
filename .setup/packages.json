@@ -103,7 +103,7 @@
   { "name": "go", "manager": "yay" },
   { "name": "google-chrome", "manager": "yay" },
   { "name": "gparted", "manager": "yay" },
-  { "name": "hugo", "manager": "yay" }
+  { "name": "hugo", "manager": "yay" },
   { "name": "hypridle", "manager": "yay" },
   { "name": "hyprland", "manager": "yay" },
   { "name": "hyprland-qt-support", "manager": "yay" },
