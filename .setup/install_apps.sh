@@ -16,6 +16,14 @@ install_apps() {
 
   fi
 
+  # arduino-ide
+  printf "arduino-ide"
+  install_appimage \
+    "Version: effcebc" \
+    "https://downloads.arduino.cc/arduino-ide/nightly/arduino-ide_nightly-20250311_Linux_64bit.AppImage" \
+    "/opt/arduino-ide" \
+    "arduino-ide.AppImage"
+
   # aseprite
   printf "aseprite"
   install_appimage \
@@ -40,13 +48,9 @@ install_apps() {
   #   "/opt/cura" \
   #   "cura.AppImage"
 
-  # arduino-ide
-  printf "arduino-ide"
-  install_appimage \
-    "Version: effcebc" \
-    "https://downloads.arduino.cc/arduino-ide/nightly/arduino-ide_nightly-20250311_Linux_64bit.AppImage" \
-    "/opt/arduino-ide" \
-    "arduino-ide.AppImage"
+  # grub2-themes
+  GRUB2_THEMES_PATH="$HOME/.grub2-themes"
+  clone_repo "https://github.com/vinceliuice/grub2-themes.git" "$GRUB2_THEMES_PATH"
 
   # lunarvim
   printf "lunarvim"
@@ -64,13 +68,13 @@ install_apps() {
   printf "vim-tmux-cycle"
   VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
   VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
-  clone_repo 'https://github.com/slarwise/vim-tmux-cycle' "$VIM_TMUX_CYCLE_REPO_PATH"
+  clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"
   sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
   chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
 
   if [ "$os" = "manjaro" ]; then
 
-    hyprpm update
+    hyprpm update > /dev/null 2>&1
 
     printf "hyprbars"
     if ! hyprpm list | grep -q hyprbars; then

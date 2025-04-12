@@ -129,6 +129,27 @@ wk.mappings["L"] = {
     n = { ":view ~/.cache/nvim/log<CR>", "View Neovim logs" },
     N = { ":edit ~/.cache/nvim/log<CR>", "Open Neovim logfile" },
   },
+  t = {
+    function()
+      local hl = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
+      local is_transparent = hl.bg == nil or hl.bg == "none"
+      if is_transparent then
+        vim.g.persist.transparency = false
+        UpdatePersistSetting("transparency", false)
+        vim.g._transparency_override = true
+        vim.cmd("colorscheme " .. lvim.colorscheme)
+        vim.g._transparency_override = false
+        print("Transparent window disabled")
+      else
+        vim.g.persist.transparency = true
+        UpdatePersistSetting("transparency", true)
+        vim.cmd("highlight Normal guibg=none")
+        vim.cmd("highlight NormalNC guibg=none")
+        print("Transparent window enabled")
+      end
+    end,
+    "Toggle Transparent Window"
+  },
 }
 
 wk.mappings["m"] = {
