@@ -74,13 +74,13 @@ install_apps() {
 
     printf "hyprbars"
     if ! hyprpm list | grep -q hyprbars; then
-      yes | hyprpm add https://github.com/hyprwm/hyprland-plugins
+      yes | hyprpm add https://github.com/hyprwm/hyprland-plugins > /dev/null 2>&1
     fi
     check hyprpm enable hyprbars
 
     printf "hypr-dynamic-cursors"
     if ! hyprpm list | grep -q dynamic-cursors; then
-      yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
+      yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors > /dev/null 2>&1
     fi
     check hyprpm enable dynamic-cursors
 
