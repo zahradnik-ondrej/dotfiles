@@ -64,6 +64,7 @@
   { "name": "ffmpeg", "manager": "snap" },
   { "name": "firefox", "manager": "snap" },
   { "name": "gimp", "manager": "snap" },
+  { "name": "gitkraken --classic", "manager": "snap" },
   { "name": "gh", "manager": "snap" },
   { "name": "inkscape", "manager": "snap" },
   { "name": "libreoffice", "manager": "snap" },
@@ -145,6 +146,7 @@
   { "name": "vim", "manager": "yay" },
   { "name": "virtualbox", "manager": "yay" },
   { "name": "virtualbox-ext-oracle", "manager": "yay" },
+  { "name": "vscodium-bin", "manager": "yay" },
   { "name": "waybar", "manager": "yay" },
   { "name": "xdg-desktop-portal-hyprland", "manager": "yay" },
   { "name": "xsel", "manager": "yay" }

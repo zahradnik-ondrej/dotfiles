@@ -61,6 +61,8 @@ else
   alias ls='ls -l --color=auto'
 fi
 
+alias saymyname='whoami'
+
 alias lsa='ls -a'
 alias diff='diff --color=auto'
 alias cls='clear'

@@ -17,6 +17,7 @@
   sl = stash list
   ss = status --short
   t  = tag
+  wip = !git add -u && git commit -m \"[wip] quick commit\" && git push
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
