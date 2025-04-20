@@ -108,3 +108,4 @@ _G.toggle_diagnostics = function()
   print("Diagnostics " .. (diagnostic_config_enabled and "enabled" or "disabled"))
 end
 
+lvim.builtin.illuminate.active = false
