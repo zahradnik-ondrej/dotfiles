@@ -24,7 +24,7 @@
 - **Resize Pane**: `<prefix> Ctrl + arrows`
 - **Clear Pane**: `<prefix> j`
 - **Show Pane Numbers**: `<prefix> q`
-- **Turnj Pane Into Window**: `<prefix> !`
+- **Turn Pane Into Window**: `<prefix> !`
 
 ## Windows
 
