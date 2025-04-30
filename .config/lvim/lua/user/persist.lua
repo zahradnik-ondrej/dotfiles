@@ -1,4 +1,4 @@
 return {
-  theme = "dracula",
   transparency = true,
+  theme = "dracula",
 }
