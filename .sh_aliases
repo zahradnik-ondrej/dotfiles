@@ -30,7 +30,6 @@ lvim_open() {
   fi
 }
 
-alias nvim='/opt/nvim-linux64/bin/nvim'
 alias nv='neovide'
 alias lvim='lvim'
 alias lv='lvim_open'
@@ -165,7 +164,13 @@ print_todo() {
     done
     $matched || printf "%s\n" "$line"
   done < "$file"
+
+  if [[ -s "$file" ]]; then
+    last_char=$(tail -c 1 "$file")
+    [[ "$last_char" == $'\n' ]] || echo
+  fi
 }
 
-alias todo="print_todo $HOME/.todo.md"
+alias todo="print_todo \$HOME/.notes/daily/\$(date +%F).md"
+# alias todo="print_todo $HOME/.todo.md"
 alias td='todo'
