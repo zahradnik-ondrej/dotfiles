@@ -69,6 +69,7 @@ alias grep='grep -I --color=auto'
 alias egrep='egrep -I --color=auto'
 alias dir='vdir'
 alias vdir='ls'
+alias dmesg='dmesg -PT'
 
 # dotfiles
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
