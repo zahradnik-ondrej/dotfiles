@@ -26,17 +26,17 @@ You will never have to put all your dotfiles into one folder or use symlinks eve
 ### Add / update a dotfile:
 1. `dots add <file/directory_name>`  
 2. `dots commit -m "Add/Update <file/directory_name(s)>"`  
-3. `dots push` [^3]
+3. `dots push`
 
 ### Update all dotfiles:
 1. `dots add -u`
 2. `dots commit -m "Update all files"`  
-3. `dots push` [^3]
+3. `dots push`
 
 ### Remove a dotfile:
 1. `dots rm <file_name>` or `dotfiles rm -r <directory_name>` 
 2. `dots commit -m "Remove <file/directory_name(s)>"`  
-3. `dots push` [^3]
+3. `dots push`
 
 ***
 
