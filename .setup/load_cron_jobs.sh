@@ -7,7 +7,7 @@ load_cron_jobs() {
   if [ "$os" = "manjaro" ]; then
     
     if ! pacman -Q cronie &>/dev/null; then
-      sudo pacman -S --noconfirm cronie
+      sudo pacman -S --needed --noconfirm cronie
     fi
 
     sudo systemctl enable --now cronie.service
