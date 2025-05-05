@@ -74,6 +74,7 @@ alias dmesg='dmesg -PT'
 # dotfiles
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias dots-private='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
+alias dots-priv='dots-private'
 
 # git
 alias git-fpd='git fetch --prune && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs git branch -D'

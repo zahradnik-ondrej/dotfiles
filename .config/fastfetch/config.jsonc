@@ -77,12 +77,12 @@
       "keyColor": "magenta"
     },
     {
-      "type": "weather",
+      "type": "wifi",
       "keyColor": "magenta"
     },
     {
-      "type": "wifi",
+      "type": "weather",
       "keyColor": "magenta"
-    }
+    },
   ]
 }
