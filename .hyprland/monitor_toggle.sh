@@ -14,6 +14,8 @@ EXTERNAL_2_SCALE=0.75
 
 current_setup=-1
 
+sleep 5
+
 while true; do
 
     external_info=$(hyprctl monitors all | grep -E -wA 5 "$EXTERNAL|$EXTERNAL_2" | head -n 6)
