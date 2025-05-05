@@ -3,6 +3,16 @@
 install_packages() {
   PACKAGE_FILE="${HOME}/.setup/packages.json"
 
+  if [ "$os" = "ubuntu" ]; then
+
+    sudo apt-get install -y jq
+
+  elif [ "$os" = "manjaro" ]; then
+
+    sudo pacman -S --needed --noconfirm jq
+
+  fi
+
   jq -c '.[]' "$PACKAGE_FILE" | while read -r pkg; do
     name=$(echo "$pkg" | jq -r '.name // empty')
     manager=$(echo "$pkg" | jq -r '.manager // empty')
