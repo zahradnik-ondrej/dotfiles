@@ -80,9 +80,9 @@
       "type": "wifi",
       "keyColor": "magenta"
     },
-    {
-      "type": "weather",
-      "keyColor": "magenta"
-    },
+    // {
+    //   "type": "weather",
+    //   "keyColor": "magenta"
+    // },
   ]
 }
