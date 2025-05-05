@@ -74,19 +74,23 @@ install_apps() {
 
   if [ "$os" = "manjaro" ]; then
 
-    hyprpm update > /dev/null 2>&1
+    if command -v hyprpm &>/dev/null; then
 
-    printf "hyprbars"
-    if ! hyprpm list | grep -q hyprbars; then
-      yes | hyprpm add https://github.com/hyprwm/hyprland-plugins > /dev/null 2>&1
-    fi
-    check hyprpm enable hyprbars
+      hyprpm update > /dev/null 2>&1
+  
+      printf "hyprbars"
+      if ! hyprpm list | grep -q hyprbars; then
+        yes | hyprpm add https://github.com/hyprwm/hyprland-plugins > /dev/null 2>&1
+      fi
+      check hyprpm enable hyprbars
+  
+      printf "hypr-dynamic-cursors"
+      if ! hyprpm list | grep -q dynamic-cursors; then
+        yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors > /dev/null 2>&1
+      fi
+      check hyprpm enable dynamic-cursors
 
-    printf "hypr-dynamic-cursors"
-    if ! hyprpm list | grep -q dynamic-cursors; then
-      yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors > /dev/null 2>&1
     fi
-    check hyprpm enable dynamic-cursors
 
   fi
 
