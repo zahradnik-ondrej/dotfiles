@@ -52,7 +52,7 @@ export EZA_COLORS=$EZA_COLORS"tr=34:tw=35:tx=32:"
 # fi
 
 if command -v fastfetch &>/dev/null; then
-  fastfetch --logo <(pony) && echo
+  echo && fastfetch --logo <(pony) && echo
 elif command -v neofetch &>/dev/null; then
   pony && echo && neofetch --off | sed 's/^/  /'
   # echo && neofetch
