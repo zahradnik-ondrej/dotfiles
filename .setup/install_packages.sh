@@ -6,10 +6,13 @@ install_packages() {
   if [ "$os" = "ubuntu" ]; then
 
     sudo apt-get install -y jq
+    sudo apt-get install -y pipx
 
   elif [ "$os" = "manjaro" ]; then
 
     sudo pacman -S --needed --noconfirm jq
+    sudo pacman -S --needed --noconfirm npm
+    sudo pacman -S --needed --noconfirm python-pipx
 
   fi
 
