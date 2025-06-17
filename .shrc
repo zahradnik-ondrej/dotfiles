@@ -51,11 +51,15 @@ export EZA_COLORS=$EZA_COLORS"tr=34:tw=35:tx=32:"
 #   fi
 # fi
 
-if command -v fastfetch &>/dev/null; then
-  echo && fastfetch --logo <(pony) && echo
-elif command -v neofetch &>/dev/null; then
-  pony && echo && neofetch --off | sed 's/^/  /'
-  # echo && neofetch
+if [ "$TERM_PROGRAM" != "vscode" ]; then
+  if command -v fastfetch &>/dev/null; then
+    echo && fastfetch --logo <(pony) && echo
+  elif command -v neofetch &>/dev/null; then
+    pony && echo && neofetch --off | sed 's/^/  /'
+    # echo && neofetch
+  fi
+
+  todo
 fi
 
 if [ -f ~/.cargo/env ]; then
@@ -63,5 +67,4 @@ if [ -f ~/.cargo/env ]; then
 fi
 
 export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
-
-todo
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | BAT_PAGER=less bat --paging=always -lman'"

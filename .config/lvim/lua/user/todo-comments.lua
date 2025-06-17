@@ -25,6 +25,7 @@ require("todo-comments").setup {
     LEGACY = { icon = "", color = "comment" },
     DOCS = { icon = "󰧮", color = "comment" },
 
+    TASK = { icon = "󰧑", color = "cyan" },
     IDEA = { icon = "", color = "cyan" },
     CLEANUP = { icon = "󰃢", color = "cyan" },
     REFACTOR = { icon = "󱑞", color = "cyan" },
@@ -63,6 +64,7 @@ require("todo-comments").setup {
 -- #LEGACY
 -- #DOCS
 
+-- #TASK
 -- #IDEA
 -- #CLEANUP
 -- #REFACTOR

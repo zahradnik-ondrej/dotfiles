@@ -11,6 +11,7 @@ alias cura='/opt/cura/Cura.AppImage'
 alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
 alias aseprite='rdetach /opt/aseprite/aseprite.AppImage'
 alias arduino='rdetach /opt/arduino-ide/arduino-ide.AppImage'
+alias openscad='/opt/openscad/openscad.AppImage'
 alias ac='alacritty'
 alias fuck='thefuck'
 alias fk='thefuck'
@@ -19,6 +20,7 @@ alias nano='nano --rcfile ~/.config/.nanorc'
 alias ponysay='ponysay 2>/dev/null'
 alias pony='ponysay --ponyonly'
 alias lg='lazygit'
+alias chitu='/opt/CBD/CHITUBOX_Basic/CHITUBOX_Basic.sh'
 
 # lunarvim
 lvim_open() {
@@ -54,10 +56,16 @@ if command -v bat &> /dev/null; then
 fi
 
 if command -v eza &> /dev/null; then
-  alias ls='eza -l --icons --git --no-user --no-time --color=auto --icons=auto'
+  alias ls='eza -la --group-directories-first --icons --git --no-user --no-time --color=auto --icons=auto'
 else
-  alias ls='ls -l --color=auto'
+  alias ls='ls -lah --group-directories-first --color=auto'
 fi
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
 
 alias saymyname='whoami'
 
@@ -102,6 +110,7 @@ print_todo() {
     [#INFO]="1;30;47"
     [#LEGACY]="1;30;47"
     [#DOCS]="1;30;47"
+    [#TASK]="1;30;46"
     [#IDEA]="1;30;46"
     [#CLEANUP]="1;30;46"
     [#REFACTOR]="1;30;46"
@@ -175,3 +184,5 @@ print_todo() {
 alias todo="print_todo \$HOME/.notes/daily/\$(date +%F).md"
 # alias todo="print_todo $HOME/.todo.md"
 alias td='todo'
+
+alias mt='$HOME/.hyprland/monitor_toggle.sh'

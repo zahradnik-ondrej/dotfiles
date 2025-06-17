@@ -8,9 +8,12 @@ install_appimage() {
   local appimage_file="$4"
 
   local current_version="none"
-  [ -f "$appimage_path/$appimage_file" ] && current_version=$("$appimage_path/$appimage_file" --appimage-version >/dev/null 2>&1)
 
-  if [ "$current_version" != "$expected_version" ]; then
+  if [ -n "$expected_version" ]; then
+    [ -f "$appimage_path/$appimage_file" ] && current_version=$("$appimage_path/$appimage_file" --appimage-version 2>/dev/null)
+  fi
+
+  if [ -z "$expected_version" ] || [ "$current_version" != "$expected_version" ]; then
 
     sudo mkdir -p "$appimage_path"
     run sudo wget -O "$appimage_path/$appimage_file" "$download_url"

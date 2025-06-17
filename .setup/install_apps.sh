@@ -48,6 +48,22 @@ install_apps() {
   #   "/opt/cura" \
   #   "cura.AppImage"
 
+  # # lychee
+  # printf "lychee"
+  # install_appimage \
+  #   "Version: 7.3.2" \
+  #   "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-7.3.2.AppImage" \
+  #   "/opt/lychee" \
+  #   "lychee-slicer.AppImage"
+
+  # openscad
+  printf "openscad"
+  install_appimage \
+    "AppImage runtime version: https://github.com/AppImage/type2-runtime/commit/5e7217b" \
+    "https://files.openscad.org/snapshots/OpenSCAD-2025.06.03.ai25586-x86_64.AppImage" \
+    "/opt/openscad" \
+    "openscad.AppImage"
+
   # grub2-themes
   GRUB2_THEMES_PATH="$HOME/.grub2-themes"
   clone_repo "https://github.com/vinceliuice/grub2-themes.git" "$GRUB2_THEMES_PATH"
@@ -65,7 +81,7 @@ install_apps() {
   clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
 
   # vim-tmux-cycle
-  printf "vim-tmux-cycle"
+  printf "vim-tmux-cycle\n"
   VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
   VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
   clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"

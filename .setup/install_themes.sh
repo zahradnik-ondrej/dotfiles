@@ -18,6 +18,13 @@ install_themes() {
   mkdir -p "$GIMP_THEMES_PATH"
   ln -sf "$GIMP_DRACULA_PATH/Dracula" "$GIMP_THEMES_PATH/Dracula"
 
+  # dracula (for kicad)
+  printf "dracula (for kicad)\n"
+  KICAD_DRACULA_PATH="$THEMES_PATH/kicad-dracula"
+  KICAD_THEMES_PATH="$HOME/.config/kicad/9.0/colors"
+  clone_repo "https://github.com/dracula/kicad.git" "$KICAD_DRACULA_PATH"
+  ln -sf "$KICAD_DRACULA_PATH/kicad/dracula.json" "$KICAD_THEMES_PATH"
+
   # dracula (for midnight-commander)
   printf "dracula (for midnight-commander)\n"
   MC_DRACULA_PATH="$THEMES_PATH/mc-dracula"
