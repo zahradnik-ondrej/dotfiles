@@ -6,18 +6,26 @@
 [init]
    defaultBranch = main
 [alias]
-  a  = add
-  au = add -u
-  c  = commit
-	cm = commit -m
-	co = checkout
-  d  = diff
-  lg = log --pretty=format:'%C(red)(%h)%Creset %C(dim)[%cr | %cd]%Creset %C(green)<%an>%Creset %C(white)%s%Creset %C(magenta)%d%Creset' --abbrev-commit --decorate=short --date=format:'%a, %d %b %Y %H:%M:%S' --first-parent
-	s  = status
-  sl = stash list
-  ss = status --short
-  t  = tag
-  wip = !git add -u && git commit -m \"[wip] quick commit\" && git push
+  a   = add
+  au  = add -u
+  bD  = "!f() { git branch -D \"$1\"; }; f" # force-delete a local branch by name
+  bd  = "!f() { git push origin --delete \"$1\"; }; f" # delete a remote branch by name
+  BD  = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f" # delete both local and remote branch
+  c   = commit
+  cm  = commit -m
+  co  = checkout
+  d   = diff
+  lg  = log --pretty=format:'%C(red)(%h)%Creset %C(dim)[%cr | %cd]%Creset %C(green)<%an>%Creset %C(white)%s%Creset %C(magenta)%d%Creset' --abbrev-commit --decorate=short --date=format:'%a, %d %b %Y %H:%M:%S' --first-parent
+  s   = status
+  sc  = stash clear
+  sd  = "!f() { git stash drop stash@{$1}; }; f"  # drop stash entry by index
+  sl  = stash list
+  sp  = "!f() { git stash pop stash@{$1}; }; f" # pop stash entry by index
+  ss  = status --short
+  t   = tag
+  td  = tag -d
+  T   = "!f() { git tag -a \"$1\" -m \"$1\" && git push origin \"$1\"; }; f" # create and push an annotated tag using its name as the message
+  wip = !git add -u && git commit -m \"wip: quick commit\" && git push
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f

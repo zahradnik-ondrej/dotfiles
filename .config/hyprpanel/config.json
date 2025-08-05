@@ -420,5 +420,6 @@
   "theme.bar.buttons.modules.microphone.text": "#F1FA8C",
   "theme.bar.buttons.modules.microphone.icon": "#F1FA8C",
   "theme.bar.buttons.modules.microphone.icon_background": "#50fa7b",
-  "bar.network.showWifiInfo": true
+  "bar.network.showWifiInfo": true,
+  "bar.customModules.ram.labelType": "percentage"
 }
