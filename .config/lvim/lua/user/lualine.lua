@@ -59,10 +59,10 @@ lvim.builtin.lualine.sections.lualine_a = {
 }
 lvim.builtin.lualine.sections.lualine_b = {}
 
-local time_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#bd93f9" } or nil
-local date_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#8be9fd" } or nil
-local ram_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#50fa7b" } or nil
-local internet_status_color = lvim.colorscheme == "dracula" and { fg = "#282a36", bg = "#ff5555" } or nil
+local time_color = lvim.colorscheme == "gruvbox" and { fg = "#282828", bg = "#d3869b" } or nil
+local date_color = lvim.colorscheme == "gruvbox" and { fg = "#282828", bg = "#83a598" } or nil
+local ram_color = lvim.colorscheme == "gruvbox" and { fg = "#282828", bg = "#b8bb26" } or nil
+local internet_status_color = lvim.colorscheme == "gruvbox" and { fg = "#282828", bg = "#fb4934" } or nil
 
 lvim.builtin.lualine.sections.lualine_c = {
   { function() return time_component("") end, color = time_color },

@@ -5,11 +5,6 @@ install_themes() {
   THEMES_PATH="$HOME/.themes"
   mkdir -p "$THEMES_PATH"
 
-  # dracula (for alacritty)
-  printf "dracula (for alacritty)"
-  ALACRITTY_DRACULA_PATH="$THEMES_PATH/alacritty-dracula"
-  check clone_repo "https://github.com/dracula/alacritty.git" "$ALACRITTY_DRACULA_PATH"
-
   # dracula (for gimp)
   printf "dracula (for gimp)\n"
   GIMP_DRACULA_PATH="$THEMES_PATH/gimp-dracula"

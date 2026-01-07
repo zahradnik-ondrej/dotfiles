@@ -1,7 +1,7 @@
 lvim.plugins = {
   { "morhetz/gruvbox" },
   { "catppuccin/nvim" },
-  { "dracula/vim" },
+  { "ellisonleao/gruvbox.nvim" },
   { "szw/vim-maximizer" },
   {
     "sindrets/diffview.nvim",

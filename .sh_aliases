@@ -8,7 +8,7 @@ alias rdetach='run-detached'
 alias godot='flatpak run org.godotengine.Godot'
 alias browsh='sudo docker run -it browsh/browsh'
 alias cura='/opt/cura/Cura.AppImage'
-alias etcher='/opt/balenaEtcher/balenaEtcher.AppImage'
+alias etcher='rdetach /opt/balenaEtcher/balenaEtcher.AppImage'
 alias aseprite='rdetach /opt/aseprite/aseprite.AppImage'
 alias arduino='rdetach /opt/arduino-ide/arduino-ide.AppImage'
 alias openscad='/opt/openscad/openscad.AppImage'
@@ -21,6 +21,8 @@ alias ponysay='ponysay 2>/dev/null'
 alias pony='ponysay --ponyonly'
 alias lg='lazygit'
 alias chitu='/opt/CBD/CHITUBOX_Basic/CHITUBOX_Basic.sh'
+alias ncdu='sudo ncdu -t $(nproc) -2 --color dark'
+alias r='ranger'
 
 # lunarvim
 lvim_open() {
@@ -35,8 +37,6 @@ alias nv='neovide'
 alias lvim='lvim'
 alias lv='lvim_open'
 alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
-alias ovim='lvim'
-alias ov='lv'
 
 # test.sh
 test_sh() {
@@ -77,6 +77,8 @@ alias egrep='egrep -I --color=auto'
 alias dir='vdir'
 alias vdir='ls'
 alias dmesg='dmesg -PT'
+alias tree='tree -l'
+alias df='df -hT'
 
 # dotfiles
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
@@ -94,11 +96,6 @@ alias g++='g++ -std=c++20 -Wall -pedantic -Wno-long-long'
 # prusa
 alias usbsdmux='/usr/bin/usbsdmux'
 alias ctrl='(cwd=$(pwd) && cd /home/ondra/prusa/meta-sl1-hw-tests/ && python3 tools/control.py && cd "$cwd")'
-
-vnc() {
-  ssh root@$1 "touch-ui -platform vnc &"
-  tigervnc $1:5900 -geometry 800x500
-}
 
 # todo
 print_todo() {
@@ -187,3 +184,6 @@ alias todo="print_todo \$HOME/.notes/daily/\$(date +%F).md"
 alias td='todo'
 
 alias mt='$HOME/.hyprland/monitor_toggle.sh'
+
+alias hostify-fs='cd ~/mnt/hostify/'
+alias hostify-rcon='mcrcon -H donkey.hostify.cz -P 45791'

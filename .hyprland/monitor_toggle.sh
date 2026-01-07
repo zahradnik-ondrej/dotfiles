@@ -14,7 +14,7 @@ EXTERNAL_2_SCALE=0.75
 
 current_setup=-1
 
-external_info=$(hyprctl monitors all | grep -E -wA 5 "$EXTERNAL|$EXTERNAL_2" | head -n 6)
+external_info=$(hyprctl monitors all | grep -E -wA 6 "$EXTERNAL|$EXTERNAL_2")
 
 if [ -z "$external_info" ]; then
 
@@ -57,7 +57,7 @@ else
 
     # fi
 
-  elif [ "$external_serial" == "$SETUP_2_SN" ] || [ "$external_serial" == "$SETUP_2_SN_2" ]; then
+  elif printf '%s\n' "$external_serial" | grep -Fxq -- "$SETUP_2_SN"; then
 
     echo "Detected Setup 2."
 
@@ -82,7 +82,7 @@ else
       external_2_info=$(hyprctl monitors all | grep -wA 5 "$EXTERNAL_2")
       external_2_serial=$(echo "$external_2_info" | grep "serial:" | awk '{print $2}')
 
-      if [ "$external_2_serial" == "$SETUP_2_SN_2" ]; then
+      if printf '%s\n' "$external_serial" | grep -Fxq -- "$SETUP_2_SN_2"; then
 
         external_2_resolution=$(hyprctl monitors all | grep -wA 1 "$EXTERNAL_2" | awk '/@/')
         external_2_width=$(echo "$external_2_resolution" | awk -F 'x' '{print $1}')

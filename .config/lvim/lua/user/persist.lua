@@ -1,4 +1,4 @@
 return {
-  theme = "dracula",
+  theme = "resurrect64",
   transparency = true,
 }

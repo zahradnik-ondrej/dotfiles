@@ -11,7 +11,7 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "dracula"
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
 
 window {
     width: 50%;
@@ -29,3 +29,4 @@ element-icon {
 element-text {
     font: "Hack Nerd Font 24";
 }
+

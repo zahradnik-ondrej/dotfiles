@@ -39,8 +39,8 @@ if [ "$os" = "ubuntu" ]; then
 
 fi
 
-print_title "Install snap"
-check install_snap
+# print_title "Install snap"
+# check install_snap
 
 if [ "$os" = "manjaro" ]; then
 
@@ -51,11 +51,11 @@ if [ "$os" = "manjaro" ]; then
 
 fi
 
-print_title "Install Flatpak"
-check install_flatpak
+# print_title "Install Flatpak"
+# check install_flatpak
 
-print_title "Install Homebrew"
-check install_homebrew
+# print_title "Install Homebrew"
+# check install_homebrew
 
 print_title "Install packages"
 install_packages

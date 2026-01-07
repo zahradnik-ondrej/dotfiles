@@ -7,24 +7,29 @@
    defaultBranch = main
 [alias]
   a   = add
-  au  = add -u
-  bD  = "!f() { git branch -D \"$1\"; }; f" # force-delete a local branch by name
-  bd  = "!f() { git push origin --delete \"$1\"; }; f" # delete a remote branch by name
-  BD  = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f" # delete both local and remote branch
+  au  = add -u # update index for tracked files
+  bD  = "!f() { git branch -D \"$1\"; }; f" # delete a LOCAL branch by name
+  bd  = "!f() { git push origin --delete \"$1\"; }; f" # delete a REMOTE branch by name
+  BD  = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f" # delete BOTH LOCAL AND REMOTE branch by name
   c   = commit
-  cm  = commit -m
+  cd  = "!f() { t=\"$1\"; [ -z \"$t\" ] && t=origin/main; git diff --stat --patch \"$t\"...HEAD; }; f" # compare diff+stats since common ancestor
+  cl  = "!f() { t=\"$1\"; [ -z \"$t\" ] && t=origin/main; git log --oneline --left-right --cherry-pick --graph \"$t\"...HEAD; }; f" # compare commits since common ancestor
+  cm  = commit -m # commit with inline message
   co  = checkout
-  d   = diff
+  cp  = cherry-pick # cherry-pick single commit by hash
+  cpr = "!f() { git cherry-pick \"$1\"^..\"$2\"; }; f"
+  d   = diff  # show unstaged changes
   lg  = log --pretty=format:'%C(red)(%h)%Creset %C(dim)[%cr | %cd]%Creset %C(green)<%an>%Creset %C(white)%s%Creset %C(magenta)%d%Creset' --abbrev-commit --decorate=short --date=format:'%a, %d %b %Y %H:%M:%S' --first-parent
   s   = status
-  sc  = stash clear
-  sd  = "!f() { git stash drop stash@{$1}; }; f"  # drop stash entry by index
-  sl  = stash list
+  sc  = stash clear # remove all stash entries
+  sd  = "!f() { git stash drop stash@{$1}; }; f" # drop stash entry by index
+  sl  = stash list # list stash entries
   sp  = "!f() { git stash pop stash@{$1}; }; f" # pop stash entry by index
   ss  = status --short
   t   = tag
-  td  = tag -d
-  T   = "!f() { git tag -a \"$1\" -m \"$1\" && git push origin \"$1\"; }; f" # create and push an annotated tag using its name as the message
+  td  = tag -d # delete a local tag by name
+  TD  = "!f() { git tag -d \"$1\" && git push origin :refs/tags/\"$1\"; }; f"
+  T   = "!f() { tag=\"$1\"; target=\"$2\"; [ -z \"$target\" ] && target=HEAD; git tag -a \"$tag\" \"$target\" -m \"$tag\" && git push origin \"$tag\"; }; f" # create and push an annotated tag using its name as the message
   wip = !git add -u && git commit -m \"wip: quick commit\" && git push
 [filter "lfs"]
 	required = true

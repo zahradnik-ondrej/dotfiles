@@ -39,6 +39,6 @@ if command -v zoxide &> /dev/null; then
 fi
 
 if command -v oh-my-posh &> /dev/null; then
-  eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/dracula.omp.yaml)"
+  eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/themes/resurrect64.omp.yaml)"
 fi
 

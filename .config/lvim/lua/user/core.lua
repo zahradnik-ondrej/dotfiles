@@ -1,4 +1,3 @@
--- lvim.colorscheme = "dracula"
 -- lvim.transparent_window = true
 lvim.builtin.bufferline.active = false
 vim.opt.relativenumber = true -- relative line numbers
@@ -38,7 +37,7 @@ vim.g.bookmark_sign = ""
 vim.g.bookmark_annotation_sign = ""
 
 lvim.builtin.terminal.open_mapping = "<C-t>"
-lvim.builtin.terminal.directiontion = "horizontal"
+lvim.builtin.terminal.direction = "horizontal"
 
 vim.api.nvim_set_keymap("n", "<C-i>", "<C-o>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-o>", "<C-i>", { noremap = true, silent = true })

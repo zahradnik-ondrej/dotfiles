@@ -83,7 +83,7 @@ editor_backup_extension=~
 editor_filesize_threshold=64M
 editor_stop_format_chars=-+*\\,.;:&>
 mcview_eof=
-skin=dracula256
+skin=gruvbox
 shell_directory_timeout=900
 
 [Layout]

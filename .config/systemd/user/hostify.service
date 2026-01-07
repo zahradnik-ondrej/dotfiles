@@ -1,0 +1,14 @@
+[Unit]
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStartPre=/usr/bin/mkdir -p %h/mnt/hostify
+ExecStartPre=/usr/bin/fusermount3 -uz %h/mnt/hostify
+ExecStart=/usr/bin/rclone mount hostify: %h/mnt/hostify --vfs-cache-mode writes --dir-cache-time 5m --poll-interval 0
+ExecStop=/usr/bin/fusermount3 -u %h/mnt/hostify
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+

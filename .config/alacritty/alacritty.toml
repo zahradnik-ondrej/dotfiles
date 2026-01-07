@@ -1,5 +1,5 @@
 [general]
-import = ["~/.themes/alacritty-dracula/dracula.toml"]
+import = ["~/.themes/alacritty-resurrect64/resurrect64.toml"]
 
 [window]
 opacity = 0.8
@@ -9,3 +9,6 @@ normal = { family = "Hack Nerd Font", style = "Regular" }
 bold = { family = "Hack Nerd Font", style = "Bold" }
 italic = { family = "Hack Nerd Font", style = "Italic" }
 size = 12
+
+[env]
+TERM = "xterm-256color"

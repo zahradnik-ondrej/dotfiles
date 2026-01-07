@@ -3,11 +3,11 @@ blocks:
   - alignment: left
     newline: true
     segments:
-      - foreground: "#44475A"
+      - foreground: "#3E3546"
         template: "┌──"
         type: text
-      # - background: "#F1FA8C"
-      #   foreground: "#282A36"
+      # - background: "#F9C22B"
+      #   foreground: "#2E222F"
       #   style: diamond
       #   leading_diamond: ""
       #   properties:
@@ -17,34 +17,40 @@ blocks:
       #     charged_icon: " "
       #   template: "{{ if not .Error }} {{ .Icon }}{{ .Percentage }} {{ end }}"
       #   type: battery
-      # - background: "#FF5555"
-      #   foreground: "#282A36"
+      # - background: "#B33831"
+      #   foreground: "#2E222F"
       #   style: powerline
       #   powerline_symbol: ""
       #   template: "  {{ .UserName }}"
       #   type: session
-      - background: "#FF5555"
-        foreground: "#282A36"
+      - background: "#B33831"
+        foreground: "#2E222F"
         style: diamond
         leading_diamond: ""
         template: " {{ .UserName }}"
         type: session
-      - background: "#44475A"
-        foreground: "#F8F8F2"
+      - background: "#2E222F"
+        foreground: "#625565"
         style: powerline
         powerline_symbol: ""
         template: "  {{ .HostName }}"
         type: session
-      - background: "#50FA7B"
-        foreground: "#282A36"
+      - background: "#A2A947"
+        foreground: "#2E222F"
         style: powerline
         powerline_symbol: ""
         properties:
           style: full
         template: "  {{ .Path }}"
         type: path
-      - background: "#BD93F9"
-        foreground: "#282A36"
+      - background: "#F9C22B"
+        foreground: "#2E222F"
+        style: powerline
+        powerline_symbol: ""
+        template: " 󰌠 {{ .Venv }}"
+        type: python
+      - background: "#A24B6F"
+        foreground: "#2E222F"
         style: powerline
         powerline_symbol: ""
         properties:
@@ -64,16 +70,16 @@ blocks:
           git_icon: ""
         template: " {{ .UpstreamIcon }} {{ .BranchStatus }} {{ .HEAD }} {{ if .LatestTag }}󰓹 {{ .LatestTag }}{{ end }} {{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}"
         type: git
-      # - background: "#FF79C6"
-      #   foreground: "#282A36"
+      # - background: "#966C6C"
+      #   foreground: "#2E222F"
       #   style: powerline
       #   powerline_symbol: ""
       #   properties:
       #     time_format: "Mon 02/01/06"
       #   template: "  {{ .CurrentDate | date .Format }}"
       #   type: time
-      - background: "#8BE9FD"
-        foreground: "#282A36"
+      - background: "#0B8A8F"
+        foreground: "#2E222F"
         style: powerline
         powerline_symbol: ""
         properties:
@@ -81,8 +87,8 @@ blocks:
           style: roundrock
         template: " 󱎫 {{ .FormattedMs }}"
         type: executiontime
-      - background: "#8BE9FD"
-        foreground: "#282A36"
+      - background: "#0B8A8F"
+        foreground: "#2E222F"
         style: powerline
         powerline_symbol: ""
         properties:
@@ -93,8 +99,8 @@ blocks:
   - alignment: left
     newline: true
     segments:
-      - background: "#FFB86C"
-        foreground: "#282A36"
+      - background: "#F79617"
+        foreground: "#2E222F"
         style: diamond
         leading_diamond: ""
         trailing_diamond: " "

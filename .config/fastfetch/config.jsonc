@@ -5,84 +5,74 @@
     "padding": {
       "left": 1
     }
+    // "color": {
+    //   "1": "#A2A947"
+    // }
+  },
+
+  "display": {
+    "color": {
+      "separator": "#625565",
+      "title": "#F79617",
+      "keys": "#A24B6F",
+      "output": "#966C6C"
+    },
+    "percent": {
+      "color": {
+        "green": "#A2A947",
+        "yellow": "#F9C22B",
+        "red": "#B33831"
+      }
+    }
   },
 
   "modules": [
+
     {
       "type": "title",
-    },
-    {
-      "type": "separator"
-    },
-
-    {
-      "type": "os",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "host",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "shell",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "display",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "theme",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "cpu",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "gpu",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "swap",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "localip",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "physicaldisk",
-      "keyColor": "magenta"
+      "format": "{user-name-colored}{at-symbol-colored}{host-name-colored}",
+      "color": {
+        "user": "#F79617",
+        "at": "#625565",
+        "host": "#F9C22B"
+      }
     },
 
     {
-      "type": "separator"
+      "type": "colors",
+      "symbol": "circle",
     },
 
+    { "type": "os" },
+    { "type": "host" },
+    { "type": "shell" },
+    { "type": "wm" },
+    { "type": "terminal" },
+    { "type": "cpu" },
+    { "type": "gpu" },
+    { "type": "physicaldisk" },
+    { "type": "swap" },
+
     {
-      "type": "uptime",
-      "keyColor": "magenta"
+      "type": "separator",
+      "outputColor": "#625565"
     },
+
+    { "type": "packages" },
+    { "type": "display" },
+    { "type": "localip" },
+
     {
-      "type": "memory",
-      "keyColor": "magenta"
+      "type": "separator",
+      "outputColor": "#625565"
     },
-    {
-      "type": "disk",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "battery",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "wifi",
-      "keyColor": "magenta"
-    },
-    // {
-    //   "type": "weather",
-    //   "keyColor": "magenta"
-    // },
+
+    { "type": "uptime" },
+    { "type": "memory" },
+    { "type": "disk" },
+    { "type": "battery" },
+    { "type": "wifi" }
+
   ]
 }
+
