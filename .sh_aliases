@@ -23,6 +23,7 @@ alias lg='lazygit'
 alias chitu='/opt/CBD/CHITUBOX_Basic/CHITUBOX_Basic.sh'
 alias ncdu='sudo ncdu -t $(nproc) -2 --color dark'
 alias r='ranger'
+alias claude='claude --dangerously-skip-permissions'
 
 # lunarvim
 lvim_open() {
@@ -56,9 +57,9 @@ if command -v bat &> /dev/null; then
 fi
 
 if command -v eza &> /dev/null; then
-  alias ls='eza -la --group-directories-first --icons --git --no-user --no-time --color=auto --icons=auto'
+  alias ls='eza -l --group-directories-first --icons --git --no-user --no-time --color=auto --icons=auto'
 else
-  alias ls='ls -lah --group-directories-first --color=auto'
+  alias ls='ls -lh --group-directories-first --color=auto'
 fi
 
 alias ..='cd ..'
@@ -79,6 +80,8 @@ alias vdir='ls'
 alias dmesg='dmesg -PT'
 alias tree='tree -l'
 alias df='df -hT'
+
+reboot(){ read -r -p "Reboot? [y/N] " r; [[ $r =~ ^[Yy]$ ]] && command reboot; }
 
 # dotfiles
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'

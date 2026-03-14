@@ -8,8 +8,8 @@
 [alias]
   a   = add
   au  = add -u # update index for tracked files
-  bD  = "!f() { git branch -D \"$1\"; }; f" # delete a LOCAL branch by name
-  bd  = "!f() { git push origin --delete \"$1\"; }; f" # delete a REMOTE branch by name
+  bd  = "!f() { git branch -D \"$1\"; }; f" # delete a LOCAL branch by name
+  bD  = "!f() { git push origin --delete \"$1\"; }; f" # delete a REMOTE branch by name
   BD  = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f" # delete BOTH LOCAL AND REMOTE branch by name
   c   = commit
   cd  = "!f() { t=\"$1\"; [ -z \"$t\" ] && t=origin/main; git diff --stat --patch \"$t\"...HEAD; }; f" # compare diff+stats since common ancestor
@@ -27,9 +27,12 @@
   sp  = "!f() { git stash pop stash@{$1}; }; f" # pop stash entry by index
   ss  = status --short
   t   = tag
-  td  = tag -d # delete a local tag by name
-  TD  = "!f() { git tag -d \"$1\" && git push origin :refs/tags/\"$1\"; }; f"
+  td  = tag -d # delete a LOCAL tag by name
+  tD  = "!f() { git push origin :refs/tags/\"$1\"; }; f" # delete a REMOTE tag by name
+  TD  = "!f() { git tag -d \"$1\" && git push origin :refs/tags/\"$1\"; }; f" # delete BOTH LOCAL AND REMOTE tag by name
   T   = "!f() { tag=\"$1\"; target=\"$2\"; [ -z \"$target\" ] && target=HEAD; git tag -a \"$tag\" \"$target\" -m \"$tag\" && git push origin \"$tag\"; }; f" # create and push an annotated tag using its name as the message
+  r   = restore
+  rs  = restore --staged
   wip = !git add -u && git commit -m \"wip: quick commit\" && git push
 [filter "lfs"]
 	required = true

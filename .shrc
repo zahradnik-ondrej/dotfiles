@@ -52,9 +52,11 @@ export EZA_COLORS=$EZA_COLORS"tr=34:tw=35:tx=32:"
 # fi
 
 if [ "$TERM_PROGRAM" != "vscode" ]; then
-  echo && fastfetch && echo
-  # echo && fastfetch --logo <(pony) && echo
-  # todo
+  if command -v fastfetch >/dev/null 2>&1; then
+    echo && fastfetch && echo
+    # echo && fastfetch --logo <(pony) && echo
+    # todo
+  fi
 fi
 
 if [ -f "$HOME/.cargo/env" ]; then

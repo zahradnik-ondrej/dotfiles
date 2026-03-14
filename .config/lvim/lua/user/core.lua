@@ -4,6 +4,7 @@ vim.opt.relativenumber = true -- relative line numbers
 vim.opt.cursorline = true
 lvim.builtin.terminal.active = true
 vim.opt.expandtab = true
+lvim.builtin.indentlines.active = false -- disable indent guides
 
 local ok, persist = pcall(require, "user.persist")
 if ok then

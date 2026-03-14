@@ -1,4 +1,4 @@
 return {
-  theme = "resurrect64",
   transparency = true,
+  theme = "resurrect64",
 }
