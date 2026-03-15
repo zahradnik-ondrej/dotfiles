@@ -278,10 +278,7 @@ Some assignments require submitting a link to a public GitHub repository. When a
 
 1. **Check GitHub access:**
    - Ask the user for their GitHub username (if not already known)
-   - Ask the user which SSH key to use for GitHub (if multiple keys exist or the default doesn't work). If a specific key is needed, override:
-     ```bash
-     export GIT_SSH_COMMAND="ssh -i <path-to-key> -o IdentitiesOnly=yes"
-     ```
+   - Rely on the SSH agent for key selection — do not specify any explicit SSH key
    - `gh` CLI should be authenticated — verify with `gh auth status`. If not, ask the user to run `gh auth login`.
    - Ask the user for their git name and email (if not already configured globally or in the repo).
 
