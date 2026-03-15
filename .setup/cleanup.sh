@@ -1,5 +1,3 @@
-#!/bin/bash
-
 cleanup() {
 
   sudo apt-get autoclean

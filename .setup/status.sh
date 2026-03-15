@@ -1,6 +1,4 @@
-#!/bin/bash
-
-check() {
+status() {
 
   run "$@"
   local exit_code=$?
@@ -9,7 +7,7 @@ check() {
 
     printf "${green} ✓${reset}\n"
     [ -f "$ERR_FILE" ] && rm "$ERR_FILE"
-    return 1
+    return 0
 
   else
 
@@ -25,7 +23,7 @@ check() {
 
     fi
 
-    return 0
+    return 1
 
   fi
 

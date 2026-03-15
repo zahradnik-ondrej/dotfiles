@@ -1,5 +1,3 @@
-#!/bin/bash
-
 update_apt() {
 
 	sudo apt-get update

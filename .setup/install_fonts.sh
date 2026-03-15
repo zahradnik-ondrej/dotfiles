@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_fonts() {
 
   FONTS_PATH="$HOME/.local/share/fonts"
@@ -13,6 +11,6 @@ install_fonts() {
   unzip -oq "$HACK_NERD_FONT_ARCHIVE_PATH" -d "$FONTS_PATH"
   rm -r "$HACK_NERD_FONT_ARCHIVE_PATH"
 
-  check fc-cache -f
+  status fc-cache -f
 
 }

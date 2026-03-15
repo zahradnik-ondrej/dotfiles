@@ -1,5 +1,3 @@
-#!/bin/bash
-
 CRON_DIR="$HOME/.cron"
 
 load_cron_jobs() {
@@ -18,10 +16,12 @@ load_cron_jobs() {
   CRON_TEMP=$(mktemp)
 
   for cron_file in "$CRON_DIR"/*; do
-    cat "$cron_file" >> "$CRON_TEMP"
+    [ -f "$cron_file" ] && cat "$cron_file" >> "$CRON_TEMP"
   done
 
-  crontab "$CRON_TEMP"
+  if [ -s "$CRON_TEMP" ]; then
+    crontab "$CRON_TEMP"
+  fi
 
   rm "$CRON_TEMP"
 

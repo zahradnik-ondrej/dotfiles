@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_packages() {
   PACKAGE_FILE="${HOME}/.setup/packages.json"
 
@@ -18,7 +16,7 @@ install_packages() {
 
   fi
 
-  jq -c '.[]' "$PACKAGE_FILE" | while read -r pkg; do
+  while read -r pkg; do
     name=$(echo "$pkg" | jq -r '.name // empty')
     manager=$(echo "$pkg" | jq -r '.manager // empty')
     version=$(echo "$pkg" | jq -r '.version // empty')
@@ -50,32 +48,32 @@ install_packages() {
 
     case "$manager" in
       apt)
-        check bash -c "dpkg -l | grep -qw '$name' || sudo apt-get install -y '$name'"
+        status bash -c "dpkg -l | grep -qw '$name' || sudo apt-get install -y '$name'"
         ;;
       yay)
-        check bash -c "pacman -Qi '$name' >/dev/null || yay -S --noconfirm --overwrite '*' '$name'"
+        status bash -c "pacman -Qi '$name' >/dev/null || yay -S --noconfirm --overwrite '*' '$name'"
         ;;
       brew)
-        check bash -c "brew list --formula | grep -qw '$name' || brew install '$name'"
+        status bash -c "brew list --formula | grep -qw '$name' || brew install '$name'"
         ;;
       flatpak)
-        check bash -c "flatpak list --app | grep -qw '$name' || flatpak install -y flathub '$name'"
+        status bash -c "flatpak list --app | grep -qw '$name' || flatpak install -y flathub '$name'"
         ;;
       npm)
-        check bash -c "npm list -g --depth=0 | grep -qw '$name' || sudo npm install -g '$name'"
+        status bash -c "npm list -g --depth=0 | grep -qw '$name' || sudo npm install -g '$name'"
         ;;
       pip3)
-        check bash -c "pip3 list | grep -qw '$name' || pip3 install --upgrade --break-system-packages '$name'"
+        status bash -c "pip3 list | grep -qw '$name' || pip3 install --upgrade --break-system-packages '$name'"
         ;;
       pipx)
-        check bash -c "pipx list | grep -qw '$name' || pipx install --quiet '$name'"
+        status bash -c "pipx list | grep -qw '$name' || pipx install --quiet '$name'"
         ;;
       snap)
-        check bash -c "snap list | grep -qw \"$(echo $name | awk '{print $1}')\" || sudo snap install $name"
+        status bash -c "snap list | grep -qw \"$(echo $name | awk '{print $1}')\" || sudo snap install $name"
         ;;
       cargo)
-        check bash -c "cargo install --list | grep -qw '$name' || cargo install '$name'"
+        status bash -c "cargo install --list | grep -qw '$name' || cargo install '$name'"
         ;;
     esac
-  done
+  done < <(jq -c '.[]' "$PACKAGE_FILE")
 }

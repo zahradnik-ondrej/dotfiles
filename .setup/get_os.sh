@@ -1,5 +1,3 @@
-#!/bin/bash
-
 get_os() {
 
   if grep -qiE "ubuntu|debian" /etc/os-release; then

@@ -1,4 +1,4 @@
 return {
+  theme = "gruvbox",
   transparency = true,
-  theme = "resurrect64",
 }

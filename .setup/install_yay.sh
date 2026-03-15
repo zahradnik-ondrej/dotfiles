@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_yay() {
 
   if ! command -v yay &> /dev/null; then

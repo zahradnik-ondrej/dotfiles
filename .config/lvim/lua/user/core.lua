@@ -1,4 +1,4 @@
--- lvim.transparent_window = true
+lvim.transparent_window = true
 lvim.builtin.bufferline.active = false
 vim.opt.relativenumber = true -- relative line numbers
 vim.opt.cursorline = true

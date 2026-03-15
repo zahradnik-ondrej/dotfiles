@@ -1,5 +1,3 @@
-#!/bin/bash
-
 run() {
   if [[ -z "$1" ]]; then
     return 1

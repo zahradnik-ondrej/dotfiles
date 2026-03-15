@@ -1,5 +1,3 @@
-#!/bin/bash
-
 print_title() {
 
     local text="$1"

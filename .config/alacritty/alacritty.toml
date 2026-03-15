@@ -1,3 +1,6 @@
+[terminal]
+shell = "/bin/bash"
+
 [general]
 import = ["~/.themes/alacritty-resurrect64/resurrect64.toml"]
 

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 modify_grub_config() {
 
   local template="$HOME/.setup/grub-template.conf"
@@ -14,8 +12,6 @@ modify_grub_config() {
     fi
   done < "$template"
 
-  sudo update-grub
-
   local scripts=(
     20_linux_xen
     25_bli
@@ -29,8 +25,10 @@ modify_grub_config() {
   )
 
   for script in "${scripts[@]}"; do
-    sudo chmod -x "/etc/grub.d/$script"
+    [ -f "/etc/grub.d/$script" ] && sudo chmod -x "/etc/grub.d/$script"
   done
+
+  sudo update-grub
 
 }
 

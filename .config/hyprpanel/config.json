@@ -29,7 +29,7 @@
       "left": [
         "workspaces"
       ],
-      "middle": [], 
+      "middle": [],
       "right": [
         "systray",
         "microphone",
@@ -419,5 +419,7 @@
   "theme.bar.buttons.modules.microphone.icon_background": "#A2A947",
   "bar.network.showwifiinfo": true,
   "bar.custommodules.ram.labeltype": "percentage",
-  "bar.customModules.updates.pollingInterval": 1440000
+  "bar.customModules.storage.paths": [
+    "/"
+  ]
 }

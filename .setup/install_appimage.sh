@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_appimage() {
 
   local expected_version="$1"
@@ -16,11 +14,11 @@ install_appimage() {
   if [ -z "$expected_version" ] || [ "$current_version" != "$expected_version" ]; then
 
     sudo mkdir -p "$appimage_path"
-    run sudo wget -O "$appimage_path/$appimage_file" "$download_url"
+    sudo wget -O "$appimage_path/$appimage_file" "$download_url"
     sudo chmod +x "$appimage_path/$appimage_file"
 
   fi
 
-  check test -f "$appimage_path/$appimage_file"
+  status test -f "$appimage_path/$appimage_file"
 
 }

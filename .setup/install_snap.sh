@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_snap() {
 
   if [ "$os" = "manjaro" ]; then

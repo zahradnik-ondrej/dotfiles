@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_flatpak() {
 
   if [ "$os" = "manjaro" ]; then

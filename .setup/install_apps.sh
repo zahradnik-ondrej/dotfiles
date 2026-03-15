@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_apps() {
 
   # aseprite
@@ -36,37 +34,39 @@ install_apps() {
     LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh) <<< $'n\nn\nn'
     echo
   fi
-  check command -v lvim
+  status command -v lvim
 
   # tpm
-  printf "tpm\n"
+  printf "tpm"
   clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
+  status test -d "$HOME/.tmux/plugins/tpm"
 
   # vim-tmux-cycle
-  printf "vim-tmux-cycle\n"
+  printf "vim-tmux-cycle"
   VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
   VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
   clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"
   sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
   chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
+  status test -x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
 
   if [ "$os" = "manjaro" ]; then
 
-    if command -v hyprpm &>/dev/null; then
+    if command -v hyprpm &>/dev/null && [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
 
-      hyprpm update > /dev/null 2>&1
-  
+      hyprpm update
+
       printf "hyprbars"
       if ! hyprpm list | grep -q hyprbars; then
-        yes | hyprpm add https://github.com/hyprwm/hyprland-plugins > /dev/null 2>&1
+        yes | hyprpm add https://github.com/hyprwm/hyprland-plugins
       fi
-      check hyprpm enable hyprbars
-  
+      status hyprpm enable hyprbars
+
       printf "hypr-dynamic-cursors"
       if ! hyprpm list | grep -q dynamic-cursors; then
-        yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors > /dev/null 2>&1
+        yes | hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
       fi
-      check hyprpm enable dynamic-cursors
+      status hyprpm enable dynamic-cursors
 
     fi
 

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 install_homebrew() {
 
   if [ "$os" = "manjaro" ]; then

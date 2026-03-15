@@ -3,7 +3,7 @@
 ERR_FILE="$HOME/.setup/error.log"
 
 source "$HOME/.setup/add_ppas.sh"
-source "$HOME/.setup/check.sh"
+source "$HOME/.setup/status.sh"
 source "$HOME/.setup/cleanup.sh"
 source "$HOME/.setup/clone_repo.sh"
 source "$HOME/.setup/colors.sh"
@@ -24,6 +24,9 @@ source "$HOME/.setup/run.sh"
 source "$HOME/.setup/update_apt.sh"
 
 sudo -v
+while true; do sudo -n true; sleep 60; done 2>/dev/null &
+SUDO_KEEPALIVE_PID=$!
+trap 'kill $SUDO_KEEPALIVE_PID 2>/dev/null' EXIT
 
 os=$(get_os)
 
@@ -35,27 +38,27 @@ if [ "$os" = "ubuntu" ]; then
   add_ppas
 
   print_title "Update apt"
-  check update_apt
+  status update_apt
 
 fi
 
 # print_title "Install snap"
-# check install_snap
+# status install_snap
 
 if [ "$os" = "manjaro" ]; then
 
   pacman -Qi base-devel >/dev/null || sudo pacman -S --noconfirm base-devel
 
   print_title "Install yay"
-  check install_yay
+  status install_yay
 
 fi
 
 # print_title "Install Flatpak"
-# check install_flatpak
+# status install_flatpak
 
 # print_title "Install Homebrew"
-# check install_homebrew
+# status install_homebrew
 
 print_title "Install packages"
 install_packages
@@ -70,12 +73,12 @@ print_title "Install fonts"
 install_fonts
 
 print_title "Load cron jobs"
-check load_cron_jobs
+status load_cron_jobs
 
 print_title "Modify GRUB config"
-check modify_grub_config
+status modify_grub_config
 
 if [ "$os" = "ubuntu" ]; then
   print_title "Cleanup"
-  check cleanup
+  status cleanup
 fi
