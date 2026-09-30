@@ -1,0 +1,53 @@
+#!/bin/sh
+set -eu
+
+STATE="${XDG_RUNTIME_DIR:-/tmp}/ddc-brightness"
+BUSF="$STATE.bus"; TGTF="$STATE.target"; LOCKF="$STATE.lock"
+STEP="${2:-10}"
+DDC="ddcutil --noverify"
+
+find_bus() {
+    ddcutil detect --brief 2>/dev/null |
+        sed -n 's|^[[:space:]]*I2C bus:[[:space:]]*/dev/i2c-||p' | head -1
+}
+
+bus=""
+[ -r "$BUSF" ] && read -r bus < "$BUSF" || true
+if [ -z "$bus" ]; then
+    bus=$(find_bus)
+    [ -n "$bus" ] || { echo "no DDC-capable monitor found" >&2; exit 1; }
+    printf '%s\n' "$bus" > "$BUSF"
+fi
+
+cur=""
+[ -r "$TGTF" ] && read -r cur < "$TGTF" || true
+case "$cur" in
+    ''|*[!0-9]*)
+        cur=$($DDC --bus "$bus" getvcp 10 2>/dev/null |
+              sed -n 's/.*current value = *\([0-9]*\).*/\1/p')
+        [ -n "$cur" ] || { rm -f "$BUSF"; echo "cannot read brightness" >&2; exit 1; }
+        ;;
+esac
+
+case "${1:-}" in
+    up)   new=$((cur + STEP)) ;;
+    down) new=$((cur - STEP)) ;;
+    set)  new=${2%%%} ;;
+    get)  echo "$cur"; exit 0 ;;
+    *)    echo "usage: ${0##*/} up|down|get [step] | set <percent>" >&2; exit 2 ;;
+esac
+case "$new" in ''|*[!0-9]*) echo "bad value: $2" >&2; exit 2 ;; esac
+[ "$new" -gt 100 ] && new=100
+[ "$new" -lt 0 ] && new=0
+printf '%s\n' "$new" > "$TGTF"
+
+(
+    flock -n 9 || exit 0
+    applied=""
+    while :; do
+        read -r want < "$TGTF" || exit 0
+        [ "$want" = "$applied" ] && exit 0
+        $DDC --bus "$bus" setvcp 10 "$want" >/dev/null 2>&1 || { rm -f "$BUSF"; exit 1; }
+        applied="$want"
+    done
+) 9>"$LOCKF" &

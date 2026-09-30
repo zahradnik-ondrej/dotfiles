@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -f /etc/bash_completion.d/git-prompt ]; then
+  source /etc/bash_completion.d/git-prompt
+fi
+
+reset="\[\e[0m\]"
+bold="\[\e[1m\]"
+green="\[\e[32m\]"
+yellow="\[\e[33m\]"
+blue="\[\e[34m\]"
+red="\[\e[35m\]"
+gray="\[\e[90m\]"
+
+if type __git_ps1 &>/dev/null; then
+    PS1="\n${gray}┌──${red}${bold}\u${reset}@${gray}\H${reset}:${green}${bold}\w${reset} ${blue}\$(__git_ps1 '(%s)')${reset}\n${gray}└─${bold}\$${reset} "
+else
+    PS1="\n${gray}┌──${red}${bold}\u${reset}@${gray}\H${reset}:${green}${bold}\w${reset}\n${gray}└─${bold}\$${reset} "
+fi

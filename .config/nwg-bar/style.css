@@ -1,0 +1,38 @@
+window {
+	background-color: transparent
+}
+
+#outer-box {
+	margin: 0px
+}
+
+#inner-box {
+	background-color: rgb(62, 53, 70);
+	border-radius: 8px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgb(162, 75, 111);
+	padding: 5px;
+	margin: 5px
+}
+
+button, image {
+	background: none;
+	border: none;
+	box-shadow: none
+}
+
+button {
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 5px;
+	color: rgb(255, 255, 255);
+	font-family: "Hack Nerd Font", monospace;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 8px
+}
+
+button:hover {
+	background-color: rgb(98, 85, 101)
+}

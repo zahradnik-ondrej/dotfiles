@@ -1,0 +1,10 @@
+.dotfiles
+.dotfiles-private
+.config/lvim/lua/user/persist.lua
+.claude/*
+!.claude/settings.json
+!.claude/statusline.sh
+!.claude/skills/
+.setup/error.log
+.config/hypr/hyprland_signature.txt
+.gitconfig.local

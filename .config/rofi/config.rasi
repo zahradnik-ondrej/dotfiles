@@ -1,0 +1,32 @@
+configuration{
+    modi: "drun,window,ssh";
+    icon-theme: "Papirus";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    disable-history: false;
+    display-drun: "󰀻  Apps ";
+    display-window: "󰕰  Windows";
+    display-ssh: "  SSH";
+    sidebar-mode: true;
+}
+
+@theme "~/.config/rofi/resurrect64.rasi"
+
+window {
+    width: 50%;
+    height: 50%;
+}
+
+element {
+    padding: 10px;
+}
+
+element-icon {
+    size: 48px;
+}
+
+element-text {
+    font: "Hack Nerd Font 24";
+}
+

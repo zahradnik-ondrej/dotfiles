@@ -1,0 +1,113 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 44,
+  "spacing": 4,
+
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["pulseaudio#microphone", "mpris", "pulseaudio#speaker"],
+  "modules-right": [
+    "tray", "memory", "disk", "custom/language",
+    "custom/network", "clock", "custom/notification", "custom/power"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "all-outputs": false
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "  {volume}%",
+    "format-source-muted": "  muted",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+    "tooltip-format": "{source_desc}"
+  },
+
+  "mpris": {
+    "format": "{player_icon}  {dynamic}",
+    "format-paused": "{status_icon}  <i>{dynamic}</i>",
+    "dynamic-order": ["title", "artist"],
+    "dynamic-len": 40,
+    "player-icons": { "default": "" },
+    "status-icons": { "paused": "" },
+    "tooltip-format": "{title}\n{artist}\n{album}"
+  },
+
+  "pulseaudio#speaker": {
+    "format": "  {volume}%",
+    "format-muted": "  muted",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "tooltip-format": "{desc}"
+  },
+
+  "tray": { "spacing": 10, "icon-size": 18 },
+
+  "memory": {
+    "interval": 5,
+    "format": "  {percentage}%",
+    "tooltip-format": "{used:0.1f}G used of {total:0.1f}G"
+  },
+  "disk": {
+    "interval": 60,
+    "path": "/",
+    "format": "󰋊  {percentage_used}%",
+    "tooltip-format": "{used} used of {total} on {path}"
+  },
+
+  "custom/language": {
+    "exec": "$HOME/.local/bin/waybar-layout",
+    "format": "  {}",
+    "tooltip": false,
+    "on-click": "hyprctl switchxkblayout all next"
+  },
+
+  "custom/network": {
+    "exec": "$HOME/.local/bin/waybar-network",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "iface=$(ip route show default | awk 'NR==1{print $5}'); [ -d /sys/class/net/$iface/wireless ] && panel=wifi || panel=network; env XDG_CURRENT_DESKTOP=GNOME gnome-control-center $panel"
+  },
+
+  "clock": {
+    "locale": "en_US.UTF-8",
+    "interval": 1,
+    "format": "  {:%a %d %b %Y   %H:%M:%S}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "format": { "today": "<b><u>{}</u></b>" }
+    }
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "",
+      "dnd-notification": "",
+      "inhibited-notification": "",
+      "dnd-inhibited-notification": "",
+      "none": "",
+      "dnd-none": "",
+      "inhibited-none": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "hyprctl dispatch movecursor 1920 1080; nwg-bar"
+  }
+}

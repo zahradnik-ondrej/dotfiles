@@ -1,0 +1,1 @@
+Vendored from https://github.com/AlexanderBrevig/kicad-gruvbox-theme.git at a34f55d

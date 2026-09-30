@@ -1,0 +1,75 @@
+@define-color bg          #2e222f;
+@define-color bg_alt      #3e3546;
+@define-color accent      #a24b6f;
+@define-color teal        #0b8a8f;
+@define-color yellow      #f9c22b;
+@define-color orange      #f79617;
+@define-color olive       #a2a947;
+@define-color mauve       #966c6c;
+@define-color red         #b33831;
+@define-color tray_border #625565;
+
+* {
+  font-family: "Hack Nerd Font", monospace;
+  font-size: 16px;
+  font-weight: bold;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @bg;
+  color: @bg;
+}
+
+#pulseaudio, #mpris, #tray, #memory, #disk,
+#custom-language, #custom-network, #clock, #custom-notification, #custom-power {
+  padding: 0 13px;
+  margin: 5px 3px;
+  border-radius: 8px;
+  color: @bg;
+}
+
+#workspaces { margin-left: 4px; }
+#workspaces button {
+  padding: 0 12px;
+  margin: 5px 2px;
+  border-radius: 8px;
+  background: @bg;
+  color: @accent;
+}
+#workspaces button.empty  { color: @teal; }
+#workspaces button.active { background: @teal; color: @bg; }
+#workspaces button.urgent { background: @red;  color: @bg; }
+#workspaces button:hover  { background: @bg_alt; color: @olive; }
+
+#pulseaudio.microphone               { background: @yellow; }
+#pulseaudio.microphone.source-muted  { background: @red; }
+#mpris                               { background: @orange; }
+#mpris.paused                        { background: @bg_alt; color: @accent; }
+#pulseaudio.speaker                  { background: @yellow; }
+#pulseaudio.speaker.muted            { background: @red; }
+#memory                              { background: @tray_border; }
+#disk                                { background: @tray_border; }
+#custom-language                     { background: @olive; }
+#custom-network                      { background: @teal; }
+#custom-network.disconnected         { background: @red; }
+#custom-network.noping               { background: @orange; }
+#clock                               { background: @accent; }
+#custom-notification                 { background: @tray_border; }
+#custom-notification.notification,
+#custom-notification.dnd-notification,
+#custom-notification.inhibited-notification,
+#custom-notification.dnd-inhibited-notification { background: @yellow; }
+#custom-power                        { background: @red; margin-right: 6px; }
+
+#tray {
+  background: @bg;
+}
+#tray menu { background: @bg; color: @accent; }
+
+tooltip {
+  background: @bg;
+  border: 1px solid @accent;
+  border-radius: 6px;
+}
+tooltip label { color: @accent; }

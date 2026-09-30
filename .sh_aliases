@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# bash
+if command -v bat &> /dev/null; then
+    alias cat='bat -n'
+fi
+
+if command -v eza &> /dev/null; then
+  alias ls='eza -l --group-directories-first --icons --git --no-user --no-time --color=auto --icons=auto'
+else
+  alias ls='ls -lh --group-directories-first --color=auto'
+fi
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+alias lsa='ls -a'
+alias diff='diff --color=auto'
+alias cls='clear'
+alias grep='grep -I --color=auto'
+alias egrep='egrep -I --color=auto'
+alias dir='vdir'
+alias vdir='ls'
+alias dmesg='dmesg -PT'
+alias tree='tree -l'
+alias df='df -hT'
+
+reboot(){ read -r -p "Reboot? [y/N] " r; [[ $r =~ ^[Yy]$ ]] && command reboot; }
+
+run-detached() {
+  nohup "$@" >/dev/null & disown
+}
+alias detach='run-detached'
+
+# dotfiles
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias dots-private='/usr/bin/git --git-dir=$HOME/.dotfiles-private --work-tree=$HOME'
+alias dots-priv='dots-private'
+
+# git
+alias git-aliases='awk "/^\[alias\]/ {in_alias=1; print; next} /^\[/ && in_alias {exit} in_alias" ~/.gitconfig | bat --language=ini --paging=never'
+alias git-fpd='git fetch --prune && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs git branch -D'
+alias git-add100='find . -type f -size -100M -print0 | xargs -0 git add'
+
+# hyprland
+alias mt='$HOME/.hyprland/monitor_toggle.sh'
+
+# claude
+alias claude='claude --dangerously-skip-permissions'
+claude-rm() { ls ~/.claude/projects/*/*"$1"*.jsonl && rm -i ~/.claude/projects/*/*"$1"*.jsonl; }
+
+# programs
+alias etcher='detach /opt/balenaEtcher/balenaEtcher.AppImage'
+alias tmux-kill='tmux kill-server'
+alias nano='nano --rcfile ~/.config/.nanorc'
+alias lg='lazygit'
+alias ncdu='sudo ncdu -t $(nproc) -2 --color dark'
+
+# lunarvim
+lvim_open() {
+  if command -v nvr >/dev/null 2>&1 && [[ -n "$NVIM_LISTEN_ADDRESS" ]]; then
+    nvr -s --nostart --remote-tab "$@" || lvim "$@"
+  else
+    lvim "$@"
+  fi
+}
+
+alias nv='neovide'
+alias lvim='lvim'
+alias lv='lvim_open'
+alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
+

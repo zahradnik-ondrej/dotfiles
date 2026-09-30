@@ -1,0 +1,40 @@
+window {
+    background-color: rgb(46, 34, 47);
+    color: #AB947A
+}
+
+/* search entry */
+entry {
+    background-color: rgb(62, 53, 70)
+}
+
+button, image {
+    background: none;
+    border: none
+}
+
+button:hover {
+    background-color: rgb(98, 85, 101)
+}
+
+/* in case you wanted to give category buttons a different look */
+#category-button {
+    margin: 0 10px 0 10px
+}
+
+#pinned-box {
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #625565
+}
+
+#files-box {
+    padding: 5px;
+    border: 1px dotted #625565;
+    border-radius: 15px
+}
+
+/* math operation result label */
+#math-label {
+    font-weight: bold;
+    font-size: 16px
+}

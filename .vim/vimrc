@@ -1,0 +1,27 @@
+set packpath+=~/.vim
+set number
+set mouse=a
+set nowrap
+set list
+set listchars=
+set listchars+=precedes:«,extends:»
+syntax enable
+colorscheme gruvbox
+set background=dark
+
+set tabstop=4
+set shiftwidth=4
+set noexpandtab
+
+highlight ExtraWhitespace ctermbg=gray guibg=gray
+match ExtraWhitespace /\s\+$/
+
+set whichwrap+=<,>,[,],h,l
+
+command YA %y+
+
+filetype plugin indent on
+
+" horizontal split: Ctrl + w, h
+nnoremap <C-w>h :split<CR>
+
