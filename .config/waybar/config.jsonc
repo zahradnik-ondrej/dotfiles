@@ -7,7 +7,7 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["pulseaudio#microphone", "mpris", "pulseaudio#speaker"],
   "modules-right": [
-    "tray", "custom/telegram", "memory", "disk", "custom/language",
+    "tray", "memory", "disk", "custom/language",
     "custom/network", "clock", "custom/notification", "custom/power"
   ],
 
@@ -48,13 +48,6 @@
   },
 
   "tray": { "spacing": 10, "icon-size": 18 },
-
-  "custom/telegram": {
-    "exec": "$HOME/.local/bin/waybar-telegram",
-    "return-type": "json",
-    "interval": 2,
-    "on-click": "$HOME/.local/bin/waybar-telegram activate"
-  },
 
   "memory": {
     "interval": 5,
