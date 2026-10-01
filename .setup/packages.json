@@ -14,7 +14,6 @@
   { "name": "avrdude", "manager": "yay" },
   { "name": "bat", "manager": "yay" },
   { "name": "bc", "manager": "yay" },
-  { "name": "betaflight-configurator", "manager": "yay" },
   { "name": "betafpv-configurator", "manager": "yay" },
   { "name": "bind", "manager": "yay" },
   { "name": "brightnessctl", "manager": "yay" },
