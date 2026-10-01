@@ -1,64 +1,79 @@
 #!/bin/sh
 set -eu
 
-BL=$(ls -d /sys/class/backlight/*/ 2>/dev/null | head -1)
-if [ -n "$BL" ] && command -v brightnessctl >/dev/null 2>&1; then
-    case "${1:-}" in
-        up)   exec brightnessctl -q set "${2:-10}%+" ;;
-        down) exec brightnessctl -q set "${2:-10}%-" ;;
-        set)  exec brightnessctl -q set "${2%%%}%" ;;
-        get)  brightnessctl -m | cut -d, -f4 | tr -d '%'; exit 0 ;;
-        *)    echo "usage: ${0##*/} up|down|get [step] | set <percent>" >&2; exit 2 ;;
-    esac
-fi
-
 STATE="${XDG_RUNTIME_DIR:-/tmp}/ddc-brightness"
 BUSF="$STATE.bus"; TGTF="$STATE.target"; LOCKF="$STATE.lock"
 STEP="${2:-10}"
 DDC="ddcutil --noverify"
 
-find_bus() {
-    ddcutil detect --brief 2>/dev/null |
-        sed -n 's|^[[:space:]]*I2C bus:[[:space:]]*/dev/i2c-||p' | head -1
+BL=$(ls -d /sys/class/backlight/*/ 2>/dev/null | head -1)
+if [ -n "$BL" ] && command -v brightnessctl >/dev/null 2>&1; then HAS_BL=1; else HAS_BL=0; fi
+
+find_buses() {
+    ddcutil detect --brief 2>/dev/null | awk '
+        /^Display[ \t]+[0-9]+/ { ok = 1; next }
+        /^Invalid display/     { ok = 0; next }
+        ok && /I2C bus:/       { sub(/.*\/dev\/i2c-/, ""); print }
+    '
 }
 
-bus=""
-[ -r "$BUSF" ] && read -r bus < "$BUSF" || true
-if [ -z "$bus" ]; then
-    bus=$(find_bus)
-    [ -n "$bus" ] || { echo "no DDC-capable monitor found" >&2; exit 1; }
-    printf '%s\n' "$bus" > "$BUSF"
+buses=""
+if [ -r "$BUSF" ]; then buses=$(cat "$BUSF"); fi
+if [ -z "$buses" ]; then
+    buses=$(find_buses) || true
+    [ -n "$buses" ] && printf '%s\n' "$buses" > "$BUSF"
 fi
 
-cur=""
-[ -r "$TGTF" ] && read -r cur < "$TGTF" || true
-case "$cur" in
-    ''|*[!0-9]*)
-        cur=$($DDC --bus "$bus" getvcp 10 2>/dev/null |
-              sed -n 's/.*current value = *\([0-9]*\).*/\1/p')
-        [ -n "$cur" ] || { rm -f "$BUSF"; echo "cannot read brightness" >&2; exit 1; }
-        ;;
-esac
+if [ "$HAS_BL" -eq 0 ] && [ -z "$buses" ]; then
+    echo "no backlight and no DDC-capable monitor found" >&2; exit 1
+fi
+
+read_current() {
+    if [ "$HAS_BL" -eq 1 ]; then
+        brightnessctl -m | cut -d, -f4 | tr -d '%'
+        return 0
+    fi
+    cur=""
+    [ -r "$TGTF" ] && read -r cur < "$TGTF" || true
+    case "$cur" in
+        ''|*[!0-9]*)
+            for b in $buses; do
+                cur=$($DDC --bus "$b" getvcp 10 2>/dev/null |
+                      sed -n 's/.*current value = *\([0-9]*\).*/\1/p')
+                [ -n "$cur" ] && break
+            done
+            ;;
+    esac
+    [ -n "$cur" ] || { rm -f "$BUSF"; echo "cannot read brightness" >&2; exit 1; }
+    printf '%s\n' "$cur"
+}
+
+cur=$(read_current)
 
 case "${1:-}" in
     up)   new=$((cur + STEP)) ;;
     down) new=$((cur - STEP)) ;;
     set)  new=${2%%%} ;;
-    get)  echo "$cur"; exit 0 ;;
+    get)  printf '%s\n' "$cur"; exit 0 ;;
     *)    echo "usage: ${0##*/} up|down|get [step] | set <percent>" >&2; exit 2 ;;
 esac
-case "$new" in ''|*[!0-9]*) echo "bad value: $2" >&2; exit 2 ;; esac
+case "$new" in ''|*[!0-9]*) echo "bad value: ${2:-}" >&2; exit 2 ;; esac
 [ "$new" -gt 100 ] && new=100
 [ "$new" -lt 0 ] && new=0
-printf '%s\n' "$new" > "$TGTF"
 
+[ "$HAS_BL" -eq 1 ] && brightnessctl -q set "$new%" || true
+
+[ -n "$buses" ] || exit 0
+printf '%s\n' "$new" > "$TGTF"
 (
     flock -n 9 || exit 0
     applied=""
     while :; do
         read -r want < "$TGTF" || exit 0
         [ "$want" = "$applied" ] && exit 0
-        $DDC --bus "$bus" setvcp 10 "$want" >/dev/null 2>&1 || { rm -f "$BUSF"; exit 1; }
+        for b in $buses; do
+            $DDC --bus "$b" setvcp 10 "$want" >/dev/null 2>&1 || { rm -f "$BUSF"; exit 1; }
+        done
         applied="$want"
     done
 ) 9>"$LOCKF" &
