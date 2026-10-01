@@ -51,7 +51,7 @@
 
   "memory": {
     "interval": 5,
-    "format": "  {percentage}%",
+    "format": "  {percentage}%",
     "tooltip-format": "{used:0.1f}G used of {total:0.1f}G"
   },
   "disk": {
@@ -78,7 +78,7 @@
   "clock": {
     "locale": "en_US.UTF-8",
     "interval": 1,
-    "format": "  {:%a %d %b %Y   %H:%M:%S}",
+    "format": "  {:%a %d %b %Y - %H:%M:%S}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
@@ -109,6 +109,6 @@
   "custom/power": {
     "format": "",
     "tooltip": false,
-    "on-click": "nwg-bar"
+    "on-click": "nwg-bar -p top -f -a end -mt 6 -mr 6"
   }
 }

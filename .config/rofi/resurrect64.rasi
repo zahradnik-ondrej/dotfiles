@@ -2,46 +2,40 @@
     highlight: bold italic;
     scrollbar: true;
 
-    resurrect-bg0:          #2E222F;
-    resurrect-bg1:          #3E3546;
-    resurrect-bg2:          #625565;
-    resurrect-fg0:          #AB947A;
-    resurrect-fg1:          #AB947A;
-    resurrect-magenta:      #A24B6F;
-    resurrect-blue:         #0B8A8F;
-    resurrect-yellow:       #F9C22B;
-    resurrect-orange:       #F79617;
-    resurrect-red-dark:     #966C6C;
-    resurrect-red-light:    #B33831;
-    resurrect-gray:         #625565;
+    resurrect-bg0:    #2E222F;
+    resurrect-bg1:    #3E3546;
+    resurrect-bg2:    #625565;
+    resurrect-mauve:  #694F62;
+    resurrect-gray:   #7F708A;
+    resurrect-white:  #FFFFFF;
 
     background:                  @resurrect-bg0;
     background-color:            @background;
-    foreground:                  @resurrect-fg1;
-    border-color:                @resurrect-magenta;
-    separatorcolor:              @resurrect-bg1;
-    scrollbar-handle:            @resurrect-magenta;
+    foreground:                  @resurrect-white;
+    border-color:                @resurrect-gray;
+    separatorcolor:              @resurrect-mauve;
+    scrollbar-handle:            @resurrect-gray;
 
     normal-background:           @background;
     normal-foreground:           @foreground;
     alternate-normal-background: @resurrect-bg1;
     alternate-normal-foreground: @foreground;
-    selected-normal-background:  @resurrect-magenta;
-    selected-normal-foreground:  @resurrect-bg0;
+    selected-normal-background:  @resurrect-bg2;
+    selected-normal-foreground:  @resurrect-white;
 
-    active-background:           @resurrect-blue;
-    active-foreground:           @resurrect-bg0;
+    active-background:           @resurrect-bg1;
+    active-foreground:           @resurrect-gray;
     alternate-active-background: @active-background;
     alternate-active-foreground: @active-foreground;
-    selected-active-background:  @resurrect-yellow;
-    selected-active-foreground:  @active-foreground;
+    selected-active-background:  @resurrect-mauve;
+    selected-active-foreground:  @resurrect-white;
 
-    urgent-background:           @resurrect-red-dark;
-    urgent-foreground:           @resurrect-bg0;
+    urgent-background:           @resurrect-mauve;
+    urgent-foreground:           @resurrect-white;
     alternate-urgent-background: @urgent-background;
     alternate-urgent-foreground: @urgent-foreground;
-    selected-urgent-background:  @resurrect-red-light;
-    selected-urgent-foreground:  @urgent-foreground;
+    selected-urgent-background:  @resurrect-gray;
+    selected-urgent-foreground:  @resurrect-bg0;
 }
 
 @import "/usr/share/rofi/themes/gruvbox-common.rasinc"

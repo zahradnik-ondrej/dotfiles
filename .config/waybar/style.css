@@ -1,5 +1,7 @@
 @define-color bg          #2e222f;
 @define-color bg_alt      #3e3546;
+@define-color fg          #9babb2;
+@define-color grey        #7f708a;
 @define-color accent      #a24b6f;
 @define-color teal        #0b8a8f;
 @define-color yellow      #f9c22b;
@@ -18,49 +20,49 @@
 
 window#waybar {
   background: @bg;
-  color: @bg;
+  color: @fg;
 }
 
 #pulseaudio, #mpris, #tray, #memory, #disk,
 #custom-language, #custom-network, #clock, #custom-notification, #custom-power {
-  padding: 0 13px;
-  margin: 5px 3px;
+  padding: 0 9px;
+  margin: 5px 2px;
   border-radius: 8px;
-  color: @bg;
+  background: @bg;
 }
 
 #workspaces { margin-left: 4px; }
 #workspaces button {
-  padding: 0 12px;
+  padding: 0 9px;
   margin: 5px 2px;
   border-radius: 8px;
   background: @bg;
   color: @accent;
 }
-#workspaces button.empty  { color: @teal; }
-#workspaces button.active { background: @teal; color: @bg; }
-#workspaces button.urgent { background: @red;  color: @bg; }
+#workspaces button.empty  { color: @tray_border; }
+#workspaces button.active { color: @teal; }
+#workspaces button.urgent { color: @red; }
 #workspaces button:hover  { background: @bg_alt; color: @olive; }
 
-#pulseaudio.microphone               { background: @yellow; }
-#pulseaudio.microphone.source-muted  { background: @red; }
-#mpris                               { background: @orange; }
-#mpris.paused                        { background: @bg_alt; color: @accent; }
-#pulseaudio.speaker                  { background: @yellow; }
-#pulseaudio.speaker.muted            { background: @red; }
-#memory                              { background: @tray_border; }
-#disk                                { background: @tray_border; }
-#custom-language                     { background: @olive; }
-#custom-network                      { background: @teal; }
-#custom-network.disconnected         { background: @red; }
-#custom-network.noping               { background: @orange; }
-#clock                               { background: @accent; }
-#custom-notification                 { background: @tray_border; }
+#pulseaudio.microphone               { color: @yellow; }
+#pulseaudio.microphone.source-muted  { color: @red; }
+#mpris                               { color: @orange; }
+#mpris.paused                        { color: @mauve; }
+#pulseaudio.speaker                  { color: @yellow; }
+#pulseaudio.speaker.muted            { color: @red; }
+#memory                              { color: @grey; }
+#disk                                { color: @grey; }
+#custom-language                     { color: @olive; }
+#custom-network                      { color: @teal; }
+#custom-network.disconnected         { color: @red; }
+#custom-network.noping               { color: @orange; }
+#clock                               { color: @accent; }
+#custom-notification                 { color: @grey; }
 #custom-notification.notification,
 #custom-notification.dnd-notification,
 #custom-notification.inhibited-notification,
-#custom-notification.dnd-inhibited-notification { background: @yellow; }
-#custom-power                        { background: @red; margin-right: 6px; }
+#custom-notification.dnd-inhibited-notification { background: @yellow; color: @bg; padding: 0 13px; }
+#custom-power                        { background: @red; color: @bg; padding: 0 13px; margin-right: 6px; }
 
 #tray {
   background: @bg;
