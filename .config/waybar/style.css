@@ -67,6 +67,7 @@ window#waybar {
 #tray {
   background: @bg;
 }
+#tray > .needs-attention { background: @yellow; border-radius: 8px; }
 #tray menu { background: @bg; color: @accent; }
 
 tooltip {
