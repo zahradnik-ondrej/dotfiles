@@ -1,6 +1,17 @@
 #!/bin/sh
 set -eu
 
+BL=$(ls -d /sys/class/backlight/*/ 2>/dev/null | head -1)
+if [ -n "$BL" ] && command -v brightnessctl >/dev/null 2>&1; then
+    case "${1:-}" in
+        up)   exec brightnessctl -q set "${2:-10}%+" ;;
+        down) exec brightnessctl -q set "${2:-10}%-" ;;
+        set)  exec brightnessctl -q set "${2%%%}%" ;;
+        get)  exec brightnessctl -m | cut -d, -f4 | tr -d '%' ;;
+        *)    echo "usage: ${0##*/} up|down|get [step] | set <percent>" >&2; exit 2 ;;
+    esac
+fi
+
 STATE="${XDG_RUNTIME_DIR:-/tmp}/ddc-brightness"
 BUSF="$STATE.bus"; TGTF="$STATE.target"; LOCKF="$STATE.lock"
 STEP="${2:-10}"
