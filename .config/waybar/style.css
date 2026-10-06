@@ -1,16 +1,4 @@
-@define-color bg          #2e222f;
-@define-color bg_alt      #3e3546;
-@define-color fg          #9babb2;
-@define-color grey        #7f708a;
-@define-color accent      #a24b6f;
-@define-color teal        #0b8a8f;
-@define-color yellow      #f9c22b;
-@define-color orange      #f79617;
-@define-color olive       #a2a947;
-@define-color mauve       #966c6c;
-@define-color red         #b33831;
-@define-color tray_border #625565;
-
+@import url("/home/ondra/.config/gtk/palette.css");
 * {
   font-family: "Hack Nerd Font", monospace;
   font-size: 16px;
@@ -40,7 +28,7 @@ window#waybar {
   background: @bg;
   color: @accent;
 }
-#workspaces button.empty  { color: @tray_border; }
+#workspaces button.empty  { color: @cyan; }
 #workspaces button.active { color: @teal; }
 #workspaces button.urgent { color: @red; }
 #workspaces button:hover  { background: @bg_alt; color: @olive; }

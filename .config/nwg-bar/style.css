@@ -1,3 +1,4 @@
+@import url("/home/ondra/.config/gtk/palette.css");
 window {
 	background-color: transparent
 }
@@ -7,11 +8,11 @@ window {
 }
 
 #inner-box {
-	background-color: rgb(62, 53, 70);
+	background-color: @bg_alt;
 	border-radius: 8px;
 	border-style: solid;
 	border-width: 2px;
-	border-color: rgb(162, 75, 111);
+	border-color: @accent;
 	padding: 5px;
 	margin: 5px
 }
@@ -26,7 +27,7 @@ button {
 	padding-left: 10px;
 	padding-right: 10px;
 	margin: 5px;
-	color: rgb(255, 255, 255);
+	color: @white;
 	font-family: "Hack Nerd Font", monospace;
 	font-size: 16px;
 	font-weight: bold;
@@ -34,5 +35,5 @@ button {
 }
 
 button:hover {
-	background-color: rgb(98, 85, 101)
+	background-color: @cyan
 }
