@@ -8,7 +8,7 @@
   "modules-center": ["pulseaudio#microphone", "mpris", "pulseaudio#speaker"],
   "modules-right": [
     "tray", "memory", "disk", "custom/language",
-    "custom/network", "clock", "custom/notification", "custom/power"
+    "custom/network", "clock", "battery", "custom/notification", "custom/power"
   ],
 
   "hyprland/workspaces": {
@@ -73,6 +73,15 @@
     "return-type": "json",
     "interval": 1,
     "on-click": "iface=$(ip route show default | awk 'NR==1{print $5}'); [ -d /sys/class/net/$iface/wireless ] && panel=wifi || panel=network; env XDG_CURRENT_DESKTOP=GNOME gnome-control-center $panel"
+  },
+
+  "battery": {
+    "interval": 30,
+    "states": { "warning": 30, "critical": 15 },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "{timeTo}"
   },
 
   "clock": {

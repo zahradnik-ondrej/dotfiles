@@ -24,7 +24,8 @@ window#waybar {
 }
 
 #pulseaudio, #mpris, #tray, #memory, #disk,
-#custom-language, #custom-network, #clock, #custom-notification, #custom-power {
+#custom-language, #custom-network, #clock, #battery, #custom-notification,
+#custom-power {
   padding: 0 9px;
   margin: 5px 2px;
   border-radius: 8px;
@@ -57,6 +58,10 @@ window#waybar {
 #custom-network.disconnected         { color: @red; }
 #custom-network.noping               { color: @orange; }
 #clock                               { color: @accent; }
+#battery                             { color: @fg; }
+#battery.warning                     { color: @orange; }
+#battery.critical:not(.charging)     { background: @red; color: @bg; padding: 0 13px; }
+#battery.charging                    { color: @olive; }
 #custom-notification                 { color: @grey; }
 #custom-notification.notification,
 #custom-notification.dnd-notification,
