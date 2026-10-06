@@ -1,0 +1,17 @@
+return {
+  bg     = "#2E222F",
+  bg_alt = "#3E3546",
+  cyan   = "#625565",
+  plum   = "#694F62",
+  grey   = "#7F708A",
+  mauve  = "#966C6C",
+  fg     = "#9BABB2",
+  tan    = "#AB947A",
+  white  = "#FFFFFF",
+  red    = "#B33831",
+  orange = "#F79617",
+  yellow = "#F9C22B",
+  olive  = "#A2A947",
+  teal   = "#0B8A8F",
+  accent = "#A24B6F",
+}

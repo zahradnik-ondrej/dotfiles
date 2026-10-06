@@ -1,20 +1,22 @@
+local p = require("user.palette")
+
 require("todo-comments").setup {
   highlight = {
     comments_only = false,
     pattern = [[.*#\s*(KEYWORDS).*]],
   },
   colors = {
-    background   = { "#2E222F" },
-    current_line = { "#3E3546" },
-    foreground   = { "#AB947A" },
-    comment      = { "#625565" },
-    cyan         = { "#0B8A8F" },
-    green        = { "#A2A947" },
-    orange       = { "#F79617" },
-    pink         = { "#A24B6F" },
-    purple       = { "#A24B6F" },
-    red          = { "#B33831" },
-    yellow       = { "#F9C22B" },
+    background   = { p.bg },
+    current_line = { p.bg_alt },
+    foreground   = { p.tan },
+    comment      = { p.cyan },
+    cyan         = { p.teal },
+    green        = { p.olive },
+    orange       = { p.orange },
+    pink         = { p.accent },
+    purple       = { p.accent },
+    red          = { p.red },
+    yellow       = { p.yellow },
   },
   keywords = {
     HACK = { icon = "", color = "background" },
