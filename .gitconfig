@@ -38,3 +38,5 @@
 	process = git-lfs filter-process
 [core]
 	autocrlf = input
+[url "git@github-prusa:prusa3d/"]
+	insteadOf = git@github.com:prusa3d/
