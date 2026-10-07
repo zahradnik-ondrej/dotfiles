@@ -58,3 +58,5 @@ install_fonts
 
 print_title "Load cron jobs"
 status load_cron_jobs
+
+[ -x "$HOME/.run-setup-private.sh" ] && "$HOME/.run-setup-private.sh"
