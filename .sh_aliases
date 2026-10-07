@@ -55,7 +55,6 @@ claude-rm() { ls ~/.claude/projects/*/*"$1"*.jsonl && rm -i ~/.claude/projects/*
 # programs
 alias etcher='detach balena-etcher'
 alias tmux-kill='tmux kill-server'
-alias nano='nano --rcfile ~/.config/.nanorc'
 alias lg='lazygit'
 alias ncdu='sudo ncdu -t $(nproc) -2 --color dark'
 alias yt-dlp-audio='yt-dlp -f ba/b -x'
