@@ -1,1 +1,1 @@
-.config/lvim/lunarvim_cheatsheet.md
+../.config/lvim/lunarvim_cheatsheet.md
