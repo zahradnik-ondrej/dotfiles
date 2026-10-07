@@ -3,6 +3,7 @@
 LATITUDE=50.08804
 LONGITUDE=14.42076
 OUT=/tmp/sun_times.env
+[ "$(date -r "$OUT" +%F 2>/dev/null)" = "$(date +%F)" ] && exit 0
 TMP=$(mktemp "${OUT}.XXXXXX") || exit 1
 trap 'rm -f "$TMP"' EXIT
 
