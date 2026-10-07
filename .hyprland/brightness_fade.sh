@@ -1,5 +1,5 @@
 #!/bin/sh
-DDC="$HOME/.local/bin/ddc-brightness"
+DDC=ddc-brightness
 SAVE="${XDG_RUNTIME_DIR:-/tmp}/brightness-before-dim"
 
 case "${1:-}" in
@@ -20,12 +20,3 @@ case "${1:-}" in
         ;;
 esac
 
-target=""
-for arg in "$@"; do
-    case "$arg" in
-        --fade-out|--fade-in) ;;
-        *%|[0-9]*) target="${arg%\%}" ;;
-    esac
-done
-[ -n "$target" ] || exit 1
-exec "$DDC" set "$target"
