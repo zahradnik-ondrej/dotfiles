@@ -6,7 +6,6 @@ fi
 
 HISTFILE=~/.zsh_history
 
-setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE

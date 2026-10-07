@@ -23,9 +23,7 @@ if [ -f ~/.sh_aliases ]; then
 fi
 
 export EDITOR=lvim
-for d in "$HOME/.local/bin" "$HOME/bin" "/home/linuxbrew/.linuxbrew/bin"; do
-  [ -d "$d" ] && case ":$PATH:" in *":$d:"*) ;; *) PATH="$d:$PATH" ;; esac
-done
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) PATH="$HOME/.local/bin:$PATH" ;; esac
 export PATH
 
 export LS_COLORS=""
@@ -62,10 +60,3 @@ fi
 
 # export NVIM_LISTEN_ADDRESS="/tmp/lvim_server"
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | BAT_PAGER=less bat --paging=always -lman'"
-
-if command -v pyenv >/dev/null 2>&1; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-fi

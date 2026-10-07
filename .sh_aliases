@@ -6,7 +6,7 @@ if command -v bat &> /dev/null; then
 fi
 
 if command -v eza &> /dev/null; then
-  alias ls='eza -l --group-directories-first --icons --git --no-user --no-time --color=auto --icons=auto'
+  alias ls='eza -l --group-directories-first --icons --git --no-user --no-time'
 else
   alias ls='ls -lh --group-directories-first --color=auto'
 fi
@@ -21,7 +21,7 @@ alias lsa='ls -a'
 alias diff='diff --color=auto'
 alias cls='clear'
 alias grep='grep -I --color=auto'
-alias egrep='egrep -I --color=auto'
+alias egrep='grep -E -I --color=auto'
 alias dir='vdir'
 alias vdir='ls'
 alias dmesg='dmesg -PT'
@@ -53,7 +53,7 @@ alias claude='claude --dangerously-skip-permissions'
 claude-rm() { ls ~/.claude/projects/*/*"$1"*.jsonl && rm -i ~/.claude/projects/*/*"$1"*.jsonl; }
 
 # programs
-alias etcher='detach /opt/balenaEtcher/balenaEtcher.AppImage'
+alias etcher='detach balena-etcher'
 alias tmux-kill='tmux kill-server'
 alias nano='nano --rcfile ~/.config/.nanorc'
 alias lg='lazygit'
@@ -70,7 +70,6 @@ lvim_open() {
 }
 
 alias nv='neovide'
-alias lvim='lvim'
 alias lv='lvim_open'
 alias neovide='/opt/neovide/neovide.AppImage --neovim-bin $(which lvim)'
 
