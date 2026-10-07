@@ -27,8 +27,6 @@ load_cron_jobs() {
 
   if [ "$os" = "manjaro" ]; then
     sudo systemctl restart cronie
-  elif [ "$os" = "ubuntu" ]; then
-    sudo systemctl restart cron
   fi
 
 }

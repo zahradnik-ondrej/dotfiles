@@ -1,4 +1,0 @@
-ppa:bartbes/love-stable
-multiverse
-ppa:papirus/papirus
-ppa:peek-developers/stable
