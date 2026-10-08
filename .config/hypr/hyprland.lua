@@ -13,9 +13,10 @@ local mainMod     = "SUPER"
 
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.0 })
 
-local internal_outputs, internal_off = {}, nil
+local internal_outputs, internal_off, pending = {}, nil, false
 
-local function sync_monitors()
+local function apply_monitors()
+    pending = false
     local has_external, discovered = false, false
     for _, m in ipairs(hl.get_monitors()) do
         if m.name:find("^eDP") or m.name:find("^LVDS") or m.name:find("^DSI") then
@@ -23,7 +24,7 @@ local function sync_monitors()
                 internal_outputs[m.name] = true
                 discovered = true
             end
-        else
+        elseif not (m.name:find("^FALLBACK") or m.name:find("^HEADLESS")) then
             has_external = true
         end
     end
@@ -32,16 +33,25 @@ local function sync_monitors()
     internal_off = has_external
 
     for name in pairs(internal_outputs) do
-        if has_external then
-            hl.monitor({ output = name, disabled = true })
-        else
-            hl.monitor({ output = name, mode = "preferred", position = "auto", scale = 1.0 })
-        end
+        hl.monitor({
+            output = name,
+            mode = "preferred",
+            position = "auto",
+            scale = 1.0,
+            disabled = has_external,
+        })
     end
+end
+
+local function sync_monitors()
+    if pending then return end
+    pending = true
+    hl.timer(apply_monitors, { timeout = 250, type = "oneshot" })
 end
 
 hl.on("monitor.added", sync_monitors)
 hl.on("monitor.removed", sync_monitors)
+apply_monitors()
 
 hl.env("PATH", home .. "/.local/bin:/usr/local/bin:/usr/bin")
 hl.env("XCURSOR_SIZE", "24")
@@ -49,7 +59,6 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
 
 hl.on("hyprland.start", function()
-    sync_monitors()
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("waybar")
