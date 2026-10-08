@@ -54,7 +54,6 @@
   { "name": "gparted", "manager": "yay" },
   { "name": "hypridle", "manager": "yay" },
   { "name": "hyprland", "manager": "yay" },
-  { "name": "hyprland-monitor-attached", "manager": "yay" },
   { "name": "hyprland-qt-support", "manager": "yay" },
   { "name": "hyprlock", "manager": "yay" },
   { "name": "hyprpaper", "manager": "yay" },
