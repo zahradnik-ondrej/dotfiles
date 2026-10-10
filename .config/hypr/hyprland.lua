@@ -119,7 +119,7 @@ hl.device({ name = "epic-mouse-v1", sensitivity = -0.5 })
 
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd('nwg-drawer -fm "nautilus" -nocats -nofs -term "alacritty"'))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen(0))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprpicker -a"))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())

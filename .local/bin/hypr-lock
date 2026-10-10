@@ -1,3 +1,0 @@
-#!/bin/sh
-hyprctl dispatch 'hl.dsp.exec_cmd("hyprlock")'
-pkill -x nwg-bar
