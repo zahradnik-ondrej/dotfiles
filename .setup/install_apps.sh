@@ -18,8 +18,7 @@ install_apps() {
   VIM_TMUX_CYCLE_REPO_PATH="$HOME/.vim-tmux-cycle"
   VIM_TMUX_CYCLE_BIN_PATH="/usr/local/bin"
   clone_repo "https://github.com/slarwise/vim-tmux-cycle" "$VIM_TMUX_CYCLE_REPO_PATH"
-  sudo mv "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH"
-  chmod +x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
+  sudo install -m 755 -o root -g root "$VIM_TMUX_CYCLE_REPO_PATH/vim-tmux-cycle" "$VIM_TMUX_CYCLE_BIN_PATH/"
   status test -x "$VIM_TMUX_CYCLE_BIN_PATH/vim-tmux-cycle"
 
 }

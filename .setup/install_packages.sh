@@ -33,10 +33,10 @@ install_packages() {
         status bash -c "pacman -Qi '$name' >/dev/null || yay -S --noconfirm '$name'"
         ;;
       npm)
-        status bash -c "npm list -g --depth=0 | grep -qw '$name' || npm install -g '$name'"
+        status bash -c "npm ls -g '$name' >/dev/null || npm install -g '$name'"
         ;;
       pipx)
-        status bash -c "pipx list | grep -qw '$name' || pipx install --quiet '$name'"
+        status bash -c "pipx list --short | grep -q '^$name ' || pipx install --quiet '$name'"
         ;;
     esac
   done < <(jq -c '.[]' "$PACKAGE_FILE")
