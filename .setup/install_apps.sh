@@ -1,9 +1,5 @@
 install_apps() {
 
-  # grub2-themes
-  GRUB2_THEMES_PATH="$HOME/.grub2-themes"
-  clone_repo "https://github.com/vinceliuice/grub2-themes.git" "$GRUB2_THEMES_PATH"
-
   # lunarvim
   printf "lunarvim"
   if ! command -v lvim &> /dev/null; then
