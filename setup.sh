@@ -9,7 +9,6 @@ source "$HOME/.setup/get_os.sh"
 source "$HOME/.setup/install_appimage.sh"
 source "$HOME/.setup/install_apps.sh"
 source "$HOME/.setup/install_flatpak.sh"
-source "$HOME/.setup/install_fonts.sh"
 source "$HOME/.setup/install_homebrew.sh"
 source "$HOME/.setup/install_packages.sh"
 source "$HOME/.setup/install_snap.sh"
@@ -52,9 +51,6 @@ install_apps
 
 print_title "Install themes"
 install_themes
-
-print_title "Install fonts"
-install_fonts
 
 print_title "Load cron jobs"
 status load_cron_jobs

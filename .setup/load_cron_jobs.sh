@@ -25,8 +25,4 @@ load_cron_jobs() {
 
   rm "$CRON_TEMP"
 
-  if [ "$os" = "manjaro" ]; then
-    sudo systemctl restart cronie
-  fi
-
 }

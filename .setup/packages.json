@@ -111,6 +111,7 @@
   { "name": "telegram-desktop", "manager": "yay" },
   { "name": "tmux", "manager": "yay" },
   { "name": "tree", "manager": "yay" },
+  { "name": "ttf-hack-nerd", "manager": "yay" },
   { "name": "typescript", "manager": "yay" },
   { "name": "unzip", "manager": "yay" },
   { "name": "vim", "manager": "yay" },

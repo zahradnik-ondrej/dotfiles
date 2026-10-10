@@ -2,6 +2,7 @@ install_packages() {
   PACKAGE_FILE="${HOME}/.setup/packages.json"
 
   sudo pacman -S --needed --noconfirm jq npm python-pipx
+  npm config set prefix "$HOME/.local"
 
   while read -r pkg; do
     name=$(echo "$pkg" | jq -r '.name // empty')
@@ -29,10 +30,10 @@ install_packages() {
 
     case "$manager" in
       yay)
-        status bash -c "pacman -Qi '$name' >/dev/null || yay -S --noconfirm --overwrite '*' '$name'"
+        status bash -c "pacman -Qi '$name' >/dev/null || yay -S --noconfirm '$name'"
         ;;
       npm)
-        status bash -c "npm list -g --depth=0 | grep -qw '$name' || sudo npm install -g '$name'"
+        status bash -c "npm list -g --depth=0 | grep -qw '$name' || npm install -g '$name'"
         ;;
       pipx)
         status bash -c "pipx list | grep -qw '$name' || pipx install --quiet '$name'"
