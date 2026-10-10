@@ -100,7 +100,6 @@ hl.config({
         kb_rules = "",
         follow_mouse = 1,
         sensitivity = 0,
-        touchpad = { natural_scroll = false },
         numlock_by_default = true,
     },
     cursor = { no_hardware_cursors = 1, inactive_timeout = 1 },
@@ -114,8 +113,6 @@ hl.animation({ leaf = "border",      enabled = true, speed = 10, bezier = "defau
 hl.animation({ leaf = "borderangle", enabled = true, speed = 8,  bezier = "default" })
 hl.animation({ leaf = "fade",        enabled = true, speed = 7,  bezier = "default" })
 hl.animation({ leaf = "workspaces",  enabled = true, speed = 6,  bezier = "default" })
-
-hl.device({ name = "epic-mouse-v1", sensitivity = -0.5 })
 
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd('nwg-drawer -fm "nautilus" -nocats -nofs -term "alacritty"'))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
