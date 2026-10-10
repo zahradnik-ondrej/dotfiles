@@ -7,14 +7,13 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["pulseaudio#microphone", "mpris", "pulseaudio#speaker"],
   "modules-right": [
-    "tray", "memory", "disk", "custom/language",
+    "tray", "memory", "disk", "hyprland/language",
     "custom/network", "clock", "battery", "custom/notification", "custom/power"
   ],
 
   "hyprland/workspaces": {
     "format": "{name}",
-    "on-click": "activate",
-    "sort-by-number": true,
+    "sort-by": "number",
     "all-outputs": false
   },
   "pulseaudio#microphone": {
@@ -61,10 +60,10 @@
     "tooltip-format": "{used} used of {total} on {path}"
   },
 
-  "custom/language": {
-    "exec": "waybar-layout",
-    "format": "  {}",
-    "tooltip": false,
+  "hyprland/language": {
+    "format": "  {short}",
+    "format-en": "  US",
+    "format-cs": "  CZ",
     "on-click": "hyprctl switchxkblayout all next"
   },
 
