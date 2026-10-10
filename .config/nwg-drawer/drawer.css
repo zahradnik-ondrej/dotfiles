@@ -4,7 +4,6 @@ window {
     color: @tan
 }
 
-/* search entry */
 entry {
     background-color: @bg_alt
 }
@@ -18,23 +17,11 @@ button:hover {
     background-color: @cyan
 }
 
-/* in case you wanted to give category buttons a different look */
-#category-button {
-    margin: 0 10px 0 10px
-}
-
 #pinned-box {
     padding-bottom: 5px;
     border-bottom: 1px dotted @cyan
 }
 
-#files-box {
-    padding: 5px;
-    border: 1px dotted @cyan;
-    border-radius: 15px
-}
-
-/* math operation result label */
 #math-label {
     font-weight: bold;
     font-size: 16px
