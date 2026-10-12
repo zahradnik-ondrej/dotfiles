@@ -1,4 +1,5 @@
 [
+  { "name": "@devcontainers/cli", "manager": "npm" },
   { "name": "chai", "manager": "npm" },
   { "name": "@types/chai", "manager": "npm" },
   { "name": "mocha", "manager": "npm" },
@@ -32,6 +33,7 @@
   { "name": "docformatter", "manager": "yay" },
   { "name": "docker", "manager": "yay" },
   { "name": "docker-buildx", "manager": "yay" },
+  { "name": "docker-compose", "manager": "yay" },
   { "name": "dotnet-sdk", "manager": "yay" },
   { "name": "downgrade", "manager": "yay" },
   { "name": "etcher-bin", "manager": "yay" },
@@ -77,6 +79,7 @@
   { "name": "mc", "manager": "yay" },
   { "name": "meson", "manager": "yay" },
   { "name": "minecraft-launcher", "manager": "yay" },
+  { "name": "mtools", "manager": "yay" },
   { "name": "nano", "manager": "yay" },
   { "name": "ncdu", "manager": "yay" },
   { "name": "neovim", "manager": "yay" },
@@ -94,6 +97,7 @@
   { "name": "potrace", "manager": "yay" },
   { "name": "puppeteer", "manager": "yay" },
   { "name": "python-pynvim", "manager": "yay" },
+  { "name": "qemu-desktop", "manager": "yay" },
   { "name": "qrencode", "manager": "yay" },
   { "name": "qt6-wayland", "manager": "yay" },
   { "name": "rclone", "manager": "yay" },
@@ -105,10 +109,12 @@
   { "name": "slack-desktop", "manager": "yay" },
   { "name": "socat", "manager": "yay" },
   { "name": "spotify-launcher", "manager": "yay" },
+  { "name": "sshpass", "manager": "yay" },
   { "name": "steam", "manager": "yay" },
   { "name": "stlink", "manager": "yay" },
   { "name": "swaync", "manager": "yay" },
   { "name": "telegram-desktop", "manager": "yay" },
+  { "name": "tigervnc", "manager": "yay" },
   { "name": "tmux", "manager": "yay" },
   { "name": "tree", "manager": "yay" },
   { "name": "ttf-hack-nerd", "manager": "yay" },
@@ -123,5 +129,6 @@
   { "name": "xsel", "manager": "yay" },
   { "name": "yt-dlp", "manager": "yay" },
   { "name": "zip", "manager": "yay" },
-  { "name": "zoxide", "manager": "yay" }
+  { "name": "zoxide", "manager": "yay" },
+  { "name": "zram-generator", "manager": "yay" }
 ]
