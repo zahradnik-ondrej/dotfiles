@@ -90,6 +90,7 @@
   { "name": "nwg-bar", "manager": "yay" },
   { "name": "nwg-drawer", "manager": "yay" },
   { "name": "obsidian", "manager": "yay" },
+  { "name": "openocd", "manager": "yay" },
   { "name": "oh-my-posh-bin", "manager": "yay" },
   { "name": "openscad", "manager": "yay" },
   { "name": "picocom", "manager": "yay" },
