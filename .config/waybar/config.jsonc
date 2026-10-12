@@ -7,7 +7,7 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["pulseaudio#microphone", "mpris", "pulseaudio#speaker"],
   "modules-right": [
-    "tray", "memory", "disk", "hyprland/language",
+    "tray", "memory", "disk", "disk#data", "hyprland/language",
     "custom/network", "clock", "battery", "custom/notification", "custom/power"
   ],
 
@@ -57,6 +57,12 @@
     "interval": 60,
     "path": "/",
     "format": "󰋊  {percentage_used}%",
+    "tooltip-format": "{used} used of {total} on {path}"
+  },
+  "disk#data": {
+    "interval": 60,
+    "path": "/data",
+    "format": "󰆼  {percentage_used}%",
     "tooltip-format": "{used} used of {total} on {path}"
   },
 
