@@ -44,34 +44,38 @@
     },
 
     { "type": "os" },
-    { "type": "host" },
     { "type": "shell" },
     { "type": "wm" },
     { "type": "terminal" },
+    { "type": "packages" },
+
+    {
+      "type": "separator",
+      "outputColor": "#625565"
+    },
+
     { "type": "cpu" },
     { "type": "gpu" },
     { "type": "physicaldisk" },
-    { "type": "swap" },
-
-    {
-      "type": "separator",
-      "outputColor": "#625565"
-    },
-
-    { "type": "packages" },
-    { "type": "display" },
-    { "type": "localip" },
-
-    {
-      "type": "separator",
-      "outputColor": "#625565"
-    },
-
-    { "type": "uptime" },
-    { "type": "memory" },
     { "type": "disk" },
-    { "type": "battery" },
-    { "type": "wifi" }
+    { "type": "memory" },
+    { "type": "swap" },
+    { "type": "display" },
+
+    {
+      "type": "separator",
+      "outputColor": "#625565"
+    },
+
+    { "type": "localip" },
+    { "type": "wifi" },
+
+    {
+      "type": "separator",
+      "outputColor": "#625565"
+    },
+
+    { "type": "uptime" }
 
   ]
 }
