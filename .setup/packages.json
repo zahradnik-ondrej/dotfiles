@@ -122,6 +122,7 @@
   { "name": "ttf-hack-nerd", "manager": "yay" },
   { "name": "typescript", "manager": "yay" },
   { "name": "unzip", "manager": "yay" },
+  { "name": "uv", "manager": "yay" },
   { "name": "vim", "manager": "yay" },
   { "name": "vlc", "manager": "yay" },
   { "name": "wget", "manager": "yay" },
