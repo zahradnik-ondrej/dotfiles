@@ -98,6 +98,7 @@
   { "name": "potrace", "manager": "yay" },
   { "name": "puppeteer", "manager": "yay" },
   { "name": "python-pynvim", "manager": "yay" },
+  { "name": "python-pyocd", "manager": "yay" },
   { "name": "qemu-desktop", "manager": "yay" },
   { "name": "qrencode", "manager": "yay" },
   { "name": "qt6-wayland", "manager": "yay" },
