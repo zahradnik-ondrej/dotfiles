@@ -152,8 +152,9 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
-hl.bind("PRINT",         hl.dsp.exec_cmd("hyprshot -m window"))
-hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind("PRINT",         hl.dsp.exec_cmd("hyprshot -m output -m active"))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m window"))
+hl.bind("CTRL + PRINT",  hl.dsp.exec_cmd("hyprshot -m region"))
 
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(home .. "/.local/bin/ddc-brightness down"), { locked = true })
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd(home .. "/.local/bin/ddc-brightness up"),   { locked = true })
